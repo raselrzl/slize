@@ -1,8 +1,8 @@
-/* import prisma from "@/app/lib/db";
+/* import prisma from "@/app/lib/db"; */
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DollarSign, PartyPopper, ShoppingBag, User2 } from "lucide-react";
 
-async function getData() {
+/* async function getData() {
   const [user, products, order] = await Promise.all([
     prisma.user.findMany({
       select: {
@@ -28,14 +28,14 @@ async function getData() {
     products,
     order,
   };
-}
+} */
 
 export async function DashboardStats() {
-  const { products, user, order } = await getData();
+ /*  const { products, user, order } = await getData();
 
   const totalAmount = order.reduce((accumalator, currentValue) => {
     return accumalator + currentValue.amount;
-  }, 0);
+  }, 0); */
   return (
     <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
       <Card>
@@ -45,7 +45,7 @@ export async function DashboardStats() {
         </CardHeader>
         <CardContent>
           <p className="text-2xl font-bold">
-            ${new Intl.NumberFormat("en-US").format(totalAmount / 100)}
+            ${/* {new Intl.NumberFormat("en-US").format(totalAmount / 100)} */}100
           </p>
           <p className="text-xs text-muted-foreground">Based on 100 Charges</p>
         </CardContent>
@@ -56,7 +56,7 @@ export async function DashboardStats() {
           <ShoppingBag className="h-4 w-4 text-blue-500" />
         </CardHeader>
         <CardContent>
-          <p className="text-2xl font-bold">+{order.length}</p>
+          <p className="text-2xl font-bold">+{/* {order.length} */}</p>7
           <p className="text-xs text-muted-foreground">
             Total Sales on ShoeMarshal
           </p>
@@ -68,7 +68,7 @@ export async function DashboardStats() {
           <PartyPopper className="h-4 w-4 text-indigo-500" />
         </CardHeader>
         <CardContent>
-          <p className="text-2xl font-bold">{products.length}</p>
+          <p className="text-2xl font-bold">{/* {products.length} */}</p>7
           <p className="text-xs text-muted-foreground">
             Total Products created
           </p>
@@ -80,11 +80,10 @@ export async function DashboardStats() {
           <User2 className="h-4 w-4 text-orange-500" />
         </CardHeader>
         <CardContent>
-          <p className="text-2xl font-bold">{user.length}</p>
+          <p className="text-2xl font-bold">{/* {user.length} */}</p>120
           <p className="text-xs text-muted-foreground">Total Users Signed Up</p>
         </CardContent>
       </Card>
     </div>
   );
 }
- */
