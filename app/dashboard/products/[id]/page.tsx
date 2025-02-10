@@ -1,4 +1,4 @@
-import { EditForm } from "@/app/components/dashboard/EditForm";
+/* import { EditForm } from "@/app/components/dashboard/EditForm";
 import prisma from "@/app/lib/db";
 import { notFound } from "next/navigation";
 import { unstable_noStore as noStore } from "next/cache";
@@ -26,3 +26,4 @@ export default async function EditRoute({
   const data = await getData(params.id);
   return <EditForm data={data} />;
 }
+ */

@@ -1,4 +1,4 @@
-import { deleteProduct } from "@/app/actions";
+/* import { deleteProduct } from "@/app/actions";
 import { SubmitButton } from "@/app/components/SubmitButtons";
 import { Button } from "@/components/ui/button";
 import {
@@ -34,3 +34,4 @@ export default function DeleteRoute({ params }: { params: { id: string } }) {
     </div>
   );
 }
+ */

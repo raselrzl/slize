@@ -1,4 +1,4 @@
-"use client";
+/* "use client";
 
 import { createProduct } from "@/app/actions";
 import { UploadDropzone } from "@/app/lib/uplaodthing";
@@ -212,3 +212,4 @@ export default function ProductCreateRoute() {
     </form>
   );
 }
+ */
