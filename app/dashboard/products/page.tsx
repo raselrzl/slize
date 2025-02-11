@@ -1,4 +1,4 @@
-/* import prisma from "@/app/lib/db"; */
+import prisma from "@/app/lib/db";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -28,7 +28,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { unstable_noStore as noStore } from "next/cache";
 
-/* async function getData() {
+async function getData() {
   const data = await prisma.product.findMany({
     orderBy: {
       createdAt: "desc",
@@ -36,11 +36,11 @@ import { unstable_noStore as noStore } from "next/cache";
   });
 
   return data;
-} */
+}
 
 export default async function ProductsRoute() {
   noStore();
- /*  const data = await getData(); */
+  const data = await getData();
   return (
     <>
       <div className="flex items-center justify-end">
@@ -71,22 +71,22 @@ export default async function ProductsRoute() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {/* {data.map((item) => ( */}
-                <TableRow /* key={item.id} */>
+              {data.map((item) => (
+                <TableRow key={item.id}>
                   <TableCell>
-                    {/* <Image
+                    <Image
                       alt="Product Image"
                       src={item.images[0]}
                       height={64}
                       width={64}
                       className="rounded-md object-cover h-16 w-16"
-                    /> */}
+                    />
                   </TableCell>
-                  <TableCell>{/* {item.name} */}name</TableCell>
-                  <TableCell>{/* {item.status} */}status</TableCell>
-                  <TableCell>${/* {item.price} */}100</TableCell>
+                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.status}</TableCell>
+                  <TableCell>${item.price}</TableCell>
                   <TableCell>
-                    {/* {new Intl.DateTimeFormat("en-US").format(item.createdAt)} */}time
+                    {new Intl.DateTimeFormat("en-US").format(item.createdAt)}
                   </TableCell>
                   <TableCell className="text-end">
                     <DropdownMenu>
@@ -112,7 +112,7 @@ export default async function ProductsRoute() {
                     </DropdownMenu>
                   </TableCell>
                 </TableRow>
-              {/* ))} */}
+              ))}
             </TableBody>
           </Table>
         </CardContent>
