@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import all from "@/public/all.jpg";
+import all from "@/public/all.webp";
 import men from "@/public/men.jpg";
 import women from "@/public/women.avif";
 
