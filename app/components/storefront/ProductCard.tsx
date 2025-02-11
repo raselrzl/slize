@@ -27,7 +27,7 @@ export function ProductCard({ item }: iAppProps) {
         <CarouselContent>
           {item.images.map((item, index) => (
             <CarouselItem key={index}>
-              <div className="relative h-[330px]">
+              <div className="relative h-[250px]">
                 <Image
                   src={item}
                   alt="Product Image"
@@ -38,8 +38,8 @@ export function ProductCard({ item }: iAppProps) {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="ml-16" />
-        <CarouselNext className="mr-16" />
+        <CarouselPrevious className="ml-12" />
+        <CarouselNext className="mr-12" />
       </Carousel>
 
       <div className="flex justify-between items-center mt-2">
