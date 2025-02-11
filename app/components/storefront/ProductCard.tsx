@@ -52,7 +52,7 @@ export function ProductCard({ item }: iAppProps) {
         {item.description}
       </p>
 
-      <Button asChild className="w-full mt-5">
+      <Button variant="secondary" asChild className="w-full mt-5">
         <Link href={`/product/${item.id}`}>Learn More!</Link>
       </Button>
     </div>
