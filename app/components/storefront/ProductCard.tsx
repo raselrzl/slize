@@ -38,17 +38,17 @@ export function ProductCard({ item }: iAppProps) {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="ml-12" />
-        <CarouselNext className="mr-12" />
+        {/* <CarouselPrevious className="ml-12" />
+        <CarouselNext className="mr-12" /> */}
       </Carousel>
 
-      <div className="flex justify-between items-center mt-2">
+      <div className="flex justify-between items-center mt-1">
         <h1 className="font-semibold text-xl">{item.name}</h1>
         <h3 className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
           ${item.price}
         </h3>
       </div>
-      <p className="text-gray-600 text-sm mt-2 line-clamp-2">
+      <p className="text-gray-600 text-sm mt-1 line-clamp-1">
         {item.description}
       </p>
 

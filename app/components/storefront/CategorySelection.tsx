@@ -6,22 +6,22 @@ import women from "@/public/women.avif";
 
 export function CategoriesSelection() {
   return (
-    <div className="py-20 sm:py-24">
+    <div className="py-10">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-extrabold tracking-tight">
+        <h2 className="text-xl md:text-2xl font-extrabold ">
           Shop by Category
         </h2>
 
         <Link
-          className="text-sm font-semibold text-primary hover:text-primary/80"
+          className="text-sm font-semibold text-primary hover:text-primary/80 bg-[rgb(247,247,247)] px-4 py-2 rounded-2xl"
           href="/products/all"
         >
-          Browse all Products &rarr;
+          View all &rarr;
         </Link>
       </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-6 lg:gap-8">
-        <div className="group aspect-w-2 aspect-h-1 overflow-hidden sm:aspect-w-1 sm:row-span-2">
+      <div className="mt-6 grid grid-cols-1 gap-y-1 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-2 lg:gap-4">
+         <div className="group aspect-w-2 aspect-h-1 overflow-hidden sm:aspect-w-1 sm:row-span-2 rounded-md">
           <Image
             src={all}
             alt="All Products Image"
@@ -36,7 +36,7 @@ export function CategoriesSelection() {
           </div>
         </div>
 
-        <div className="group aspect-w-2 aspect-h-1 overflow-hidden sm:relative sm:aspect-none sm:h-full">
+        <div className="group aspect-w-2 aspect-h-1 overflow-hidden sm:relative sm:aspect-none sm:h-full rounded-md">
           <Image
             src={men}
             alt="Products for men Image"
@@ -51,7 +51,7 @@ export function CategoriesSelection() {
           </div>
         </div>
 
-        <div className="group aspect-w-2 aspect-h-1 overflow-hidden sm:relative sm:aspect-none sm:h-full">
+        <div className="group aspect-w-2 aspect-h-1 overflow-hidden sm:relative sm:aspect-none sm:h-full rounded-md">
           <Image
             src={women}
             alt="Women product image"

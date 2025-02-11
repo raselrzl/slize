@@ -2,6 +2,7 @@ import prisma from "@/app/lib/db";
 import { LoadingProductCard, ProductCard } from "./ProductCard";
 import { Suspense } from "react";
 import { unstable_noStore as noStore } from "next/cache";
+import Link from "next/link";
 
 async function getData() {
   const data = await prisma.product.findMany({
@@ -28,7 +29,18 @@ async function getData() {
 export function FeaturedProducts() {
   return (
     <>
-      <h2 className="text-2xl font-extrabold tracking-tight">Featured Items</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl md:text-2xl font-extrabold ">
+        Featured Items
+        </h2>
+
+        <Link
+          className="text-sm font-semibold text-primary hover:text-primary/80 bg-[rgb(247,247,247)] px-4 py-2 rounded-2xl"
+          href="/products/all"
+        >
+          View all &rarr;
+        </Link>
+      </div>
       <Suspense fallback={<LoadingRows />}>
         <LoadFeaturedproducts />
       </Suspense>
@@ -41,7 +53,7 @@ async function LoadFeaturedproducts() {
   const data = await getData();
 
   return (
-    <div className="mt-5 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-2">
       {data.map((item) => (
         <ProductCard key={item.id} item={item} />
       ))}
@@ -51,7 +63,7 @@ async function LoadFeaturedproducts() {
 
 function LoadingRows() {
   return (
-    <div className="mt-5 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-2">
       <LoadingProductCard />
       <LoadingProductCard />
       <LoadingProductCard />

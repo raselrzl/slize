@@ -35,9 +35,9 @@ export async function Navbar() {
           <>
             <Link href="/bag" className="group p-2 flex items-center mr-2">
               <div className="relative">
-                <ShoppingBagIcon className="h-8 w-8 text-gray-800 group-hover:text-gray-600" />
+                <ShoppingBagIcon className="h-6 w-6 text-gray-800 group-hover:text-gray-600" />
                 <span className="absolute top-0 right-0 text-md font-semibold text-red-600 group-hover:text-gray-800 transform translate-x-1/2 -translate-y-1/2">
-                  5 {/* {total} */}
+                  5{/* {total} */}
                 </span>
               </div>
             </Link>
@@ -51,11 +51,11 @@ export async function Navbar() {
             />
           </>
         ) : (
-          <div className="md:flex md:flex-1 md:items-center md:justify-end md:space-x-1">
+          <div className="flex md:flex md:flex-1 md:items-center md:justify-end md:space-x-1">
             <Button variant="ghost" asChild>
               <LoginLink>Sign in</LoginLink>
             </Button>
-            <span className="h-6 w-px bg-gray-200"></span>
+            <span className="h-6 w-px bg-gray-400 self-center"></span>
             <Button variant="ghost" asChild>
               <RegisterLink>Register</RegisterLink>
             </Button>
