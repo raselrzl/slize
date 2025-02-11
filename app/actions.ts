@@ -3,7 +3,7 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod";
-import {/*  bannerSchema, */ productSchema } from "./lib/zodSchemas";
+import { bannerSchema, productSchema } from "./lib/zodSchemas";
 import prisma from "./lib/db";
 /* import { redis } from "./lib/redis";
 import { Cart } from "./lib/interfaces"; */
@@ -101,12 +101,12 @@ export async function deleteProduct(formData: FormData) {
 
   redirect("/dashboard/products");
 }
-/* 
+
 export async function createBanner(prevState: any, formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  if (!user || user.email !== "jan@alenix.de") {
+  if (!user || user.email !== "rasel6041@gmail.com") {
     return redirect("/");
   }
 
@@ -127,7 +127,7 @@ export async function createBanner(prevState: any, formData: FormData) {
 
   redirect("/dashboard/banner");
 }
-
+/* 
 export async function deleteBanner(formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
