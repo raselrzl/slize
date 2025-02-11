@@ -28,7 +28,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { unstable_noStore as noStore } from "next/cache";
 
-/* async function getData() {
+async function getData() {
   const data = await prisma.banner.findMany({
     orderBy: {
       createdAt: "desc",
@@ -36,11 +36,11 @@ import { unstable_noStore as noStore } from "next/cache";
   });
 
   return data;
-} */
+}
 
 export default async function BannerRoute() {
   noStore();
-  /* const data = await getData(); */
+  const data = await getData();
   return (
     <>
       <div className="flex items-center justify-end">
@@ -68,18 +68,18 @@ export default async function BannerRoute() {
             </TableHeader>
 
             <TableBody>
-              {/* {data.map((item) => ( */}
-                <TableRow /* key={item.id} */>
+              {data.map((item) => (
+                <TableRow key={item.id}>
                   <TableCell>
-                   {/*  <Image
+                    <Image
                       alt="Product Image"
                       src={item.imageString}
                       width={64}
                       height={64}
                       className="rounded-lg object-cover h-16 w-16"
-                    /> */}
+                    />
                   </TableCell>
-                  <TableCell className="font-medium">{/* {item.title} */}title</TableCell>
+                  <TableCell className="font-medium">{item.title}</TableCell>
                   <TableCell className="text-end">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -92,15 +92,15 @@ export default async function BannerRoute() {
                         <DropdownMenuSeparator />
 
                         <DropdownMenuItem asChild>
-                         {/*  <Link href={`/dashboard/banner/${item.id}/delete`}> */}
+                          <Link href={`/dashboard/banner/${item.id}/delete`}>
                             Delete
-                          {/* </Link> */}
+                          </Link>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
                 </TableRow>
-             {/*  ))} */}
+             ))}
             </TableBody>
           </Table>
         </CardContent>

@@ -127,12 +127,12 @@ export async function createBanner(prevState: any, formData: FormData) {
 
   redirect("/dashboard/banner");
 }
-/* 
+
 export async function deleteBanner(formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  if (!user || user.email !== "jan@alenix.de") {
+  if (!user || user.email !== "rasel6041@gmail.com") {
     return redirect("/");
   }
 
@@ -144,7 +144,7 @@ export async function deleteBanner(formData: FormData) {
 
   redirect("/dashboard/banner");
 }
-
+/* 
 export async function addItem(productId: string) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
