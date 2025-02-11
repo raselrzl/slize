@@ -1,5 +1,6 @@
 import prisma from "@/app/lib/db";
 import { Button } from "@/components/ui/button";
+
 import {
   Card,
   CardContent,
@@ -98,10 +99,10 @@ export default async function ProductsRoute() {
                       <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem /* asChild */>
-                          {/* <Link href={`/dashboard/products/${item.id}`}> */}
+                        <DropdownMenuItem asChild>
+                          <Link href={`/dashboard/products/${item.id}`}>
                             Edit
-                          {/* </Link> */}
+                          </Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem /* asChild */>
                           {/* <Link href={`/dashboard/products/${item.id}/delete`}> */}
