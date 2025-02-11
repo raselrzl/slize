@@ -1,4 +1,4 @@
-import prisma from "@/app/lib/db";
+/* import prisma from "@/app/lib/db";
 import { LoadingProductCard, ProductCard } from "./ProductCard";
 import { Suspense } from "react";
 import { unstable_noStore as noStore } from "next/cache";
@@ -58,3 +58,4 @@ function LoadingRows() {
     </div>
   );
 }
+ */
