@@ -33,7 +33,7 @@ export async function Hero() {
                 fill
                 className="object-cover w-full h-full"
               />
-              <div className="absolute top-[10%] left-[36%] bg-opacity-75 bg-black text-white p-6 rounded-xl shadow-lg transition-transform hover:scale-105">
+              <div className="absolute top-6 left-6 bg-opacity-75 bg-black text-white p-6 rounded-xl shadow-lg transition-transform hover:scale-105">
                 <h1 className="text-xl lg:text-4xl font-bold ">{item.title}</h1>
               </div>
             </div>
