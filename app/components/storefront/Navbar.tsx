@@ -6,7 +6,7 @@ import { UserDropdown } from "./UserDropdown";
 import { Button } from "@/components/ui/button";
 import {
   LoginLink,
-  RegisterLink, 
+  RegisterLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 /* import { redis } from "@/app/lib/redis";
 import { Cart } from "@/app/lib/interfaces"; */
@@ -15,7 +15,7 @@ export async function Navbar() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-/*   const cart: Cart | null = await redis.get(`cart-${user?.id}`);
+  /*   const cart: Cart | null = await redis.get(`cart-${user?.id}`);
 
   const total = cart?.items.reduce((sum, item) => sum + item.quantity, 0) || 0; */
 
@@ -34,10 +34,12 @@ export async function Navbar() {
         {user ? (
           <>
             <Link href="/bag" className="group p-2 flex items-center mr-2">
-              <ShoppingBagIcon className="h-6 w-6 text-gray-400 group-hover:text-gray-500" />
-              <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                {/* {total} */}5
-              </span>
+              <div className="relative">
+                <ShoppingBagIcon className="h-8 w-8 text-gray-800 group-hover:text-gray-600" />
+                <span className="absolute top-0 right-0 text-md font-semibold text-red-600 group-hover:text-gray-800 transform translate-x-1/2 -translate-y-1/2">
+                  5 {/* {total} */}
+                </span>
+              </div>
             </Link>
 
             <UserDropdown
