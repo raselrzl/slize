@@ -84,12 +84,12 @@ export async function editProduct(prevState: any, formData: FormData) {
 
   redirect("/dashboard/products");
 }
-/* 
+
 export async function deleteProduct(formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
-  if (!user || user.email !== "jan@alenix.de") {
+  if (!user || user.email !== "rasel6041@gmail.com") {
     return redirect("/");
   }
 
@@ -101,7 +101,7 @@ export async function deleteProduct(formData: FormData) {
 
   redirect("/dashboard/products");
 }
-
+/* 
 export async function createBanner(prevState: any, formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();

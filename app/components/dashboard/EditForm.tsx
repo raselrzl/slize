@@ -79,7 +79,7 @@ export function EditForm({ data }: iAppProps) {
         <CardHeader>
           <CardTitle>Product Details</CardTitle>
           <CardDescription>
-            In this form you can update your product
+            In this form can update product
           </CardDescription>
         </CardHeader>
         <CardContent>

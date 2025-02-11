@@ -104,10 +104,10 @@ export default async function ProductsRoute() {
                             Edit
                           </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem /* asChild */>
-                          {/* <Link href={`/dashboard/products/${item.id}/delete`}> */}
+                        <DropdownMenuItem asChild>
+                          <Link href={`/dashboard/products/${item.id}/delete`}>
                             Delete
-                          {/* </Link> */}
+                          </Link>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
