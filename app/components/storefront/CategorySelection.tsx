@@ -20,7 +20,7 @@ export function CategoriesSelection() {
         </Link>
       </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-y-1 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-2 lg:gap-4">
+      <div className="mt-6 grid grid-cols-2 gap-y-2 sm:grid-cols-2 sm:grid-rows-2 gap-x-2 ">
          <div className="group aspect-w-2 aspect-h-1 overflow-hidden sm:aspect-w-1 sm:row-span-2 rounded-md">
           <Image
             src={all}
@@ -29,8 +29,8 @@ export function CategoriesSelection() {
           />
           <div className="bg-gradient-to-b from-transparent to-black opacity-55" />
           <div className="p-6 flex items-end">
-            <Link href="/products/all">
-              <h3 className="text-white font-semibold">All Products</h3>
+            <Link href="/products/kids">
+              <h3 className="text-white font-semibold">Products Kids</h3>
               <p className="mt-1 text-sm text-white">Shop Now</p>
             </Link>
           </div>
