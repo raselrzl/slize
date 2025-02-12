@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import all from "@/public/all.webp";
-import men from "@/public/men.jpg";
-import women from "@/public/women.avif";
+import all from "@/public/b1.png";
+import men from "@/public/b2.webp";
+import women from "@/public/b3.webp";
 
 export function CategoriesSelection() {
   return (
