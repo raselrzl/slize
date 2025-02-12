@@ -212,7 +212,7 @@ export async function addItem(productId: string) {
 
   revalidatePath("/", "layout");
 }
-/* 
+
 export async function delItem(formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
@@ -236,7 +236,7 @@ export async function delItem(formData: FormData) {
 
   revalidatePath("/bag");
 }
-
+/* 
 export async function checkOut() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
