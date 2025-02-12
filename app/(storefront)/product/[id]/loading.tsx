@@ -5,7 +5,7 @@ export default function ProductLoadingRoute() {
     <div className="grid md:grid-cols-2 gap-6 items-start lg:gap-x-24 py-6">
       <div>
         <Skeleton className="w-full h-[600px]" />
-        <div className="grid grid-cols-5 gap-4 mt-6">
+        <div className="grid grid-cols-5 gap-2 mt-6">
           <Skeleton className="w-[100px] h-[100px]" />
           <Skeleton className="w-[100px] h-[100px]" />
           <Skeleton className="w-[100px] h-[100px]" />

@@ -6,7 +6,7 @@ export default function LoadingFile() {
     <div>
       <Skeleton className="h-10 w-56 my-5" />
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
         <LoadingProductCard />
         <LoadingProductCard />
         <LoadingProductCard />

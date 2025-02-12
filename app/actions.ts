@@ -8,8 +8,8 @@ import prisma from "./lib/db";
 import { redis } from "./lib/redis";
 import { Cart } from "./lib/interfaces";
 import { revalidatePath } from "next/cache";
-/* import { stripe } from "./lib/stripe";
-import Stripe from "stripe"; */
+import { stripe } from "./lib/stripe";
+import Stripe from "stripe";
 
 export async function createProduct(prevState: unknown, formData: FormData) {
   const { getUser } = getKindeServerSession();
@@ -236,7 +236,7 @@ export async function delItem(formData: FormData) {
 
   revalidatePath("/bag");
 }
-/* 
+
 export async function checkOut() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
@@ -267,11 +267,11 @@ export async function checkOut() {
       success_url:
         process.env.NODE_ENV === "development"
           ? "http://localhost:3000/payment/success"
-          : "https://shoe-marshal.vercel.app/payment/success",
+          : "https://slize-rust.vercel.app/payment/success",
       cancel_url:
         process.env.NODE_ENV === "development"
           ? "http://localhost:3000/payment/cancel"
-          : "https://shoe-marshal.vercel.app/payment/cancel",
+          : "https://slize-rust.vercel.app/payment/cancel",
       metadata: {
         userId: user.id,
       },
@@ -279,4 +279,4 @@ export async function checkOut() {
 
     return redirect(session.url as string);
   }
-} */
+}

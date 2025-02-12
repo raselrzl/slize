@@ -1,4 +1,4 @@
-import { /* checkOut, */ delItem } from "@/app/actions";
+import { checkOut, delItem } from "@/app/actions";
 import { ChceckoutButton, DeleteItem } from "@/app/components/SubmitButtons";
 import { Cart } from "@/app/lib/interfaces";
 import { redis } from "@/app/lib/redis";
@@ -84,7 +84,7 @@ export default async function BagRoute() {
               <p>${new Intl.NumberFormat("en-US").format(totalPrice)}</p>
             </div>
 
-            <form /* action={checkOut} */>
+            <form action={checkOut}>
               <ChceckoutButton />
             </form>
           </div>
