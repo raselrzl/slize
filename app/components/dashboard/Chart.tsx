@@ -1,4 +1,4 @@
-/* "use client";
+"use client";
 
 import {
   ResponsiveContainer,
@@ -54,4 +54,3 @@ export function Chart({ data }: iAppProps) {
     </ResponsiveContainer>
   );
 }
- */
