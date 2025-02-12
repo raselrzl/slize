@@ -5,8 +5,8 @@ import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod";
 import { bannerSchema, productSchema } from "./lib/zodSchemas";
 import prisma from "./lib/db";
-/* import { redis } from "./lib/redis";
-import { Cart } from "./lib/interfaces"; */
+import { redis } from "./lib/redis";
+import { Cart } from "./lib/interfaces";
 import { revalidatePath } from "next/cache";
 /* import { stripe } from "./lib/stripe";
 import Stripe from "stripe"; */
@@ -144,7 +144,7 @@ export async function deleteBanner(formData: FormData) {
 
   redirect("/dashboard/banner");
 }
-/* 
+
 export async function addItem(productId: string) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
@@ -212,7 +212,7 @@ export async function addItem(productId: string) {
 
   revalidatePath("/", "layout");
 }
-
+/* 
 export async function delItem(formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
