@@ -20,7 +20,7 @@ model User {
   lastName     String
   profileImage String
 
-/*   orders Order[] */
+  orders Order[]
 
   createdAt DateTime @default(now())
 }
@@ -45,7 +45,7 @@ model Banner {
 
   createdAt DateTime @default(now())
 }
-/*
+
 model Order {
   id     String @id @default(uuid())
   status String @default("pending")
@@ -56,7 +56,7 @@ model Order {
 
   createdAt DateTime @default(now())
 }
- */
+
 
 enum ProductStatus {
   draft
