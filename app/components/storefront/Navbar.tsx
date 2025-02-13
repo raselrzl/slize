@@ -10,6 +10,7 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { redis } from "@/app/lib/redis";
 import { Cart } from "@/app/lib/interfaces";
+import Image from "next/image";
 
 export async function Navbar() {
   const { getUser } = getKindeServerSession();
@@ -20,14 +21,20 @@ export async function Navbar() {
   const total = cart?.items.reduce((sum, item) => sum + item.quantity, 0) || 0;
 
   return (
+    <>
     <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
       <div className="flex items-center">
         <Link href="/">
-          <h1 className="text-black font-bold text-xl lg:text-3xl">
-            SL<span className="text-primary">IZE</span>
-          </h1>
+        <Image
+            src="/slizelogo.png" 
+            alt="Slize Word Logo"
+            width={100} 
+            height={60} 
+          />
         </Link>
+        <div className="hidden md:block">
         <NavbarLinks />
+      </div>
       </div>
 
       <div className="flex items-center">
@@ -60,8 +67,15 @@ export async function Navbar() {
               <RegisterLink>Register</RegisterLink>
             </Button>
           </div>
+          
         )}
+        
       </div>
+      
     </nav>
+    <div className="block md:hidden mb-6">
+        <NavbarLinks />
+      </div>
+    </>
   );
 }
