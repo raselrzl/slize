@@ -33,7 +33,7 @@ export default async function BagRoute() {
       {!cart || !cart.items ||cart.items.length===0  ? (
         <div className="flex min-h-[400px] flex-col items-center justify-center rounded-lg border border-dashed p-8 text-center mt-20">
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
-            <ShoppingBag className="w-10 h-10 text-primary" />
+            <ShoppingBag className="w-10 h-10 text-red-800" />
           </div>
 
           <h2 className="mt-6 text-xl font-semibold">
@@ -44,7 +44,7 @@ export default async function BagRoute() {
             add some so that you can see them right here.
           </p>
 
-          <Button asChild>
+          <Button asChild variant="destructive">
             <Link href="/">Shop Now!</Link>
           </Button>
         </div>
