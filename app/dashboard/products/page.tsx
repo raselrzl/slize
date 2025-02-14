@@ -80,7 +80,7 @@ export default async function ProductsRoute() {
                       src={item.images[0]}
                       height={64}
                       width={64}
-                      className="rounded-md object-cover h-16 w-16"
+                      className="rounded-md object-contain h-16 w-16"
                     />
                   </TableCell>
                   <TableCell>{item.name}</TableCell>

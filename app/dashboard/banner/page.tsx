@@ -76,7 +76,7 @@ export default async function BannerRoute() {
                       src={item.imageString}
                       width={64}
                       height={64}
-                      className="rounded-lg object-cover h-16 w-16"
+                      className="rounded-lg object-contain h-16 w-16"
                     />
                   </TableCell>
                   <TableCell className="font-medium">{item.title}</TableCell>

@@ -45,7 +45,7 @@ export function ProductCard({ item }: iAppProps) {
       </Carousel>
 
       <div className="flex justify-between items-center mt-1">
-        <h1 className="font-semibold text-lg">{item.name}</h1>
+        <h1 className="font-semibold text-md">{item.name}</h1>
         <h3 className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
           ${item.price}
         </h3>
