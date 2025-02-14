@@ -35,7 +35,7 @@ export function FeaturedProducts() {
         </h2>
 
         <Link
-          className="text-sm font-semibold text-primary hover:text-primary/80 bg-[rgb(247,247,247)] px-4 py-2 rounded-2xl"
+          className="text-sm font-semibold text-white hover:text-white/80 bg-red-600 px-4 py-2 rounded-2xl"
           href="/products/all"
         >
           View all &rarr;

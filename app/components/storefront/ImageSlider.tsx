@@ -33,16 +33,16 @@ export function ImageSlider({ images }: iAppProps) {
     <div className="grid gap-6 md:gap-3 items-start">
       <div className="relative overflow-hidden">
         <Image
-          width={400}
-          height={400}
+          width={300}
+          height={300}
           src={images[mainImageIndex]}
           alt="Product image"
-          className="object-cover w-[400px] h-[300px]"
+          className="object-cover"
         />
 
         <div className="absolute inset-0 flex items-center justify-between px-4">
           <Button onClick={handlePreviousClick} variant="ghost" size="icon">
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-6 h-6 hover:bg-red-200"/>
           </Button>
           <Button onClick={handleNextClick} variant="ghost" size="icon">
             <ChevronRight className="w-6 h-6" />

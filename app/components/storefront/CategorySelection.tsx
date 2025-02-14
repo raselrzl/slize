@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import all from "@/public/kids1.png";
-import men from "@/public/man1.png";
-import women from "@/public/women1.png";
+import all from "@/public/m1.png";
+import men from "@/public/Daim.png";
+import women from "@/public/Japp.png";
 
 export function CategoriesSelection() {
   return (
@@ -13,19 +13,19 @@ export function CategoriesSelection() {
         </h2>
 
         <Link
-          className="text-sm font-semibold text-primary hover:text-primary/80 bg-[rgb(247,247,247)] px-4 py-2 rounded-2xl"
+          className="text-sm font-semibold text-white hover:text-white/80 bg-red-600 px-4 py-2 rounded-2xl"
           href="/products/all"
         >
           View all &rarr;
         </Link>
       </div>
 
-      <div className="mt-6 grid grid-cols-2 gap-y-2 sm:grid-cols-2 sm:grid-rows-2 gap-x-2 ">
+      <div className="mt-6 grid grid-cols-2 gap-y-2 sm:grid-cols-2 sm:grid-rows-2 gap-x-2">
          <div className="group aspect-w-2 aspect-h-1 overflow-hidden sm:aspect-w-1 sm:row-span-2 rounded-md">
           <Image
             src={all}
             alt="All Products Image"
-            className="object-cover object-center "
+            className="object-contain object-center "
           />
           <div className="bg-gradient-to-b from-transparent to-black opacity-55" />
           <div className="p-6 flex items-end">
@@ -40,7 +40,7 @@ export function CategoriesSelection() {
           <Image
             src={men}
             alt="Products for men Image"
-            className="object-bottom object-cover sm:absolute sm:inset-0 sm:w-full sm:h-full"
+            className="object-bottom object-contain sm:absolute sm:inset-0 sm:w-full sm:h-full"
           />
           <div className="bg-gradient-to-b from-transparent to-black opacity-55 sm:absolute sm:inset-0" />
           <div className="p-6 flex items-end sm:absolute sm:inset-0">
@@ -55,7 +55,7 @@ export function CategoriesSelection() {
           <Image
             src={women}
             alt="Women product image"
-            className="object-bottom object-cover sm:absolute sm:inset-0 sm:w-full sm:h-full"
+            className="object-bottom object-contain sm:absolute sm:inset-0 sm:w-full sm:h-full"
           />
           <div className="bg-gradient-to-b from-transparent to-black opacity-55 sm:absolute sm:inset-0" />
           <div className="p-6 flex items-end sm:absolute sm:inset-0">

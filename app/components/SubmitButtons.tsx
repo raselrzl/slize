@@ -45,7 +45,7 @@ export function ShoppingBagButton() {
           <Loader2 className="mr-4 h-5 w-5 animate-spin" /> Please Wait
         </Button>
       ) : (
-        <Button size="lg" className="w-full mt-5" type="submit">
+        <Button variant="destructive" size="lg" className="w-full mt-5" type="submit">
           <ShoppingBag className="mr-4 h-5 w-5" /> Add to Cart
         </Button>
       )}
@@ -80,7 +80,7 @@ export function ChceckoutButton() {
           <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Please Wait
         </Button>
       ) : (
-        <Button type="submit" size="lg" className="w-full mt-5">
+        <Button variant="destructive" type="submit" size="lg" className="w-full mt-5">
           Checkout
         </Button>
       )}

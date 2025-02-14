@@ -56,7 +56,7 @@ export default async function BagRoute() {
             <div key={item.id} className="flex border-b-2 border-gray-200">
               <div className="w-20 h-20 sm:w-32 sm:h-32 relative">
                 <Image
-                  className="rounded-md object-cover"
+                  className="rounded-md object-contain"
                   fill
                   src={item.imageString}
                   alt="Product image"

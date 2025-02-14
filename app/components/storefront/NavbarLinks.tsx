@@ -8,7 +8,7 @@ export const navbarLinks = [
 
   {
     id: 1,
-    name: "All Products",
+    name: "All products",
     href: "/products/all",
   },
   {
@@ -38,9 +38,9 @@ export function NavbarLinks() {
           key={item.id}
           className={cn(
             location === item.href
-              ? "bg-muted"
+              ? "bg-[#9b3e22] text-white"
               : "hover:bg-muted hover:bg-opacity-75",
-            "group p-2 font-medium rounded-md"
+            "group p-2 font-semibold rounded-md"
           )}
         >
           {item.name}

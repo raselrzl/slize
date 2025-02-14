@@ -22,58 +22,59 @@ export async function Navbar() {
 
   return (
     <>
-    <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
-      <div className="flex items-center">
-        <Link href="/">
-        <Image
-            src="/slizelogo.png" 
-            alt="Slize Word Logo"
-            width={100} 
-            height={60} 
-          />
-        </Link>
-        <div className="hidden md:block">
-        <NavbarLinks />
-      </div>
-      </div>
+      <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
+        <div className="flex items-center">
+          <Link href="/">
+            {/* <Image
+              src="/slizeword.png"
+              alt="Slize Word Logo"
+              width={200} // Set a specific width
+              height={100} // Set a specific height maintaining the aspect ratio
+            /> */}
+            <h1 className="text-3xl font-extrabold text-center text-gradient transform hover:scale-105 transition-all duration-300 ease-in-out">
+  SLIZE
+</h1>
 
-      <div className="flex items-center">
-        {user ? (
-          <>
-            <Link href="/bag" className="group p-2 flex items-center mr-2">
-              <div className="relative">
-                <ShoppingBagIcon className="h-6 w-6 text-gray-800 group-hover:text-gray-600" />
-                <span className="absolute top-0 right-0 text-xs text-black group-hover:text-gray-800 transform translate-x-1/2 -translate-y-1/2 bg-[rgb(186,183,183)] p-2 rounded-full w-5 h-5 flex items-center justify-center">
-                  {total}
-                </span>
-              </div>
-            </Link>
-
-            <UserDropdown
-              email={user.email as string}
-              name={user.given_name as string}
-              userImage={
-                user.picture ?? `https://avatar.vercel.sh/${user.given_name}`
-              }
-            />
-          </>
-        ) : (
-          <div className="flex md:flex md:flex-1 md:items-center md:justify-end md:space-x-1">
-            <Button variant="ghost" asChild>
-              <LoginLink>Sign in</LoginLink>
-            </Button>
-            <span className="h-6 w-px bg-gray-400 self-center"></span>
-            <Button variant="ghost" asChild>
-              <RegisterLink>Register</RegisterLink>
-            </Button>
+          </Link>
+          <div className="hidden md:block">
+            <NavbarLinks />
           </div>
-          
-        )}
-        
-      </div>
-      
-    </nav>
-    <div className="block md:hidden mb-6">
+        </div>
+
+        <div className="flex items-center">
+          {user ? (
+            <>
+              <Link href="/bag" className="group p-2 flex items-center mr-2">
+                <div className="relative">
+                  <ShoppingBagIcon className="h-6 w-6 text-red-800 group-hover:text-red-600" />
+                  <span className="absolute top-0 right-0 text-xs text-black group-hover:text-gray-800 transform translate-x-1/2 -translate-y-1/2 bg-red-600 p-2 rounded-full w-5 h-5 flex items-center justify-center">
+                    {total}
+                  </span>
+                </div>
+              </Link>
+
+              <UserDropdown
+                email={user.email as string}
+                name={user.given_name as string}
+                userImage={
+                  user.picture ?? `https://avatar.vercel.sh/${user.given_name}`
+                }
+              />
+            </>
+          ) : (
+            <div className="flex md:flex md:flex-1 md:items-center md:justify-end md:space-x-1">
+              <Button variant="ghost" asChild>
+                <LoginLink>Sign in</LoginLink>
+              </Button>
+              <span className="h-6 w-px bg-gray-400 self-center"></span>
+              <Button variant="ghost" asChild>
+                <RegisterLink>Register</RegisterLink>
+              </Button>
+            </div>
+          )}
+        </div>
+      </nav>
+      <div className="block md:hidden mb-6">
         <NavbarLinks />
       </div>
     </>
