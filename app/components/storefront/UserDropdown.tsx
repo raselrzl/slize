@@ -9,6 +9,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 interface iAppProps {
   email: string;
@@ -29,9 +31,17 @@ export function UserDropdown({ email, name, userImage }: iAppProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="flex flex-col space-y-1">
-          <p className="text-sm font-medium leading-none">{name}</p>
+          <p className="text-md font-semibold leading-none">{name}</p>
           <p className="text-xs leading-none text-muted-foreground">{email}</p>
         </DropdownMenuLabel>
+        
+        
+        <DropdownMenuItem>
+        {email === "rasel6041@gmail.com" && (
+        <Link href="/dashboard" className="flex mb-2">
+          Dashboard <ArrowRight className="pt-1" />
+        </Link>
+      )} </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <LogoutLink>Log out</LogoutLink>
