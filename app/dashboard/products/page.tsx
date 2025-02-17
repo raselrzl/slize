@@ -45,7 +45,7 @@ export default async function ProductsRoute() {
   return (
     <>
       <div className="flex items-center justify-end">
-        <Button asChild className="flex items-center gap-x-2">
+        <Button asChild className="flex items-center gap-x-2" variant={"destructive"}>
           <Link href="/dashboard/products/create">
             <PlusCircle className="w-3.5 h-3.5" />
             <span>Add Product</span>

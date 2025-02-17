@@ -29,9 +29,9 @@ export default async function DashboardLayout({
     return redirect("/");
   }
   return (
-    <div className="flex w-full flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-white">
-        <nav className="hidden font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+    <div className="flex w-full flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+      <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-white rounded-lg">
+        <nav className="hidden font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 ml-6">
           <DashboardNavigation />
         </nav>
 
@@ -54,12 +54,13 @@ export default async function DashboardLayout({
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="secondary" size="icon" className="rounded-full">
+            <Button variant="secondary" size="icon" className="rounded-full mr-5">
               <CircleUser className="w-5 h-5" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuLabel>{user.given_name}</DropdownMenuLabel>
+            <DropdownMenuLabel className="text-xs text-gray-600">{user.email}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <LogoutLink>Logout</LogoutLink>

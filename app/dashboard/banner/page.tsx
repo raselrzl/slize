@@ -44,8 +44,8 @@ export default async function BannerRoute() {
   return (
     <>
       <div className="flex items-center justify-end">
-        <Button asChild className="flex gap-x-2">
-          <Link href="/dashboard/banner/create">
+        <Button asChild className="flex gap-x-2" variant={"destructive"}>
+          <Link href="/dashboard/banner/create" >
             <PlusCircle className="h-3.5 w-3.5" />
             <span>Add Banner</span>
           </Link>
