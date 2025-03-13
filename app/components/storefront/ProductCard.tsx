@@ -28,14 +28,15 @@ export function ProductCard({ item }: iAppProps) {
           {item.images.map((item, index) => (
             <CarouselItem key={index}>
               <div className="relative h-[150px] md:h-[250px]">
-                <Image
-                  src={item}
-                  alt="Product Image"
-                  layout="responsive"
-                  width={100}
-                  height={100}
-                  className="pt-10 md:mb-5"
-                />
+              <Image
+  src={item}
+  alt="Product Image"
+  layout="responsive"
+  width={100}
+  height={100}
+  className="pt-10 md:mb-5 transform transition-transform duration-500 hover:scale-105"
+/>
+
               </div>
             </CarouselItem>
           ))}

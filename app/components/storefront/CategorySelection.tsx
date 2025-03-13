@@ -26,7 +26,7 @@ export function CategoriesSelection() {
           <Image
             src={all}
             alt="All Products Image"
-            className="object-contain object-center "
+            className="object-contain object-center"
           />
           <div className="bg-gradient-to-b from-transparent to-black opacity-55" />
           <div className="p-6 flex items-end">
