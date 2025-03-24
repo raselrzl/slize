@@ -267,11 +267,11 @@ export async function checkOut() {
       success_url:
         process.env.NODE_ENV === "development"
           ? "http://localhost:3000/payment/success"
-          : "https://slize-rust.vercel.app/payment/success",
+          : "https://kronstil.store/payment/success",
       cancel_url:
         process.env.NODE_ENV === "development"
           ? "http://localhost:3000/payment/cancel"
-          : "https://slize-rust.vercel.app/payment/cancel",
+          : "https://kronstil.store/payment/cancel",
       metadata: {
         userId: user.id,
       },
