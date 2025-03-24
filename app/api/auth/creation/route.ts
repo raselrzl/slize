@@ -34,6 +34,6 @@ export async function GET() {
   return NextResponse.redirect(
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000/"
-      : "https://slize-rust.vercel.app/"
+      : "https://kronstil.store/"
   );
 }
