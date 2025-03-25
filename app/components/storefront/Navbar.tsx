@@ -25,13 +25,15 @@ export async function Navbar() {
       <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
         <div className="flex items-center">
           <Link href="/">
-          <Image
+            <Image
               src="/kron1.png"
               alt="Kron Word Logo"
-              width={100} // Set a specific width
-              height={60} // Set a specific height maintaining the aspect ratio
+              width={200}
+              height={60}
+              className="w-[100px] lg:w-[200px] h-[25px]"
             />
-           {/*  <h1 className="text-3xl font-extrabold text-center text-gradient transform hover:scale-105 transition-all duration-300 ease-in-out">
+
+            {/*  <h1 className="text-3xl font-extrabold text-center text-gradient transform hover:scale-105 transition-all duration-300 ease-in-out">
               KRONSTIL
             </h1> */}
           </Link>
