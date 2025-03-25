@@ -8,25 +8,33 @@ export default function IndexPage() {
     <div>
       <Hero />
 
-   
-
       <CategoriesSelection />
-      <div className="bg-gray-100 p-6 flex justify-center items-center my-4">
-        <div className="relative flex space-x-4">
+      <div className="bg-gray-100 p-4 flex justify-center items-center my-4">
+        <div className="relative flex space-x-4 overflow-x-auto overflow-y-hidden px-4">
           <img
             src="/blackfriday.jpg"
             alt="Image 1"
-            className="w-[150px] h-[150px] object-cover transform rotate-2 border-4 border-b-8 border-white"
+            className="w-[150px] h-[150px] object-cover transform rotate-2 border-4 border-b-8 border-white m-4"
           />
           <img
             src="/summer.jpg"
             alt="Image 2"
-            className="w-[150px] h-[150px] object-cover transform rotate-6 border-4 border-t-8 border-white"
+            className="w-[150px] h-[150px] object-cover transform -rotate-6 border-4 border-t-8 border-white m-4"
+          />
+          <img
+            src="/summer.jpg"
+            alt="Image 2"
+            className="w-[150px] h-[150px] object-cover transform rotate-6 border-4 border-t-8 border-white m-4"
           />
           <img
             src="/3.jpg"
             alt="Image 3"
-            className="w-[150px] h-[150px] object-cover transform rotate-4 border-4 border-r-8 border-white"
+            className="w-[150px] h-[150px] object-cover transform rotate-4 border-4 border-r-8 border-white m-4"
+          />
+          <img
+            src="/summer.jpg"
+            alt="Image 2"
+            className="w-[150px] h-[150px] object-cover transform rotate-6 border-4 border-t-8 border-white m-4"
           />
         </div>
       </div>
