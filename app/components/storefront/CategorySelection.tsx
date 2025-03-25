@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import all from "@/public/m1.png";
-import men from "@/public/Daim.png";
-import women from "@/public/Japp.png";
+import kids from "@/public/2.png";
+import men from "@/public/k1.png";
+import women from "@/public/4.png";
 import { ArrowRight, ArrowRightFromLine, ArrowRightIcon } from "lucide-react";
 
 export function CategoriesSelection() {
@@ -24,7 +24,7 @@ export function CategoriesSelection() {
       <div className="mt-6 grid grid-cols-2 gap-y-2 sm:grid-cols-2 sm:grid-rows-2 gap-x-2">
          <div className="group aspect-w-2 aspect-h-1 overflow-hidden sm:aspect-w-1 sm:row-span-2 rounded-md">
           <Image
-            src={all}
+            src={kids}
             alt="All Products Image"
             className="object-contain object-center"
           />
