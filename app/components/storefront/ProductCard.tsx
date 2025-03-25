@@ -7,7 +7,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Skeleton } from "@/components/ui/skeleton";
-import { MoveRight } from "lucide-react";
+import { MoveRight, SquareChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -45,7 +45,7 @@ export function ProductCard({ item }: iAppProps) {
         <div className="flex justify-between items-center mt-1">
           <h1 className="font-semibold text-md">{item.name}</h1>
           <h3 className="inline-flex items-center px-2 py-1 text-xs font-medium">
-            {item.price} kr
+            {item.price}kr
           </h3>
         </div>
         <div className="flex flex-row items-center">
@@ -53,8 +53,8 @@ export function ProductCard({ item }: iAppProps) {
             {item.description}
           </p>
 
-          <div className="ml-auto pl-2 font-bold">
-            <MoveRight />
+          <div className="ml-auto pl-2 font-medium">
+            <SquareChevronRight />
           </div>
         </div>
       </Link>

@@ -33,7 +33,7 @@ export function FeaturedProducts() {
         <h2 className="text-xl md:text-2xl font-extrabold ">Featured Items</h2>
 
         <Link
-          className="text-sm font-semibold text-white hover:text-white/80 bg-red-600 px-4 py-2 rounded-2xl"
+          className="text-sm font-semibold text-white hover:text-white/80 bg-red-800 px-4 py-2 rounded-2xl"
           href="/products/all"
         >
           View all &rarr;
