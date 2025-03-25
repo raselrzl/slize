@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Slize-creating a slice of perfection in every detail",
+  title: "Kronstil-creating a slice of perfection in every detail",
   description: "luxurious product for men, wome, kids",
 };
 
