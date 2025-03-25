@@ -55,7 +55,7 @@ export default async function ProductIdRoute({
           <h1 className="text-3xl font-extrabold tracking-tight text-red-800">
             {data.name}
           </h1>
-          <p className="text-3xl mt-2 text-red-800">${data.price}</p>
+          <p className="text-3xl mt-2 text-red-800">{data.price} kr</p>
           <div className="mt-3 flex items-center gap-1">
             <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
             <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />

@@ -115,7 +115,7 @@ export function EditForm({ data }: iAppProps) {
                 name={fields.price.name}
                 defaultValue={data.price}
                 type="number"
-                placeholder="$55"
+                placeholder="55 kr"
               />
               <p className="text-red-500">{fields.price.errors}</p>
             </div>

@@ -85,7 +85,7 @@ export default async function ProductsRoute() {
                   </TableCell>
                   <TableCell>{item.name}</TableCell>
                   <TableCell>{item.status}</TableCell>
-                  <TableCell>${item.price}</TableCell>
+                  <TableCell>{item.price} kr</TableCell>
                   <TableCell>
                     {new Intl.DateTimeFormat("en-US").format(item.createdAt)}
                   </TableCell>
