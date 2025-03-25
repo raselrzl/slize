@@ -45,7 +45,7 @@ export function ProductCard({ item }: iAppProps) {
         <div className="flex justify-between items-center mt-1">
           <h1 className="font-semibold text-md">{item.name}</h1>
           <h3 className="inline-flex items-center px-2 py-1 text-xs font-medium">
-            ${item.price}
+            {item.price} kr
           </h3>
         </div>
         <div className="flex flex-row items-center">
