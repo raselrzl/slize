@@ -28,7 +28,7 @@ export async function Navbar() {
           <Image
               src="/kron1.png"
               alt="Kron Word Logo"
-              width={200} // Set a specific width
+              width={100} // Set a specific width
               height={60} // Set a specific height maintaining the aspect ratio
             />
            {/*  <h1 className="text-3xl font-extrabold text-center text-gradient transform hover:scale-105 transition-all duration-300 ease-in-out">
