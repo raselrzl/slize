@@ -6,10 +6,9 @@ export function Footer() {
     <p className="text-xs leading-5 text-gray-700 mt-8">
       &copy; 2024 kronstil and Co. All Rights Reserved.
     </p>
-    <div className="flex space-x-6 items-center mt-8">
-        <Instagram className="text-gray-900 hover:text-indigo-600 cursor-pointer" size={24} />
-        <Facebook className="text-gray-900 hover:text-indigo-600 cursor-pointer" size={24} />
-        <Twitter className="text-gray-900 hover:text-indigo-600 cursor-pointer" size={24} />
+    <div className="flex space-x-2 items-center mt-8">
+        <Instagram className="text-red-900 hover:text-red-600 cursor-pointer" size={24} />
+        <Facebook className="text-red-900 hover:text-red-600 cursor-pointer" size={24} />
       </div>
   </div>
 </footer>
