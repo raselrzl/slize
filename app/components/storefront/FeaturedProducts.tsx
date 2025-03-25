@@ -30,9 +30,7 @@ export function FeaturedProducts() {
   return (
     <>
       <div className="flex justify-between items-center">
-        <h2 className="text-xl md:text-2xl font-extrabold ">
-        Featured Items
-        </h2>
+        <h2 className="text-xl md:text-2xl font-extrabold ">Featured Items</h2>
 
         <Link
           className="text-sm font-semibold text-white hover:text-white/80 bg-red-600 px-4 py-2 rounded-2xl"
@@ -53,11 +51,15 @@ async function LoadFeaturedproducts() {
   const data = await getData();
 
   return (
-    <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-2">
-      {data.map((item) => (
-        <ProductCard key={item.id} item={item} />
-      ))}
-    </div>
+    <>
+      
+
+      <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-2">
+        {data.map((item) => (
+          <ProductCard key={item.id} item={item} />
+        ))}
+      </div>
+    </>
   );
 }
 
