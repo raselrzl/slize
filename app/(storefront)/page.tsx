@@ -40,7 +40,7 @@ export default function IndexPage() {
       </div>
 
       <FeaturedProducts />
-      <div className="w-full h-[250px] my-2">
+   {/*    <div className="w-full h-[250px] my-2">
         <h2 className="text-xl md:text-2xl font-extrabold my-4 border-2 text-center">
           Keep eyes on new arival
         </h2>
@@ -49,7 +49,7 @@ export default function IndexPage() {
           alt="Homepage"
           className="w-full h-full object-contain"
         />
-      </div>
+      </div> */}
     </div>
   );
 }
