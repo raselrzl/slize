@@ -8,22 +8,22 @@ export const navbarLinks = [
 
   {
     id: 1,
-    name: "All products",
+    name: "All",
     href: "/products/all",
   },
   {
     id: 2,
-    name: "Men",
+    name: "Boy",
     href: "/products/men",
   },
   {
     id: 3,
-    name: "Women",
+    name: "Girls",
     href: "/products/women",
   },
   {
     id: 4,
-    name: "Kids",
+    name: "Newborn",
     href: "/products/kids",
   },
 ];
