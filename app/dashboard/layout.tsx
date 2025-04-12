@@ -45,7 +45,7 @@ export default async function DashboardLayout({
               <MenuIcon className="h-5 w-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left">
+          <SheetContent side="left" className="bg-black w-[200px] h-[400px]">
             <nav className="flex flex-col gap-6 text-lg font-medium mt-5">
               <DashboardNavigation />
             </nav>
