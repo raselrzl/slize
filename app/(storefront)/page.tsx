@@ -1,7 +1,7 @@
 import { CategoriesSelection } from "../components/storefront/CategorySelection";
 import { FeaturedProducts } from "../components/storefront/FeaturedProducts";
 import { Hero } from "../components/storefront/Hero";
-import ImageAlbum from "../components/storefront/imageAlbum";
+import ModelAlbum from "../components/storefront/modelAlbum";
 import NewArrival from "../components/storefront/NewArrival";
 
 
@@ -38,7 +38,7 @@ export default function IndexPage() {
           />
         </div>
       </div> */}
-      <ImageAlbum />
+      <ModelAlbum />
 
       <FeaturedProducts />
       <NewArrival />

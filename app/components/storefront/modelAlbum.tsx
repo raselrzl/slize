@@ -2,7 +2,7 @@
 import { ArrowDownRightFromSquare, ArrowLeft, ArrowRight } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 
-export default function ImageAlbum() {
+export default function ModelAlbum() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(false);
