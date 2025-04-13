@@ -7,7 +7,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Skeleton } from "@/components/ui/skeleton";
-import { MoveRight, SquareChevronRight } from "lucide-react";
+import { ChevronRight, MoveRight, SquareChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -54,7 +54,7 @@ export function ProductCard({ item }: iAppProps) {
           </p>
 
           <div className="ml-auto pl-2 font-medium">
-            <SquareChevronRight />
+            <ChevronRight />
           </div>
         </div>
       </Link>
