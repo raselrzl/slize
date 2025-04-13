@@ -1,18 +1,15 @@
 import { CategoriesSelection } from "../components/storefront/CategorySelection";
 import { FeaturedProducts } from "../components/storefront/FeaturedProducts";
-import { Footer } from "../components/storefront/Footer";
 import { Hero } from "../components/storefront/Hero";
-import { Info } from "../components/storefront/Info";
-import { Navbar } from "../components/storefront/Navbar";
 import NewArrival from "../components/storefront/NewArrival";
 
 export default function IndexPage() {
   return (
     <div>
-      <Hero />
-
-      
-      <div className="bg-gray-100 p-4 flex justify-center items-center my-4">
+      <div className="hidden md:block">
+  <Hero />
+</div>
+      <div className="bg-teal-300 p-4 flex justify-center items-center mb-4">
         <div className="relative flex space-x-4 overflow-x-auto overflow-y-hidden px-4">
           <img
             src="/blackfriday.jpg"

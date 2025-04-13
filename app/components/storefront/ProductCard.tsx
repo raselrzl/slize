@@ -23,7 +23,7 @@ interface iAppProps {
 
 export function ProductCard({ item }: iAppProps) {
   return (
-    <div className="pb-4 px-2 bg-[#f7f3f2]">
+    <div className="pb-4 px-2 bg-[#efeff0]">
       <Carousel className="w-full mx-auto">
         <CarouselContent>
           {item.images.map((item, index) => (

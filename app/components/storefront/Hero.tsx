@@ -24,7 +24,7 @@ export async function Hero() {
   const data = await getData();
 
   return (
-    <Carousel className="bg-pink-50">
+    <Carousel className="bg-[#F9C6D3] w-full max-w-7xl mx-auto mb-4">
       <CarouselContent>
         {data.map((item) => (
           <CarouselItem key={item.id}>

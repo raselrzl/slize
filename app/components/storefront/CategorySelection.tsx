@@ -19,7 +19,7 @@ export function CategoriesSelection() {
         {/* Left Div */}
         <div className="w-full md:w-1/2 h-full relative rounded-xl overflow-hidden shadow-lg shadow-black/10">
           <div
-            className="absolute inset-0 bg-contain bg-no-repeat bg-center opacity-90 bg-pink-50"
+            className="absolute inset-0 bg-contain bg-no-repeat bg-center opacity-90 bg-teal-50"
             style={{ backgroundImage: "url('/2.png')" }}
           ></div>
           <div className="absolute inset-0 rounded-xl" />
@@ -39,7 +39,7 @@ export function CategoriesSelection() {
           {/* Top Right */}
           <div className="h-1/2 relative rounded-xl overflow-hidden shadow-lg shadow-black/10">
             <div
-              className="absolute inset-0 bg-contain bg-no-repeat bg-center opacity-90 bg-pink-50"
+              className="absolute inset-0 bg-contain bg-no-repeat bg-center opacity-90 bg-teal-50"
               style={{ backgroundImage: "url('/k1.png')" }}
             ></div>
             <div className="absolute inset-0 rounded-xl" />
@@ -57,7 +57,7 @@ export function CategoriesSelection() {
           {/* Bottom Right */}
           <div className="h-1/2 relative rounded-xl overflow-hidden shadow-lg shadow-black/10">
             <div
-              className="absolute inset-0 bg-contain bg-no-repeat bg-center opacity-90 bg-pink-50"
+              className="absolute inset-0 bg-contain bg-no-repeat bg-center opacity-90 bg-teal-50"
               style={{ backgroundImage: "url('/4.png')" }}
             ></div>
             <div className="absolute inset-0 rounded-xl" />
