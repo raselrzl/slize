@@ -1,13 +1,15 @@
 import { CategoriesSelection } from "../components/storefront/CategorySelection";
 import { FeaturedProducts } from "../components/storefront/FeaturedProducts";
 import { Hero } from "../components/storefront/Hero";
+import ImageAlbum from "../components/storefront/imageAlbum";
 import NewArrival from "../components/storefront/NewArrival";
+
 
 export default function IndexPage() {
   return (
     <div>
       <Hero />
-      <div className="bg-teal-300 p-4 flex justify-center items-center mb-4">
+      {/* <div className="bg-teal-300 p-4 flex justify-center items-center mb-4">
         <div className="relative flex space-x-4 overflow-x-auto overflow-y-hidden px-4">
           <img
             src="/blackfriday.jpg"
@@ -35,7 +37,8 @@ export default function IndexPage() {
             className="w-[150px] h-[150px] object-cover transform rotate-6 border-4 border-t-8 border-white m-4"
           />
         </div>
-      </div>
+      </div> */}
+      <ImageAlbum />
 
       <FeaturedProducts />
       <NewArrival />
