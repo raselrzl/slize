@@ -6,9 +6,7 @@ import NewArrival from "../components/storefront/NewArrival";
 export default function IndexPage() {
   return (
     <div>
-      <div className="hidden md:block">
-  <Hero />
-</div>
+      <Hero />
       <div className="bg-teal-300 p-4 flex justify-center items-center mb-4">
         <div className="relative flex space-x-4 overflow-x-auto overflow-y-hidden px-4">
           <img
@@ -41,7 +39,7 @@ export default function IndexPage() {
 
       <FeaturedProducts />
       <NewArrival />
-    <CategoriesSelection />
+      <CategoriesSelection />
     </div>
   );
 }

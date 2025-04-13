@@ -99,7 +99,7 @@ export default async function CategoriesPage({
   const params = await paramsPromise;
   const { data, title } = await getData(params.name);
   return (
-    <section>
+    <section className="px-2 sm:px-6 lg:px-8">
       <h1 className="font-semibold text-3xl my-5">{title}</h1>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
         {data.map((item) => (

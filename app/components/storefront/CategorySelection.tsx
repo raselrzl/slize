@@ -3,8 +3,8 @@ import { ArrowRightFromLine, ArrowRightIcon } from "lucide-react";
 
 export function CategoriesSelection() {
   return (
-    <div className="mt-2">
-      <div className="flex justify-between items-center py-6">
+    <div className="mt-2 px-4">
+      <div className="flex justify-between items-center py-6 px-2">
         <h2 className="text-xl md:text-2xl font-extrabold ">
           Shop by Category
         </h2>
