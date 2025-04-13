@@ -1,6 +1,8 @@
 import { CategoriesSelection } from "../components/storefront/CategorySelection";
 import { FeaturedProducts } from "../components/storefront/FeaturedProducts";
+import { Footer } from "../components/storefront/Footer";
 import { Hero } from "../components/storefront/Hero";
+import { Info } from "../components/storefront/Info";
 import { Navbar } from "../components/storefront/Navbar";
 
 export default function IndexPage() {
@@ -8,7 +10,7 @@ export default function IndexPage() {
     <div>
       <Hero />
 
-      <CategoriesSelection />
+      
       <div className="bg-gray-100 p-4 flex justify-center items-center my-4">
         <div className="relative flex space-x-4 overflow-x-auto overflow-y-hidden px-4">
           <img
@@ -40,16 +42,24 @@ export default function IndexPage() {
       </div>
 
       <FeaturedProducts />
-   {/*    <div className="w-full h-[250px] my-2">
-        <h2 className="text-xl md:text-2xl font-extrabold my-4 border-2 text-center">
-          Keep eyes on new arival
-        </h2>
-        <img
-          src="/homepage.png"
-          alt="Homepage"
-          className="w-full h-full object-contain"
-        />
-      </div> */}
+      <div className="flex flex-wrap gap-4 bg-red-800 text-white w-full max-w-screen-xl mx-auto px-4 py-8">
+      <div className="flex flex-col md:flex-row w-full max-w-6xl gap-4">
+        <div className="flex-1 w-full h-[250px] my-2 flex items-center justify-center">
+          <p className="text-xl md:text-2xl font-extrabold border-2 p-4 text-center text-white">
+            Keep eyes on new arrival
+          </p>
+        </div>
+        <div className="flex-1 w-full h-[250px] my-2 bg-white rounded-md shadow-md overflow-hidden">
+          <img
+            src="/homepage.png"
+            alt="Homepage"
+            className="w-full h-full object-contain"
+          />
+        </div>
+      </div>
+    </div>
+    <CategoriesSelection />
+    <Info />
     </div>
   );
 }
