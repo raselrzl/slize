@@ -22,7 +22,7 @@ export async function Navbar() {
 
   return (
     <>
-      <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
+      <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between border-b-2 mb-2 md:border-none">
         <div className="flex items-center">
           <Link href="/">
             <Image
