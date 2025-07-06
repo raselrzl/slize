@@ -63,14 +63,16 @@ export function Info() {
         </div>
         <CollapsibleContent className={collapsibleContentClass}>
           {[
-            "Frequently asked questions",
-            "Delivery time",
-            "Payment & security",
-            "Invoice payment",
-            "Delivery and return costs",
+            { text: "Frequently asked questions", link: "/faq" },
+            { text: "Delivery time", link: "/delivery-time" },
+            { text: "Payment & security", link: "/payment-security" },
+            { text: "Invoice payment", link: "/invoice-payment" },
+            { text: "Delivery and return costs", link: "/delivery-return" },
           ].map((item, i) => (
             <div key={i} className="px-4 py-3 font-mono text-sm">
-              {item}
+              <a href={item.link} className="text-white hover:underline">
+                {item.text}
+              </a>
             </div>
           ))}
         </CollapsibleContent>
@@ -83,9 +85,15 @@ export function Info() {
           {collapsibleToggleButton}
         </div>
         <CollapsibleContent className={collapsibleContentClass}>
-          {["About us", "Career", "Investor"].map((item, i) => (
+          {[
+            { text: "About us", link: "/about-us" },
+            { text: "Career", link: "/career" },
+            { text: "Investor", link: "/investor" },
+          ].map((item, i) => (
             <div key={i} className="px-4 py-3 font-mono text-sm">
-              {item}
+              <a href={item.link} className="text-white hover:underline">
+                {item.text}
+              </a>
             </div>
           ))}
         </CollapsibleContent>
@@ -118,9 +126,15 @@ export function Info() {
           {collapsibleToggleButton}
         </div>
         <CollapsibleContent className={collapsibleContentClass}>
-          {["Free delivery", "Free Returns", "30-day open purchase"].map((item, i) => (
+          {[
+            { text: "Free delivery", link: "/free-delivery" },
+            { text: "Free Returns", link: "/free-returns" },
+            { text: "30-day open purchase", link: "/30-day-open-purchase" },
+          ].map((item, i) => (
             <div key={i} className="px-4 py-3 font-mono text-sm">
-              {item}
+              <a href={item.link} className="text-white hover:underline">
+                {item.text}
+              </a>
             </div>
           ))}
         </CollapsibleContent>
