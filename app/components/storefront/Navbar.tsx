@@ -22,15 +22,15 @@ export async function Navbar() {
 
   return (
     <>
-      <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between border-b-2 mb-2 md:border-none">
+      <nav className="w-full max-w-7xl mx-auto px-0 sm:px-0 lg:px-0 py-4 flex items-center justify-between border-b-2 mb-2 md:border-none">
         <div className="flex items-center">
-          <Link href="/">
+          <Link href="/" className="">
             <Image
-              src="/kron1.png"
+              src="/kronstil.png"
               alt="Kron Word Logo"
               width={200}
-              height={60}
-              className="w-[100px] lg:w-[200px] h-[25px]"
+              height={160}
+              className="w-auto h-auto"
             />
 
             {/*  <h1 className="text-3xl font-extrabold text-center text-gradient transform hover:scale-105 transition-all duration-300 ease-in-out">
