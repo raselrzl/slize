@@ -28,8 +28,8 @@ async function getData() {
 
 export function FeaturedProducts() {
   return (
-    <>
-      <div className="flex justify-between items-center px-2">
+    <div className="max-w-7xl mx-auto">
+      <div className="flex justify-between items-center px-2 md:px-0">
         <h2 className="text-xl md:text-2xl font-extrabold ">Featured Items</h2>
 
         <Link
@@ -42,7 +42,7 @@ export function FeaturedProducts() {
       <Suspense fallback={<LoadingRows />}>
         <LoadFeaturedproducts />
       </Suspense>
-    </>
+    </div>
   );
 }
 
@@ -54,7 +54,7 @@ async function LoadFeaturedproducts() {
     <>
       
 
-      <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-2 px-2 sm:px-6 lg:px-8">
+      <div className="mt-5 grid grid-cols-2 md:grid-cols-4 gap-2 px-0 sm:px-6 lg:px-0">
         {data.map((item) => (
           <ProductCard key={item.id} item={item} />
         ))}

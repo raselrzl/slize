@@ -10,8 +10,8 @@ export default function StoreFrontLayout({
 }) {
   return (
     <>
-      <Navbar />
-      <main className="max-w-7xl mx-auto">{children}</main>
+     <div className="bg-[#f4f4f4]"> <Navbar /></div>
+      <main className=" mx-auto">{children}</main>
       <Info />
       <Footer />
     </>

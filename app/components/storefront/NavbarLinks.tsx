@@ -31,16 +31,16 @@ export const navbarLinks = [
 export function NavbarLinks() {
   const location = usePathname();
   return (
-    <div className="md:flex justify-center items-center gap-x-2 ml-8">
+    <div className="md:flex justify-center items-center">
       {navbarLinks.map((item) => (
         <Link
           href={item.href}
           key={item.id}
           className={cn(
             location === item.href
-              ? "bg-[#9b3e22] text-white"
+              ? "bg-[#9b3e22] text-white "
               : "hover:bg-muted hover:bg-opacity-75",
-            "group p-2 font-semibold rounded-md"
+            "group px-2 rounded-xs w-24 border border-gray-200 mx-1 py-1 text-center text-sm"
           )}
         >
           {item.name}

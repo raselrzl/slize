@@ -33,7 +33,7 @@ export default function ModelAlbum() {
   };
 
   return (
-    <div>
+    <div className="">
       <div className="bg-teal-300 p-4 flex justify-center items-center mb-4">
         <div className="relative">
           {/* Left Arrow */}

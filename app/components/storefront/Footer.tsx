@@ -2,7 +2,7 @@ import { Instagram, Facebook, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="mb-10 sm:px-6 lg:px-8 bg-black text-white max-w-screen-xl mx-auto px-4 py-8">
+    <footer className="mb-0 sm:px-6 lg:px-8 bg-black text-white max-w-screen-xl mx-auto px-4 py-8">
       {/* Links Section */}
       <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-400 mb-6">
         <a href="#" className="hover:text-white transition-colors">
