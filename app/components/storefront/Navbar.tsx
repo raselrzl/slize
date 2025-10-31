@@ -87,9 +87,6 @@ export async function Navbar() {
           )}
         </div>
       </nav>
-    {/*   <div className="block md:hidden ml-4 pb-2">
-        <NavbarLinks />
-      </div> */}
     </>
   );
 }

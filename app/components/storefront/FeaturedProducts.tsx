@@ -28,7 +28,7 @@ async function getData() {
 
 export function FeaturedProducts() {
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto px-2 md:px-0">
       <div className="flex justify-between items-center px-2 md:px-0">
         <h2 className="text-xl md:text-2xl font-extrabold ">Featured Items</h2>
 
