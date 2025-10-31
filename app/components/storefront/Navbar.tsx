@@ -52,7 +52,7 @@ export async function Navbar() {
         </div>
          <div className="hidden md:block">
             <NavbarLinks />
-          </div>
+          </div> 
 
         <div className="flex items-center">
           {user ? (
