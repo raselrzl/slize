@@ -4,5 +4,3 @@ ignoredBuiltDependencies:
   - msgpackr-extract
   - prisma
   - sharp
-  - "apps/*"
-  - "packages/*"
