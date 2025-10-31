@@ -8,7 +8,7 @@ import NewArrival from "../components/storefront/NewArrival";
 export default function IndexPage() {
   return (
     <div>
-     <div className=""> <Hero /></div>
+     <div className="bg-[#F9C6D3]"> <Hero /></div>
       <ModelAlbum />
       <FeaturedProducts />
       <NewArrival />
