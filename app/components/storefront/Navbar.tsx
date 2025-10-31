@@ -22,12 +22,12 @@ export async function Navbar() {
 
   return (
     <>
-      <nav className="w-full max-w-7xl mx-auto px-0 sm:px-0 lg:px-0 py-4 flex items-center justify-between bg-[#f4f4f4]">
+      <nav className="w-full max-w-7xl mx-auto px-0 sm:px-0 lg:px-0 py-4 flex items-center justify-between">
         <div className="flex items-center">
           <Link href="/" className="hidden md:block">
             {/* This link is visible on medium screens and above (desktop/tablet) */}
             <Image
-              src="/logo/lg2.png"
+              src="/logo/l3.png"
               alt="Kron Word Logo"
               width={200}
               height={160}
@@ -38,7 +38,7 @@ export async function Navbar() {
           <Link href="/" className="block md:hidden">
             {/* This link is visible only on small screens (mobile) */}
             <Image
-              src="/logo/lg2.png"
+              src="/logo/l3.png"
               alt="Kron Word Logo"
               width={200}
               height={160}

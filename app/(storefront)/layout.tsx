@@ -11,7 +11,7 @@ export default function StoreFrontLayout({
 }) {
   return (
     <>
-     <div className="bg-[#f4f4f4]"> <Navbar /></div>
+     <div className="bg-[#213344]"> <Navbar /></div>
       <main className=" mx-auto">{children}</main>
       <Info />
       <Footer />
