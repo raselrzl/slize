@@ -24,35 +24,31 @@ export async function Navbar() {
     <>
       <nav className="w-full max-w-7xl mx-auto px-0 sm:px-0 lg:px-0 py-4 flex items-center justify-between bg-[#f4f4f4]">
         <div className="flex items-center">
-         <Link href="/" className="hidden md:block">
-  {/* This link is visible on medium screens and above (desktop/tablet) */}
-  <Image
-    src="/logo/k4.png"
-    alt="Kron Word Logo"
-    width={200}
-    height={160}
-    className="md:w-full md:h-full h-[40px] w-[60px]"
-  />
-</Link>
+          <Link href="/" className="hidden md:block">
+            {/* This link is visible on medium screens and above (desktop/tablet) */}
+            <Image
+              src="/logo/lg2.png"
+              alt="Kron Word Logo"
+              width={200}
+              height={160}
+              className="md:w-full md:h-full h-[40px] w-[60px]"
+            />
+          </Link>
 
-<Link href="/" className="block md:hidden">
-  {/* This link is visible only on small screens (mobile) */}
-  <Image
-    src="/logo/k5.png"
-    alt="Kron Word Logo"
-    width={200}
-    height={160}
-    className="md:w-full md:h-full h-[40px] w-[60px]"
-  />
-</Link>
-
-
-          
-         
+          <Link href="/" className="block md:hidden">
+            {/* This link is visible only on small screens (mobile) */}
+            <Image
+              src="/logo/lg2.png"
+              alt="Kron Word Logo"
+              width={200}
+              height={160}
+              className="md:w-full md:h-full h-[35px] w-[140px]"
+            />
+          </Link>
         </div>
-         <div className="hidden md:block">
-            <NavbarLinks />
-          </div> 
+        <div className="hidden md:block">
+          <NavbarLinks />
+        </div>
 
         <div className="flex items-center">
           {user ? (
