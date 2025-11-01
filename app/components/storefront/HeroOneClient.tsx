@@ -17,11 +17,12 @@ export function HeroOneClient({ data }: { data: Banner[] }) {
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   const footerColors = [
-    "bg-pink-600",
-    "bg-blue-800",
-    "bg-green-800",
-    "bg-yellow-800",
-    "bg-red-800",
+    
+    "bg-yellow-600",
+    "bg-pink-400",
+    "bg-gray-400",
+    "bg-green-600",
+    "bg-red-600",
   ];
 
   const links = [
@@ -64,11 +65,11 @@ export function HeroOneClient({ data }: { data: Banner[] }) {
     <div className="max-w-7xl mx-auto px-4 md:px-0 mt-6">
       {/* Header */}
       <div className="flex justify-between items-center my-6 pb-8">
-        <h1 className="font-bold text-2xl text-gray-700 mt-4 leading-tight">
+        <h1 className="font-bold text-2xl text-gray-800 mt-4 leading-tight">
           Don’t Miss Out <br />
           Boys, Girls and Babies
         </h1>
-        <FileQuestion className="w-6 h-6 text-gray-700" />
+        <FileQuestion className="w-6 h-6 text-gray-800" />
       </div>
 
       {/* Scrollable row */}
@@ -115,7 +116,7 @@ export function HeroOneClient({ data }: { data: Banner[] }) {
                     absolute bottom-0 left-0
                     w-full h-[40px] md:h-[60px]
                     flex items-center justify-center
-                    text-white text-sm font-semibold
+                    text-black text-sm font-semibold
                     ${footerColors[i % footerColors.length]}
                   `}
                 >
