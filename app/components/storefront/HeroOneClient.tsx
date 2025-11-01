@@ -64,7 +64,7 @@ export function HeroOneClient({ data }: { data: Banner[] }) {
     <div className="max-w-7xl mx-auto px-4 md:px-0 mt-6">
       {/* Header */}
       <div className="flex justify-between items-center my-6 pb-8">
-        <h1 className="font-bold text-xl text-gray-700 mt-4 leading-tight">
+        <h1 className="font-bold text-2xl text-gray-700 mt-4 leading-tight">
           Don’t Miss Out <br />
           Boys, Girls and Babies
         </h1>
