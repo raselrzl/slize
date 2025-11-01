@@ -1,13 +1,8 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import {
-  ChevronLeft,
-  ChevronRight,
-  FileQuestion,
-  MoveLeft,
-  MoveRight,
-} from "lucide-react";
+import { FileQuestion, MoveLeft, MoveRight } from "lucide-react";
+import Link from "next/link";
 
 type Banner = {
   id: string;
@@ -22,10 +17,19 @@ export function HeroOneClient({ data }: { data: Banner[] }) {
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   const footerColors = [
-    "bg-pink-800",
+    "bg-pink-600",
     "bg-blue-800",
     "bg-green-800",
     "bg-yellow-800",
+    "bg-red-800",
+  ];
+
+  const links = [
+    "/baby",
+    "/toddlers-boys",
+    "/toddlers-girls",
+    "/kids-boys",
+    "/kids-girls",
   ];
 
   const updateScrollButtons = () => {
@@ -69,57 +73,60 @@ export function HeroOneClient({ data }: { data: Banner[] }) {
 
       {/* Scrollable row */}
       <div className="relative">
-        {/* Scrollable banners */}
         <div
           ref={scrollRef}
           className="
-    flex md:grid md:grid-cols-4
-    gap-4
-    overflow-x-auto md:overflow-visible
-    pb-4
-    scroll-smooth
-    snap-x snap-mandatory
-    [scrollbar-width:none] 
-    [-ms-overflow-style:none]
-    [&::-webkit-scrollbar]:hidden
-  "
+            flex
+            gap-4
+            overflow-x-auto md:overflow-visible
+            pb-4
+            scroll-smooth
+            snap-x snap-mandatory
+            [scrollbar-width:none] 
+            [-ms-overflow-style:none]
+            [&::-webkit-scrollbar]:hidden
+          "
         >
           {data.map((item, i) => (
-            <div
-              key={item.id}
-              className="
-                relative
-                flex-shrink-0
-                w-[180px] h-[180px]
-                md:w-[300px] md:h-[300px]
-                border border-gray-300
-                overflow-hidden
-                snap-start
-              "
-            >
-              <img
-                src={item.imageString}
-                alt={item.title}
-                className="w-full h-full object-cover"
-              />
-
-              {/* Footer bar */}
+            <Link key={item.id} href={links[i] || "#"}>
               <div
-                className={`
-                  absolute bottom-0 left-0
-                  w-full h-[40px] md:h-[60px]
-                  flex items-center justify-center
-                  text-white text-sm font-semibold
-                  ${footerColors[i % footerColors.length]}
-                `}
+                className="
+                  relative
+                  flex-shrink-0
+                  w-[180px] h-[180px]
+                  md:w-[300px] md:h-[300px]
+                  border border-gray-300
+                  overflow-hidden
+                  snap-start
+                  cursor-pointer
+                  hover:scale-105
+                  transition-transform duration-200
+                "
               >
-                {item.title || "Untitled"}
+                <img
+                  src={item.imageString}
+                  alt={item.title}
+                  className="w-full h-full object-cover"
+                />
+
+                {/* Footer bar */}
+                <div
+                  className={`
+                    absolute bottom-0 left-0
+                    w-full h-[40px] md:h-[60px]
+                    flex items-center justify-center
+                    text-white text-sm font-semibold
+                    ${footerColors[i % footerColors.length]}
+                  `}
+                >
+                  {item.title || "Untitled"}
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
-        {/* Scroll buttons (only visible on mobile) */}
+        {/* Scroll buttons (mobile only) */}
         {canScrollLeft && (
           <button
             onClick={() => scrollByAmount("left")}

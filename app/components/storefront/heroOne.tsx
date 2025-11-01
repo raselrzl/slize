@@ -4,7 +4,7 @@ import { HeroOneClient } from "./HeroOneClient";
 export async function HeroOne() {
   const data = await prisma.banner.findMany({
     orderBy: { createdAt: "desc" },
-    take: 4,
+    take: 5,
   });
 
   return <HeroOneClient data={data} />;
