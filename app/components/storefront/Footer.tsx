@@ -37,18 +37,12 @@ export function Footer() {
               size={24}
             />
           </div>
-      {/*     <div className="h-10 w-10 bg-red-100 flex justify-center items-center">
+          <div className="h-10 w-10 bg-red-100 flex justify-center items-center">
             <Facebook
               className="text-black hover:text-gray-600 cursor-pointer"
               size={24}
             />
           </div>
-          <div className="h-10 w-10 bg-red-100 flex justify-center items-center">
-            <Twitter
-              className="text-black hover:text-gray-600 cursor-pointer"
-              size={24}
-            />
-          </div> */}
         </div>
       </div>
     </footer>
