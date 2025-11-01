@@ -226,10 +226,17 @@ export default async function CategoriesPage({
   noStore();
   const params = await paramsPromise;
   const { data, title } = await getData(params.name);
-  return (
-    <section className="px-2 md:px-0 max-w-7xl mx-auto">
+  console.log("params name",params.name)
 
-      <h1 className="font-semibold text-3xl my-5">{title}</h1>
+  const bgColor =
+    params.name === "exclusive" ? "bg-[#2A1F14]" : "bg-white";
+
+
+  return (
+    <section className={`px-2 md:px-0 max-w-7xl mx-auto`}>
+
+   {/*    <h1 className="font-semibold text-3xl my-5">{title}</h1> 
+   px-2 md:px-0 max-w-7xl mx-auto ${bgColor}*/}
       <CategoryRenderer category={params.name}/>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
         {data.map((item) => (
