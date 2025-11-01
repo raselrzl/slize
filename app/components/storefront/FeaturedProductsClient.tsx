@@ -50,7 +50,7 @@ export function FeaturedProductsClient({ data }: { data: any[] }) {
         <button
           onClick={() => scroll("left")}
           className="flex absolute left-0 top-1/2 -translate-y-1/2 bg-black text-white shadow p-2 rounded-full z-10 
-          hover:bg-gray-100 hover:text-black hover:border border-black transition-all duration-200"
+          transition-all duration-200"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -79,7 +79,7 @@ export function FeaturedProductsClient({ data }: { data: any[] }) {
         <button
           onClick={() => scroll("right")}
           className="flex absolute right-0 top-1/2 -translate-y-1/2 bg-black text-white shadow p-2 rounded-full z-10 
-          hover:bg-gray-100 hover:text-black hover:border border-black transition-all duration-200"
+          transition-all duration-200"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
