@@ -77,13 +77,13 @@ export async function Navbar() {
               </LoginLink>
               <span className="h-6 w-px bg-gray-400 self-center"></span>
               <LoginLink>
-                <Heart className="text-gray-300 h-7 w-7 mr-2 hover:text-gray-500" />
+                <Heart className="text-gray-300 h-7 w-7 mx-2 hover:text-gray-500" />
               </LoginLink>
 
               <span className="h-6 w-px bg-gray-400 self-center"></span>
 
               <LoginLink>
-                <User2 className="text-gray-300 h-7 w-7 mr-2 hover:text-gray-500" />
+                <User2 className="text-gray-300 h-7 w-7 mx-2 hover:text-gray-500" />
               </LoginLink>
             </div>
           )}
