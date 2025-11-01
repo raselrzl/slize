@@ -27,7 +27,7 @@ export async function Navbar() {
           <Link href="/" className="hidden md:block">
             {/* This link is visible on medium screens and above (desktop/tablet) */}
             <Image
-              src="/logo/kw.png"
+              src="/logo/kb.png"
               alt="Kron Word Logo"
               width={200}
               height={160}
@@ -38,7 +38,7 @@ export async function Navbar() {
           <Link href="/" className="block md:hidden">
             {/* This link is visible only on small screens (mobile) */}
             <Image
-              src="/logo/kw.png"
+              src="/logo/kb.png"
               alt="Kron Word Logo"
               width={200}
               height={160}
@@ -73,17 +73,17 @@ export async function Navbar() {
           ) : (
             <div className="flex md:flex md:flex-1 md:items-center md:justify-end md:space-x-1">
               <LoginLink>
-                <ShoppingBagIcon className="text-gray-300 h-7 w-7 mr-2 hover:text-gray-500" />
+                <ShoppingBagIcon className="text-gray-800 h-7 w-7 mr-2 hover:text-gray-500" />
               </LoginLink>
               <span className="h-6 w-px bg-gray-400 self-center"></span>
               <LoginLink>
-                <Heart className="text-gray-300 h-7 w-7 mx-2 hover:text-gray-500" />
+                <Heart className="text-gray-800 h-7 w-7 mx-2 hover:text-gray-500" />
               </LoginLink>
 
               <span className="h-6 w-px bg-gray-400 self-center"></span>
 
               <LoginLink>
-                <User2 className="text-gray-300 h-7 w-7 mx-2 hover:text-gray-500" />
+                <User2 className="text-gray-800 h-7 w-7 mx-2 hover:text-gray-500" />
               </LoginLink>
             </div>
           )}
