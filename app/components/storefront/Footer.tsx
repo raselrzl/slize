@@ -14,13 +14,13 @@ export function Footer() {
         <a href="#" className="hover:underline transition-colors">
           General terms and conditions
         </a>
-        <a href="#" className="hover:text-white transition-colors">
+        <a href="#" className="hover:underline transition-colors">
           Data protection
         </a>
-        <a href="#" className="hover:text-white transition-colors">
+        <a href="#" className="hover:underline transition-colors">
           Cookie settings
         </a>
-        <a href="#" className="hover:text-white transition-colors">
+        <a href="#" className="hover:underline transition-colors">
           Community Guidelines
         </a>
       </div>
