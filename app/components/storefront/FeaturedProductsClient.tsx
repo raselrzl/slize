@@ -1,11 +1,38 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ProductCard } from "./ProductCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export function FeaturedProductsClient({ data }: { data: any[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  // Function to handle scroll position
+  const checkScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1);
+  };
+
+  // Check scroll position on mount and whenever resized
+  useEffect(() => {
+    checkScroll();
+    const el = scrollRef.current;
+    if (!el) return;
+
+    el.addEventListener("scroll", checkScroll);
+    window.addEventListener("resize", checkScroll);
+
+    return () => {
+      el.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("resize", checkScroll);
+    };
+  }, []);
 
   const scroll = (dir: "left" | "right") => {
     if (scrollRef.current) {
@@ -18,13 +45,16 @@ export function FeaturedProductsClient({ data }: { data: any[] }) {
 
   return (
     <div className="relative mt-5">
-      {/* Left button */}
-      <button
-        onClick={() => scroll("left")}
-        className=" md:flex absolute left-0 top-1/2 -translate-y-1/2 bg-black text-white shadow p-2 rounded-full z-10 hover:bg-gray-100 hover:text-black hover:border border-black"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
+      {/* Left button — only show if scrollable left */}
+      {canScrollLeft && (
+        <button
+          onClick={() => scroll("left")}
+          className="flex absolute left-0 top-1/2 -translate-y-1/2 bg-black text-white shadow p-2 rounded-full z-10 
+          hover:bg-gray-100 hover:text-black hover:border border-black transition-all duration-200"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+      )}
 
       {/* Scroll area */}
       <div
@@ -44,13 +74,16 @@ export function FeaturedProductsClient({ data }: { data: any[] }) {
         ))}
       </div>
 
-      {/* Right button */}
-      <button
-        onClick={() => scroll("right")}
-        className="md:flex absolute right-0 top-1/2 -translate-y-1/2 bg-black text-white shadow p-2 rounded-full z-10 hover:bg-gray-100 hover:text-black hover:border border-black"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
+      {/* Right button — only show if scrollable right */}
+      {canScrollRight && (
+        <button
+          onClick={() => scroll("right")}
+          className="flex absolute right-0 top-1/2 -translate-y-1/2 bg-black text-white shadow p-2 rounded-full z-10 
+          hover:bg-gray-100 hover:text-black hover:border border-black transition-all duration-200"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
+      )}
     </div>
   );
 }
