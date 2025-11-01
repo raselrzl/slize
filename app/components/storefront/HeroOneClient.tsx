@@ -25,11 +25,11 @@ export function HeroOneClient({ data }: { data: Banner[] }) {
   ];
 
   const links = [
-    "/baby",
-    "/toddlers-boys",
-    "/toddlers-girls",
-    "/kids-boys",
-    "/kids-girls",
+    "/products/baby",
+    "/products/toddlergirls",
+    "/products/toddlerboys",
+    "/products/kidgirlsfourtofive",
+    "/products/kidboysfourtofive",
   ];
 
   const updateScrollButtons = () => {

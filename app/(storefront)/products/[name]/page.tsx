@@ -84,6 +84,112 @@ async function getData(productCategory: string) {
         data: data,
       };
     }
+
+    case "baby": {
+      const data = await prisma.product.findMany({
+        where: {
+          status: "published",
+          category: "baby",
+        },
+        select: {
+          name: true,
+          images: true,
+          price: true,
+          id: true,
+          description: true,
+        },
+      });
+
+      return {
+        title: "Products for baby",
+        data: data,
+      };
+    }
+
+    case "toddlergirls": {
+      const data = await prisma.product.findMany({
+        where: {
+          status: "published",
+          category: "toddlergirls",
+        },
+        select: {
+          name: true,
+          images: true,
+          price: true,
+          id: true,
+          description: true,
+        },
+      });
+
+      return {
+        title: "Products for toddlergirls",
+        data: data,
+      };
+    }
+
+    case "toddlerboys": {
+      const data = await prisma.product.findMany({
+        where: {
+          status: "published",
+          category: "toddlerboys",
+        },
+        select: {
+          name: true,
+          images: true,
+          price: true,
+          id: true,
+          description: true,
+        },
+      });
+
+      return {
+        title: "Products for toddlerboys",
+        data: data,
+      };
+    }
+
+    case "kidgirlsfourtofive": {
+      const data = await prisma.product.findMany({
+        where: {
+          status: "published",
+          category: "kidgirlsfourtofive",
+        },
+        select: {
+          name: true,
+          images: true,
+          price: true,
+          id: true,
+          description: true,
+        },
+      });
+
+      return {
+        title: "Products for kidgirlsfourtofive",
+        data: data,
+      };
+    }
+
+    case "kidboysfourtofive": {
+      const data = await prisma.product.findMany({
+        where: {
+          status: "published",
+          category: "kidboysfourtofive",
+        },
+        select: {
+          name: true,
+          images: true,
+          price: true,
+          id: true,
+          description: true,
+        },
+      });
+
+      return {
+        title: "Products for kidboysfourtofive",
+        data: data,
+      };
+    }
+
     default: {
       return notFound();
     }

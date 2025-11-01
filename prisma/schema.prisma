@@ -62,4 +62,9 @@ enum Category {
   men
   women
   kids
+  baby
+  toddlergirls
+  toddlerboys
+  kidgirlsfourtofive
+  kidboysfourtofive
 }
