@@ -9,7 +9,7 @@ export function ExclusiveProduct() {
        
 
         {/* Right side text section */}
-        <div className="flex flex-col justify-center items-start gap-4 md:gap-6 md:w-1/2 text-center md:text-left">
+        <div className="flex flex-col justify-center items-start gap-4 md:gap-6 md:w-1/2 text-left">
           <div className="flex justify-center md:justify-start">
             <FileQuestion className="w-10 h-10 text-yellow-300"/>
           </div>
