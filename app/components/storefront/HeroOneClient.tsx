@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { FileQuestion, MoveLeft, MoveRight } from "lucide-react";
+import { ChevronDown, ChevronLast, ChevronLeft, ChevronRight, FileQuestion, MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
 
 type Banner = {
@@ -61,10 +61,10 @@ export function HeroOneClient({ data }: { data: Banner[] }) {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 md:px-0">
+    <div className="max-w-7xl mx-auto px-4 md:px-0 mt-6">
       {/* Header */}
-      <div className="flex justify-between items-center my-6">
-        <h1 className="font-bold text-xl text-gray-700 leading-tight">
+      <div className="flex justify-between items-center my-6 pb-8">
+        <h1 className="font-bold text-xl text-gray-700 mt-4 leading-tight">
           Don’t Miss Out <br />
           Boys, Girls and Babies
         </h1>
@@ -130,17 +130,17 @@ export function HeroOneClient({ data }: { data: Banner[] }) {
         {canScrollLeft && (
           <button
             onClick={() => scrollByAmount("left")}
-            className="absolute items-center left-2 top-1/3 -translate-y-1/2 pl-2 bg-black text-white shadow-md md:hidden h-8 w-10"
-          >
-            <MoveLeft />
+         className="flex absolute left-0 top-1/2 -translate-y-1/2 bg-black text-white shadow p-2 rounded-full z-10 
+          transition-all duration-200"  >
+           <ChevronLeft className="h-4 w-4"/>
           </button>
         )}
         {canScrollRight && (
           <button
             onClick={() => scrollByAmount("right")}
-            className="absolute items-center right-2 top-1/3 -translate-y-1/2 pl-2 bg-black text-white shadow-md md:hidden h-8 w-10"
-          >
-            <MoveRight />
+         className="flex absolute right-0 top-1/3 -translate-y-1/2 bg-black text-white shadow p-2 rounded-full z-10 
+          transition-all duration-200" >
+            <ChevronRight className="h-4 w-4"/>
           </button>
         )}
       </div>
