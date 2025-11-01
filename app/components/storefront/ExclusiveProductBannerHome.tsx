@@ -2,7 +2,7 @@ import { FileQuestion } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export function ExclusiveProduct() {
+export function ExclusiveProductBannerHome() {
   return (
     <section className="bg-[#2A1F14] mt-16 text-white py-8 px-4 md:px-8 max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row items-center md:items-stretch gap-6">

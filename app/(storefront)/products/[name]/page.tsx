@@ -2,6 +2,7 @@ import { ProductCard } from "@/app/components/storefront/ProductCard";
 import prisma from "@/app/lib/db";
 import { notFound } from "next/navigation";
 import { unstable_noStore as noStore } from "next/cache";
+import { CategoryRenderer } from "@/app/components/category/CategoryRenderer";
 
 async function getData(productCategory: string) {
   switch (productCategory) {
@@ -190,6 +191,27 @@ async function getData(productCategory: string) {
       };
     }
 
+     case "exclusive": {
+      const data = await prisma.product.findMany({
+        where: {
+          status: "published",
+          isFeatured: true,
+        },
+        select: {
+          name: true,
+          images: true,
+          price: true,
+          id: true,
+          description: true,
+        },
+      });
+
+      return {
+        title: "Products for Exclusive",
+        data: data,
+      };
+    }
+
     default: {
       return notFound();
     }
@@ -206,7 +228,9 @@ export default async function CategoriesPage({
   const { data, title } = await getData(params.name);
   return (
     <section className="px-2 md:px-0 max-w-7xl mx-auto">
+
       <h1 className="font-semibold text-3xl my-5">{title}</h1>
+      <CategoryRenderer category={params.name}/>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
         {data.map((item) => (
           <ProductCard item={item} key={item.id} />
