@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { NavbarLinks } from "./NavbarLinks";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { ShoppingBagIcon } from "lucide-react";
+import { Heart, ShoppingBagIcon, User2 } from "lucide-react";
 import { UserDropdown } from "./UserDropdown";
 import { Button } from "@/components/ui/button";
 import {
@@ -55,8 +55,8 @@ export async function Navbar() {
             <>
               <Link href="/bag" className="group p-2 flex items-center mr-2">
                 <div className="relative">
-                  <ShoppingBagIcon className="h-6 w-6 text-red-800 group-hover:text-red-600" />
-                  <span className="absolute top-0 right-0 text-xs text-black group-hover:text-gray-800 transform translate-x-1/2 -translate-y-1/2 bg-red-600 p-2 rounded-full w-5 h-5 flex items-center justify-center">
+                  <ShoppingBagIcon className="text-gray-300 h-7 w-7 mr-2 hover:text-gray-500" />
+                  <span className="absolute top-0 right-0 text-xs font-bold text-black group-hover:text-gray-800 transform translate-x-1/2 -translate-y-1/2 bg-white p-2 rounded-full w-5 h-5 flex items-center justify-center">
                     {total}
                   </span>
                 </div>
@@ -72,13 +72,19 @@ export async function Navbar() {
             </>
           ) : (
             <div className="flex md:flex md:flex-1 md:items-center md:justify-end md:space-x-1">
-              <Button variant="ghost" asChild>
-                <LoginLink>Sign in</LoginLink>
-              </Button>
+              <LoginLink>
+                <ShoppingBagIcon className="text-gray-300 h-7 w-7 mr-2 hover:text-gray-500" />
+              </LoginLink>
               <span className="h-6 w-px bg-gray-400 self-center"></span>
-              <Button variant="ghost" asChild>
-                <RegisterLink>Register</RegisterLink>
-              </Button>
+              <LoginLink>
+                <Heart className="text-gray-300 h-7 w-7 mr-2 hover:text-gray-500" />
+              </LoginLink>
+
+              <span className="h-6 w-px bg-gray-400 self-center"></span>
+
+              <LoginLink>
+                <User2 className="text-gray-300 h-7 w-7 mr-2 hover:text-gray-500" />
+              </LoginLink>
             </div>
           )}
         </div>
