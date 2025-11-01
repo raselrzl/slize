@@ -2,16 +2,16 @@ import { Instagram, Facebook, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="mb-0 sm:px-6 lg:px-8 bg-black text-white max-w-screen-xl mx-auto px-4 py-8">
+    <footer className="mb-0 sm:px-6 lg:px-8 bg-gray-100 max-w-screen-xl mx-auto px-4 py-8">
       {/* Links Section */}
-      <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-400 mb-6">
-        <a href="#" className="hover:text-white transition-colors">
+      <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-800 mb-6 text-bold">
+        <a href="#" className="hover:underline transition-colors">
           Tech blog
         </a>
-        <a href="#" className="hover:text-white transition-colors">
+        <a href="#" className="hover:underline transition-colors">
           Company information
         </a>
-        <a href="#" className="hover:text-white transition-colors">
+        <a href="#" className="hover:underline transition-colors">
           General terms and conditions
         </a>
         <a href="#" className="hover:text-white transition-colors">
@@ -31,15 +31,15 @@ export function Footer() {
           &copy; 2024 Kronstil and Co. All Rights Reserved.
         </p>
         <div className="flex space-x-2 items-center mt-4 sm:mt-0">
-          <div className="h-10 w-10 bg-red-100 flex justify-center items-center">
+          <div className="h-10 w-10 bg-gray-800 flex justify-center items-center">
             <Instagram
-              className="text-black hover:text-gray-600 cursor-pointer"
+              className="text-gray-100 hover:text-gray-600 cursor-pointer"
               size={24}
             />
           </div>
-          <div className="h-10 w-10 bg-red-100 flex justify-center items-center">
+          <div className="h-10 w-10 bg-gray-800 flex justify-center items-center">
             <Facebook
-              className="text-black hover:text-gray-600 cursor-pointer"
+              className="text-gray-100 hover:text-gray-600 cursor-pointer"
               size={24}
             />
           </div>

@@ -14,7 +14,8 @@ export default function StoreFrontLayout({
      <div className="border-b border-gray-400"> <Navbar /></div>
       <main className=" mx-auto">{children}</main>
       <Info />
-      <Footer />
+      
+      <div className="bg-gray-100"> <Footer /></div>
       <ScrollToTopButton />
     </>
   );
