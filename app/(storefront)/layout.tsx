@@ -3,6 +3,7 @@ import { Navbar } from "../components/storefront/Navbar";
 import { Footer } from "../components/storefront/Footer";
 import { Info } from "../components/storefront/Info";
 import ScrollToTopButton from "../components/storefront/ScrollToTopButton";
+import { AllLinks } from "../components/links/links";
 
 export default function StoreFrontLayout({
   children,
@@ -12,6 +13,8 @@ export default function StoreFrontLayout({
   return (
     <>
      <div className="border-b border-gray-900/10"> <Navbar /></div>
+     <div className="mt-2"> <AllLinks /></div>
+
       <main className=" mx-auto">{children}</main>
       <Info />
       
