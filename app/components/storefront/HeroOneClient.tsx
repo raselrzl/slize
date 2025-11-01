@@ -61,7 +61,7 @@ export function HeroOneClient({ data }: { data: Banner[] }) {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-4">
+    <div className="max-w-7xl mx-auto px-4 md:px-0">
       {/* Header */}
       <div className="flex justify-between items-center my-6">
         <h1 className="font-bold text-xl text-gray-700 leading-tight">

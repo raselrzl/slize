@@ -23,18 +23,23 @@ interface iAppProps {
 
 export function ProductCard({ item }: iAppProps) {
   return (
-    <div className="pb-4 px-2 bg-[#efeff0]">
+    <div
+      className="pb-4 px-2 group relative flex flex-col items-center justify-between 
+        bg-white border border-gray-200
+        overflow-hidden shadow-sm transition-all duration-300 
+        hover:shadow-xl hover:-translate-y-2"
+    >
       <Carousel className="w-full mx-auto">
         <CarouselContent>
           {item.images.map((item, index) => (
             <CarouselItem key={index}>
-              <div className="relative h-[290px] md:h-[320px] w-full">
+              <div className="relative w-full h-[300px] md:h-[320px] flex items-center justify-center">
                 <Image
                   src={item}
                   alt="Product Image"
-                  width={100} // You can use a large value to allow the image to scale appropriately
-                  height={100} // Same as above for scaling
-                  className="object-contain w-full h-full py-10"
+                  width={320}
+                  height={320}
+                  className="object-contain max-h-full w-auto"
                 />
               </div>
             </CarouselItem>
@@ -43,7 +48,7 @@ export function ProductCard({ item }: iAppProps) {
       </Carousel>
       <Link href={`/product/${item.id}`}>
         <div className="flex justify-between items-center mt-1">
-          <h1 className="font-semibold text-md">{item.name}</h1>
+          <h1 className="font-semibold text-md line-clamp-1">{item.name}</h1>
           <h3 className="inline-flex items-center px-2 py-1 text-xs font-medium">
             {item.price}kr
           </h3>
