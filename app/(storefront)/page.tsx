@@ -1,12 +1,11 @@
 import { NewBornFeaturedProducts } from "../components/newborn/NewBornFeaturedProducts";
-import { CategoriesSelection } from "../components/storefront/CategorySelection";
 import { ExclusiveProductBannerHome } from "../components/storefront/ExclusiveProductBannerHome";
 import { FeaturedProducts } from "../components/girlsfeatured/FeaturedProducts";
 import { HeroOne } from "../components/storefront/heroOne";
 import ModelAlbum from "../components/storefront/modelAlbum";
 import BabyFeaturedHomePageBanner from "../components/storefront/BabyFeaturedHomePageBanner";
-import { ExclusiveProductBoys } from "../components/category/ExclusiveProductBoys";
 import { BoysFeaturedProducts } from "../components/boysfeatured/BoysFeaturedProducts";
+import { ExclusiveProductBoysHomeBanner } from "../components/storefront/ExclusiveProductBoysBannerHome";
 
 export default function IndexPage() {
   return (
@@ -25,7 +24,7 @@ export default function IndexPage() {
         <FeaturedProducts />
       </div>
 
-      <div className="max-w-7xl mx-auto"><ExclusiveProductBoys /></div>
+      <div className=""><ExclusiveProductBoysHomeBanner /></div>
 
       <div><BoysFeaturedProducts /></div>
 
