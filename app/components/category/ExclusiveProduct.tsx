@@ -17,8 +17,9 @@ export function ExclusiveProduct() {
           </h2>
 
           <p className="text-sm md:text-base text-gray-200 max-w-md">
-            Discover our most premium and limited edition products, crafted with
-            care and quality. Don’t miss out on what’s trending right now.
+           Each of our exclusive items is available in only one piece—truly one of a kind.
+            We’re currently showcasing our limited stock, but stay tuned as we plan to expand
+            with more unique collections soon.
           </p>
         </div>
          {/* Left side image */}
