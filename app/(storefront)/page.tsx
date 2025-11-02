@@ -1,7 +1,7 @@
 import { NewBornFeaturedProducts } from "../components/newborn/NewBornFeaturedProducts";
 import { CategoriesSelection } from "../components/storefront/CategorySelection";
 import { ExclusiveProductBannerHome } from "../components/storefront/ExclusiveProductBannerHome";
-import { FeaturedProducts } from "../components/storefront/FeaturedProducts";
+import { FeaturedProducts } from "../components/girlsfeatured/FeaturedProducts";
 import { HeroOne } from "../components/storefront/heroOne";
 import ModelAlbum from "../components/storefront/modelAlbum";
 import BabyFeaturedHomePageBanner from "../components/storefront/BabyFeaturedHomePageBanner";

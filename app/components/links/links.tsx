@@ -14,7 +14,7 @@ export const Links = [
   {
     id: 2,
     name: "Exclusive-Girls",
-    href: "/products/exclusive",
+    href: "/products/exclusivegirls",
   },
   {
     id: 3,

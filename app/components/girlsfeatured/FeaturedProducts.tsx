@@ -1,15 +1,15 @@
 import prisma from "@/app/lib/db";
-import { LoadingProductCard, ProductCard } from "./ProductCard";
+import { LoadingProductCard, ProductCard } from "../storefront/ProductCard";
 import { Suspense } from "react";
-import { FeaturedProductsClient } from "./FeaturedProductsClient";
+import { FeaturedProductsClient } from "../storefront/FeaturedProductsClient";
 
 async function getData() {
   const data = await prisma.product.findMany({
     where: {
       status: "published",
-      category: {
-      not: "baby",
-    },
+        category: {
+        in: ["kidgirlsfourtofive", "toddlergirls"],
+      },
       isFeatured: true,
     },
     select: {

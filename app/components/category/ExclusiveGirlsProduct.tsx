@@ -1,7 +1,7 @@
 import { FileQuestion } from "lucide-react";
 import Image from "next/image";
 
-export function ExclusiveProduct() {
+export function ExclusiveGirlsProduct() {
   return (
     <section className="bg-[#2A1F14] text-white py-4 px-2 md:px-0">
       <div className="flex flex-col md:flex-row items-center justify-between md:items-stretch gap-6 max-w-7xl mx-auto">

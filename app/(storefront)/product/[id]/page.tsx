@@ -1,6 +1,6 @@
 import { addItem } from "@/app/actions";
 import { ShoppingBagButton } from "@/app/components/SubmitButtons";
-import { FeaturedProducts } from "@/app/components/storefront/FeaturedProducts";
+import { FeaturedProducts } from "@/app/components/girlsfeatured/FeaturedProducts";
 import { ImageSlider } from "@/app/components/storefront/ImageSlider";
 import prisma from "@/app/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";

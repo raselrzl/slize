@@ -191,13 +191,13 @@ async function getData(productCategory: string) {
       };
     }
 
-    case "exclusive": {
+    case "exclusivegirls": {
       const data = await prisma.product.findMany({
         where: {
           status: "published",
           isFeatured: true,
              category: {
-        in: ["kidgirlsfourtofive", "toddlergirls"],
+        in: ["kidgirlsfourtofive", "toddlergirls"], 
       },
         },
         select: {
@@ -279,7 +279,7 @@ export default async function CategoriesPage({
   console.log("params name", params.name);
 
   const bgColor =
-      params.name === "exclusive"
+      params.name === "exclusivegirls"
     ? "bg-[#8e6b48]"
     : params.name === "exclusivebaby"
     ? "bg-red-100"

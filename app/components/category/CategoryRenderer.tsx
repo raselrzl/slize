@@ -1,7 +1,7 @@
 "use client";
 
 import { AlertCircle } from "lucide-react";
-import { ExclusiveProduct } from "./ExclusiveProduct";
+import { ExclusiveGirlsProduct} from "./ExclusiveGirlsProduct";
 import { ExclusiveProductBoys } from "./ExclusiveProductBoys";
 import { ExclusiveBabyProduct } from "./ExclusiveBabyProduct";
 
@@ -11,8 +11,8 @@ interface Props {
 
 export function CategoryRenderer({ category }: Props) {
   switch (category.toLowerCase()) {
-    case "exclusive":
-      return <ExclusiveProduct />;
+    case "exclusivegirls":
+      return <ExclusiveGirlsProduct />;
 
     case "exclusivebaby":
       return <ExclusiveBabyProduct />;
