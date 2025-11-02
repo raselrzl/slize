@@ -27,9 +27,9 @@ export async function Navbar() {
           <Link href="/" className="hidden md:block">
             {/* This link is visible on medium screens and above (desktop/tablet) */}
             <Image
-              src="/logo/143.png"
+              src="/logo/k6.png"
               alt="Kron Word Logo"
-              width={200}
+              width={200} 
               height={160}
               className="md:w-full md:h-full h-[40px] w-[60px]"
             />
@@ -38,7 +38,7 @@ export async function Navbar() {
           <Link href="/" className="block md:hidden">
             {/* This link is visible only on small screens (mobile) */}
             <Image
-              src="/logo/143.png"
+              src="/logo/k6.png"
               alt="Kron Word Logo"
               width={200}
               height={160}
