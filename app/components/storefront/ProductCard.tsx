@@ -34,11 +34,19 @@ export function ProductCard({ item }: iAppProps) {
           {item.images.map((img, index) => (
             <CarouselItem key={index} className="p-0">
               <div className="relative w-full h-[250px] md:h-[320px] overflow-hidden">
-                <img
-                  src={img}
-                  alt="Product Image"
-                  className="object-cover w-full h-full"
-                />
+                <Image
+  src={img}
+  alt="Product Image"
+  width={600}
+  height={600}
+  className="object-cover w-full h-full"
+  placeholder="blur"
+  blurDataURL="/placeholder.webp" // small base64 or local tiny image
+  quality={75}
+  priority={index === 0} // preload first image for faster carousel load
+  unoptimized={false} // let Next.js optimize by default
+/>
+
               </div>
             </CarouselItem>
           ))}
