@@ -24,29 +24,27 @@ interface iAppProps {
 export function ProductCard({ item }: iAppProps) {
   return (
     <div
-      className="pb-2 px-1 group relative flex flex-col items-center justify-between 
+      className="pb-2 px-0 group relative flex flex-col items-center justify-between 
         bg-white border border-gray-200
         overflow-hidden shadow-sm transition-all duration-300 
         hover:shadow-xl hover:-translate-y-2"
     >
-      <Carousel className="w-full mx-auto">
-        <CarouselContent>
-          {item.images.map((item, index) => (
-            <CarouselItem key={index}>
-              <div className="relative w-full h-[250px] md:h-[320px] flex items-center justify-center">
-                <Image
-                  src={item}
+      <Carousel className="w-full mx-auto p-0">
+        <CarouselContent className="p-0">
+          {item.images.map((img, index) => (
+            <CarouselItem key={index} className="p-0">
+              <div className="relative w-full h-[250px] md:h-[320px] overflow-hidden">
+                <img
+                  src={img}
                   alt="Product Image"
-                  width={320}
-                  height={320}
-                  className="object-contain max-h-full w-auto"
+                  className="object-cover w-full h-full"
                 />
               </div>
             </CarouselItem>
           ))}
         </CarouselContent>
       </Carousel>
-      <Link href={`/product/${item.id}`} className="">
+      <Link href={`/product/${item.id}`} className="p-1">
         <div className="flex justify-between items-center mt-1">
           <h1 className="font-semibold text-md line-clamp-1">{item.name}</h1>
           <h3 className="inline-flex items-center px-2 py-1 text-xs font-medium">
