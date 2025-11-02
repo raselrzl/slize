@@ -234,7 +234,7 @@ export default async function CategoriesPage({
     <section>
       <CategoryRenderer category={params.name} />
       <div className={`px-2 md:px-0 ${bgColor}`}>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 max-w-7xl mx-auto py-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-1 max-w-7xl mx-auto py-4">
           {data.map((item) => (
             <ProductCard item={item} key={item.id} />
           ))}
