@@ -18,7 +18,7 @@ export function CategoryRenderer({ category }: Props) {
 
     default:
       return (
-        <div className="p-4 bg-gray-100 rounded-lg">
+        <div className="p-4 bg-gray-100">
           <h2 className="text-xl font-bold">Category Not Found</h2>
           <p>No products available for this category.</p>
         </div>

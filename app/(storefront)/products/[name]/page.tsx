@@ -191,7 +191,7 @@ async function getData(productCategory: string) {
       };
     }
 
-     case "exclusive": {
+    case "exclusive": {
       const data = await prisma.product.findMany({
         where: {
           status: "published",
@@ -226,22 +226,19 @@ export default async function CategoriesPage({
   noStore();
   const params = await paramsPromise;
   const { data, title } = await getData(params.name);
-  console.log("params name",params.name)
+  console.log("params name", params.name);
 
-  const bgColor =
-    params.name === "exclusive" ? "bg-[#2A1F14]" : "bg-white";
-
+  const bgColor = params.name === "exclusive" ? "bg-[#8e6b48]" : "bg-white";
 
   return (
-    <section className={`px-2 md:px-0 max-w-7xl mx-auto`}>
-
-   {/*    <h1 className="font-semibold text-3xl my-5">{title}</h1> 
-   px-2 md:px-0 max-w-7xl mx-auto ${bgColor}*/}
-      <CategoryRenderer category={params.name}/>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-        {data.map((item) => (
-          <ProductCard item={item} key={item.id} />
-        ))}
+    <section>
+      <CategoryRenderer category={params.name} />
+      <div className={`px-2 md:px-0 ${bgColor}`}>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 max-w-7xl mx-auto py-4">
+          {data.map((item) => (
+            <ProductCard item={item} key={item.id} />
+          ))}
+        </div>
       </div>
     </section>
   );

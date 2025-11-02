@@ -4,11 +4,9 @@ import Link from "next/link";
 
 export function ExclusiveProduct() {
   return (
-    <section className="bg-[#2A1F14] text-white pt-8 px-4 md:px-8 max-w-7xl mx-auto mb-4">
-      <div className="flex flex-col md:flex-row items-center md:items-stretch gap-6">
-       
-
-        {/* Right side text section */}
+    <section className="bg-[#2A1F14] text-white py-4 px-2 md:px-0">
+      <div className="flex flex-col md:flex-row items-center justify-between md:items-stretch gap-6 max-w-7xl mx-auto">
+               {/* Right side text section */}
         <div className="flex flex-col justify-center items-start gap-4 md:gap-6 md:w-1/2 text-left">
           <div className="flex justify-center md:justify-start">
             <FileQuestion className="w-10 h-10 text-yellow-300"/>
@@ -24,7 +22,7 @@ export function ExclusiveProduct() {
           </p>
         </div>
          {/* Left side image */}
-        <div className="relative w-full md:w-[600px] h-[300px] flex-shrink-0 overflow-hidden">
+        <div className="relative w-full md:w-[600px] h-[300px] justify-end flex-shrink-0 overflow-hidden">
           <Image
             src="/exclusivebanner.png"
             alt="Exclusive Product"
