@@ -196,9 +196,9 @@ async function getData(productCategory: string) {
         where: {
           status: "published",
           isFeatured: true,
-          category: {
-            not: "baby",
-          },
+             category: {
+        in: ["kidgirlsfourtofive", "toddlergirls"],
+      },
         },
         select: {
           name: true,
@@ -236,6 +236,31 @@ async function getData(productCategory: string) {
         data: data,
       };
     }
+
+      case "exclusiveboys": {
+      const data = await prisma.product.findMany({
+        where: {
+          status: "published",
+          isFeatured: true,
+          category: {
+        in: ["kidboysfourtofive", "toddlerboys"],
+      },
+        },
+        select: {
+          name: true,
+          images: true,
+          price: true,
+          id: true,
+          description: true,
+        },
+      });
+
+      return {
+        title: "Products for exclusivebaby",
+        data: data,
+      };
+    }
+    
 
     default: {
       return notFound();

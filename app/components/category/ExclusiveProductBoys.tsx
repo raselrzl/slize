@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export function ExclusiveProductBoys() {
   return (
-    <section className="bg-[#2A1F14] text-white py-6 px-4 md:px-0">
+    <section className="bg-gray-800 text-white py-6 px-4">
       <div className="flex flex-col md:flex-row items-center justify-between md:items-stretch gap-6 max-w-7xl mx-auto">
         {/* Right side text section */}
         <div className="flex flex-col justify-center items-start gap-4 md:gap-6 md:w-1/2 text-left">

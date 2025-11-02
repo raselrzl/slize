@@ -13,15 +13,15 @@ export const Links = [
   },
   {
     id: 2,
-    name: "Exclusive",
+    name: "Exclusive-Girls",
     href: "/products/exclusive",
   },
-/*   {
-    id: 3,
-    name: "Girls",
-    href: "/products/women",
-  },
   {
+    id: 3,
+    name: "Exclusive-Boys",
+    href: "/products/exclusiveboys",
+  },
+ /*  {
     id: 4,
     name: "Newborn",
     href: "/products/kids",

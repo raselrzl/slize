@@ -5,6 +5,8 @@ import { FeaturedProducts } from "../components/storefront/FeaturedProducts";
 import { HeroOne } from "../components/storefront/heroOne";
 import ModelAlbum from "../components/storefront/modelAlbum";
 import BabyFeaturedHomePageBanner from "../components/storefront/BabyFeaturedHomePageBanner";
+import { ExclusiveProductBoys } from "../components/category/ExclusiveProductBoys";
+import { BoysFeaturedProducts } from "../components/boysfeatured/BoysFeaturedProducts";
 
 export default function IndexPage() {
   return (
@@ -22,6 +24,10 @@ export default function IndexPage() {
         {" "}
         <FeaturedProducts />
       </div>
+
+      <div className="max-w-7xl mx-auto"><ExclusiveProductBoys /></div>
+
+      <div><BoysFeaturedProducts /></div>
 
       <ModelAlbum />
       <div className="bg-red-800 py-4 flex justify-end">
