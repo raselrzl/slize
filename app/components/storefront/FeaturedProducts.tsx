@@ -1,13 +1,15 @@
 import prisma from "@/app/lib/db";
 import { LoadingProductCard, ProductCard } from "./ProductCard";
 import { Suspense } from "react";
-import Link from "next/link";
 import { FeaturedProductsClient } from "./FeaturedProductsClient";
 
 async function getData() {
   const data = await prisma.product.findMany({
     where: {
       status: "published",
+      category: {
+      not: "baby",
+    },
       isFeatured: true,
     },
     select: {

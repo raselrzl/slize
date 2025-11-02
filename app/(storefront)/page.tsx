@@ -1,9 +1,10 @@
+import { NewBornFeaturedProducts } from "../components/newborn/NewBornFeaturedProducts";
 import { CategoriesSelection } from "../components/storefront/CategorySelection";
 import { ExclusiveProductBannerHome } from "../components/storefront/ExclusiveProductBannerHome";
 import { FeaturedProducts } from "../components/storefront/FeaturedProducts";
 import { HeroOne } from "../components/storefront/heroOne";
 import ModelAlbum from "../components/storefront/modelAlbum";
-import NewArrival from "../components/storefront/NewArrival";
+import BabyFeaturedHomePageBanner from "../components/storefront/BabyFeaturedHomePageBanner";
 
 export default function IndexPage() {
   return (
@@ -23,9 +24,17 @@ export default function IndexPage() {
       </div>
 
       <ModelAlbum />
+      <div className="bg-red-800 py-4 flex justify-end">
+        <div className="max-w-7xl mx-auto w-full">
+          <BabyFeaturedHomePageBanner />
+        </div>
+      </div>
 
-      <NewArrival />
-      <CategoriesSelection />
+      <div className="bg-red-100 py-4 flex justify-end">
+        <div className="max-w-7xl mx-auto w-full">
+          <NewBornFeaturedProducts />
+        </div>
+      </div>
     </div>
   );
 }

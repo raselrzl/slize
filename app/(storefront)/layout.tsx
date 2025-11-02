@@ -16,9 +16,9 @@ export default function StoreFrontLayout({
      <div className="mt-2"> <AllLinks /></div>
 
       <main className=" mx-auto">{children}</main>
-      <Info />
       
-      <div className="bg-gray-100"> <Footer /></div>
+      <div className="bg-gray-700"><Info /> </div>
+      <div className="bg-gray-200"> <Footer /></div>
       <ScrollToTopButton />
     </>
   );

@@ -54,7 +54,7 @@ export function Info() {
   );
 
   return (
-    <div className="flex flex-wrap gap-4 bg-pink-900 text-white w-full max-w-screen-xl mx-auto mt-2 px-4 py-8">
+    <div className="flex flex-wrap gap-4 bg-gray-700 text-white w-full max-w-screen-xl mx-auto px-4 py-8">
       {/* Help & Contact */}
       <Collapsible {...collapsibleProps(openHelp, setOpenHelp)} className="w-[350px] space-y-2">
         <div className="flex items-center justify-between space-x-4 px-4">

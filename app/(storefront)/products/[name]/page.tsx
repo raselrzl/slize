@@ -196,6 +196,9 @@ async function getData(productCategory: string) {
         where: {
           status: "published",
           isFeatured: true,
+          category: {
+            not: "baby",
+          },
         },
         select: {
           name: true,
@@ -208,6 +211,28 @@ async function getData(productCategory: string) {
 
       return {
         title: "Products for Exclusive",
+        data: data,
+      };
+    }
+
+     case "exclusivebaby": {
+      const data = await prisma.product.findMany({
+        where: {
+          status: "published",
+          isFeatured: true,
+          category: "baby"
+        },
+        select: {
+          name: true,
+          images: true,
+          price: true,
+          id: true,
+          description: true,
+        },
+      });
+
+      return {
+        title: "Products for exclusivebaby",
         data: data,
       };
     }
@@ -228,7 +253,12 @@ export default async function CategoriesPage({
   const { data, title } = await getData(params.name);
   console.log("params name", params.name);
 
-  const bgColor = params.name === "exclusive" ? "bg-[#8e6b48]" : "bg-white";
+  const bgColor =
+      params.name === "exclusive"
+    ? "bg-[#8e6b48]"
+    : params.name === "exclusivebaby"
+    ? "bg-red-100"
+    : "bg-white";
 
   return (
     <section>

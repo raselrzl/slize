@@ -1,8 +1,9 @@
 "use client";
 
-import { BabyProduct } from "./BabyProduct";
+import { AlertCircle } from "lucide-react";
 import { ExclusiveProduct } from "./ExclusiveProduct";
-
+import { ExclusiveProductBoys } from "./ExclusiveProductBoys";
+import { ExclusiveBabyProduct } from "./ExclusiveBabyProduct";
 
 interface Props {
   category: string;
@@ -13,14 +14,25 @@ export function CategoryRenderer({ category }: Props) {
     case "exclusive":
       return <ExclusiveProduct />;
 
-    case "baby":
-      return <BabyProduct />;
+    case "exclusivebaby":
+      return <ExclusiveBabyProduct />;
+
+    case "exclusiveboys":
+      return <ExclusiveProductBoys />;
 
     default:
       return (
-        <div className="p-4 bg-gray-100">
-          <h2 className="text-xl font-bold">Category Not Found</h2>
-          <p>No products available for this category.</p>
+        <div className="flex items-center gap-4 p-6 max-w-7xl mx-auto bg-red-50 border border-red-200 shadow-md">
+          <AlertCircle className="text-red-600 w-8 h-8" />
+          <div>
+            <h2 className="text-xl font-semibold text-red-800">
+              Category Not Found
+            </h2>
+            <p className="text-red-700 mt-1">
+              Sorry, there are no products available for this category at the
+              moment.
+            </p>
+          </div>
         </div>
       );
   }
