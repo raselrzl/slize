@@ -349,3 +349,30 @@ export async function delItem(formData: FormData) {
 
   return redirect(session.url as string);
 }
+
+
+export async function updateItemQuantity(formData: FormData) {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user) return redirect("/");
+
+  const productId = formData.get("productId") as string;
+  const newQuantity = Number(formData.get("quantity"));
+
+  if (!productId || newQuantity < 1) return;
+
+  let cart: Cart | null = await redis.get(`cart-${user.id}`);
+  if (!cart || !cart.items) return;
+
+  const updatedCart: Cart = {
+    userId: user.id,
+    items: cart.items.map((item) =>
+      item.id === productId ? { ...item, quantity: newQuantity } : item
+    ),
+  };
+
+  await redis.set(`cart-${user.id}`, updatedCart);
+
+  revalidatePath("/bag");
+}
