@@ -24,7 +24,8 @@ export function AllBabyProductBanner() {
          {/* Left side image */}
         <div className="relative w-full md:w-[600px] h-[300px] justify-end flex-shrink-0 overflow-hidden">
           <Image
-            src="/newaraival/n3.jpg"
+            /* src="/newaraival/n3.jpg" */
+            src="/mahbub.jpg" 
             alt="Exclusive Product"
             fill
             className="object-cover"
