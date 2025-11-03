@@ -6,6 +6,10 @@ import { ExclusiveProductBoys } from "./ExclusiveProductBoys";
 import { ExclusiveBabyProduct } from "./ExclusiveBabyProduct";
 import AllProductsBanner from "./AllProductsBanner";
 import { AllBabyProductBanner } from "./AllBabyProductBanner";
+import { AllToddlerGirlsProductBanner } from "./AllToddlerGirlsProductBanner";
+import { AllToddlerBoysProductBanner } from "./AllToddlerBoysProductBanner";
+import { AllkidGirlsfourtofiveProductBanner } from "./AllkidGirlsfourtofiveProductBanner";
+import { AllkidBoysfourtofiveProductBanner } from "./AllkidBoysfourtofiveProductBanner";
 
 interface Props {
   category: string;
@@ -27,6 +31,20 @@ export function CategoryRenderer({ category }: Props) {
 
        case "baby":
       return <AllBabyProductBanner />;
+
+      case "toddlergirls":
+      return <AllToddlerGirlsProductBanner />;
+
+
+       case "toddlerboys":
+      return <AllToddlerBoysProductBanner />;
+
+       case "kidgirlsfourtofive":
+      return <AllkidGirlsfourtofiveProductBanner />;
+
+      case "kidboysfourtofive":
+      return <AllkidBoysfourtofiveProductBanner />;
+
 
     default:
       return (
