@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -12,6 +12,7 @@ interface iAppProps {
 
 export function ImageSlider({ images }: iAppProps) {
   const [mainImageIndex, setMainImageIndex] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   function handlePreviousClick() {
     setMainImageIndex((prevIndex) =>
@@ -27,17 +28,23 @@ export function ImageSlider({ images }: iAppProps) {
 
   function handleImageClick(index: number) {
     setMainImageIndex(index);
+    setIsFullscreen(true); // open fullscreen
+  }
+
+  function handleCloseFullscreen() {
+    setIsFullscreen(false);
   }
 
   return (
     <div className="grid gap-6 md:gap-3 items-start">
+      {/* Main Slider */}
       <div className="relative flex items-center justify-center overflow-hidden">
         <Image
           width={300}
           height={300}
           src={images[mainImageIndex]}
           alt="Product image"
-          className="object-cover"
+          className="object-cover border border-gray-900/10"
         />
 
         <div className="absolute inset-0 flex items-center justify-between px-4">
@@ -50,6 +57,7 @@ export function ImageSlider({ images }: iAppProps) {
         </div>
       </div>
 
+      {/* Thumbnails */}
       <div className="flex mx-auto gap-2 mt-2">
         {images.map((image, index) => (
           <div
@@ -58,7 +66,7 @@ export function ImageSlider({ images }: iAppProps) {
             className={cn(
               "flex items-center justify-center cursor-pointer",
               index === mainImageIndex
-                ? "border-2 border-gray-700 p-1"
+                ? "border border-gray-700 p-1"
                 : "border border-gray-200 p-1"
             )}
           >
@@ -72,6 +80,25 @@ export function ImageSlider({ images }: iAppProps) {
           </div>
         ))}
       </div>
+
+      {/* Fullscreen Overlay */}
+      {isFullscreen && (
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center">
+          <button
+            onClick={handleCloseFullscreen}
+            className="absolute top-4 right-4 text-white p-2 rounded-full hover:bg-white/20"
+          >
+            <X className="w-6 h-6" />
+          </button>
+          <Image
+            src={images[mainImageIndex]}
+            alt="Fullscreen Image"
+            width={800}
+            height={800}
+            className="object-contain max-h-[90vh] max-w-[90vw]"
+          />
+        </div>
+      )}
     </div>
   );
 }
