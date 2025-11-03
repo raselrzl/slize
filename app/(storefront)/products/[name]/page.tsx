@@ -290,7 +290,7 @@ export default async function CategoriesPage({
       params.name === "exclusivegirls"
     ? "bg-[#8e6b48]"
     : params.name === "exclusivebaby"
-    ? "bg-red-100"
+    ? "bg-teal-50"
     : "bg-white";
 
   return (

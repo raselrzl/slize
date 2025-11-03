@@ -13,7 +13,7 @@ import InfoAlert from "./infoAlert";
 
 const BabyFeaturedHomePageBanner = () => {
   return (
-    <div className="flex flex-wrap gap-4 bg-red-800 text-white w-full max-w-screen-xl mx-auto px-4 py-8 mt-2">
+    <div className="flex flex-wrap gap-4 bg-teal-900 text-white w-full max-w-screen-xl mx-auto px-4 py-8 mt-2">
       <Link href="/products/exclusivebaby" className="flex flex-col md:flex-row w-full max-w-6xl gap-4">
         <div className="flex-1 w-full h-[250px] my-2 flex items-center justify-center g">
           <div className="">
@@ -32,7 +32,7 @@ const BabyFeaturedHomePageBanner = () => {
             </div>
           </div>
         </div>
-        <div className="flex-1 w-full h-[250px] my-2 bg-red-800 overflow-hidden flex gap-1 px-1">
+        <div className="flex-1 w-full h-[250px] my-2 bg-teal-900 overflow-hidden flex gap-1 px-1">
           <div className="w-1/3 h-full flex items-center justify-center">
             <img
               src="/newaraival/n1.png"

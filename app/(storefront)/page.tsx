@@ -31,13 +31,13 @@ export default function IndexPage() {
       <div>
         <BoysFeaturedProducts />
       </div>
-      <div className="bg-red-800 py-4 flex justify-end">
+      <div className="bg-teal-900 py-4 flex justify-end">
         <div className="max-w-7xl mx-auto w-full">
           <BabyFeaturedHomePageBanner />
         </div>
       </div>
 
-      <div className="bg-red-100 py-4 flex justify-end">
+      <div className="bg-teal-50 py-4 flex justify-end">
         <div className="max-w-7xl mx-auto w-full">
           <NewBornFeaturedProducts />
         </div>
