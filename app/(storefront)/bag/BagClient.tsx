@@ -65,14 +65,24 @@ export default function BagClient({
               <div className="flex flex-col">
                 <p className="text-sm font-bold">{item.name}</p>
                 <p className="text-xs items-center justify-center">
-                  Item Price:
-                  <span className="text-lg font-bold px-2">{item.price}.00</span> kr
+                  Total Price:
+                  <span className="text-lg font-bold px-2">
+                    {(item.price * item.quantity).toFixed(2)}kr
+                  </span>
+                  
+                  
                 </p>
+                <span className="text-xs">
+                    ({item.quantity} item{item.quantity > 1 ? "s" : ""})
+                  </span>
               </div>
 
               <div className="flex flex-col h-full justify-between">
                 <div className="flex items-center gap-x-2">
-                  <form action={updateItemQuantity} className="flex items-center gap-x-2">
+                  <form
+                    action={updateItemQuantity}
+                    className="flex items-center gap-x-2"
+                  >
                     <input type="hidden" name="productId" value={item.id} />
                     <input
                       type="number"
