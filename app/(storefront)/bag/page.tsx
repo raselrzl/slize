@@ -165,7 +165,6 @@ export default async function BagRoute() {
     totalPrice += item.price * item.quantity;
   });
 
-  // ✅ Delivery fee logic
   const deliveryFee = totalPrice >= 8 ? 0 : 4;
   const finalTotal = totalPrice + deliveryFee;
 
@@ -264,7 +263,6 @@ export default async function BagRoute() {
 
               <div className="p-3 flex flex-col gap-3 text-xs">
                 <form action={checkOut}>
-                  {/* ✅ Include delivery fee for Stripe */}
                   <input type="hidden" name="deliveryFee" value={deliveryFee} />
                   <ChceckoutButton />
                 </form>
