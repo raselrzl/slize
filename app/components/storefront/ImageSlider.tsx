@@ -13,6 +13,7 @@ interface iAppProps {
 export function ImageSlider({ images }: iAppProps) {
   const [mainImageIndex, setMainImageIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
 
   function handlePreviousClick() {
     setMainImageIndex((prevIndex) =>
@@ -28,11 +29,17 @@ export function ImageSlider({ images }: iAppProps) {
 
   function handleImageClick(index: number) {
     setMainImageIndex(index);
-    setIsFullscreen(true); // open fullscreen
+    setIsFullscreen(true);
+    setIsZoomed(false); // reset zoom when opening
   }
 
   function handleCloseFullscreen() {
     setIsFullscreen(false);
+    setIsZoomed(false);
+  }
+
+  function toggleZoom() {
+    setIsZoomed((prev) => !prev);
   }
 
   return (
@@ -90,13 +97,22 @@ export function ImageSlider({ images }: iAppProps) {
           >
             <X className="w-6 h-6" />
           </button>
-          <Image
-            src={images[mainImageIndex]}
-            alt="Fullscreen Image"
-            width={800}
-            height={800}
-            className="object-contain max-h-[90vh] max-w-[90vw]"
-          />
+
+          <div
+            onClick={toggleZoom}
+            className="cursor-zoom-in"
+          >
+            <Image
+              src={images[mainImageIndex]}
+              alt="Fullscreen Image"
+              width={isZoomed ? 1600 : 800} // zoom in/out
+              height={isZoomed ? 1600 : 800}
+              className={cn(
+                "object-contain transition-transform duration-300",
+                isZoomed ? "scale-150 cursor-zoom-out" : "scale-100"
+              )}
+            />
+          </div>
         </div>
       )}
     </div>
