@@ -3,17 +3,21 @@ import prisma from "@/app/lib/db";
 import { notFound } from "next/navigation";
 import { unstable_noStore as noStore } from "next/cache";
 import { CategoryRenderer } from "@/app/components/category/CategoryRenderer";
+import ProductFilterBar from "@/app/components/storefront/ProductFilterBar";
+import ProductListWithFilter from "@/app/components/storefront/ProductListWithFilter";
 
 async function getData(productCategory: string) {
   switch (productCategory) {
     case "all": {
       const data = await prisma.product.findMany({
         select: {
-          name: true,
-          images: true,
-          price: true,
           id: true,
-          description: true,
+  name: true,
+  images: true,
+  price: true,
+  description: true,
+  category: true,
+  createdAt: true, 
         },
         where: {
           status: "published",
@@ -290,14 +294,18 @@ export default async function CategoriesPage({
     : "bg-white";
 
   return (
-    <section>
+   <section>
       <CategoryRenderer category={params.name} />
-      <div className={`px-2 md:px-0 ${bgColor}`}>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-1 max-w-7xl mx-auto py-4">
-          {data.map((item) => (
-            <ProductCard item={item} key={item.id} />
-          ))}
-        </div>
+      <div className={bgColor}>
+        {params.name === "all" ? (
+          <ProductListWithFilter data={data} />
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-1 max-w-7xl mx-auto py-4 px-2 md:px-0">
+            {data.map((item) => (
+              <ProductCard key={item.id} item={item} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
