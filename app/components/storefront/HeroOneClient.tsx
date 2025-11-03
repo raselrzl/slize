@@ -22,7 +22,7 @@ export function HeroOneClient({ data }: { data: Banner[] }) {
     "bg-pink-400",
     "bg-gray-400",
     "bg-green-600",
-    "bg-red-600",
+    "bg-teal-600",
   ];
 
   const links = [

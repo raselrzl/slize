@@ -5,6 +5,7 @@ import { ExclusiveGirlsProduct} from "./ExclusiveGirlsProduct";
 import { ExclusiveProductBoys } from "./ExclusiveProductBoys";
 import { ExclusiveBabyProduct } from "./ExclusiveBabyProduct";
 import AllProductsBanner from "./AllProductsBanner";
+import { AllBabyProductBanner } from "./AllBabyProductBanner";
 
 interface Props {
   category: string;
@@ -23,6 +24,9 @@ export function CategoryRenderer({ category }: Props) {
 
       case "all":
       return <AllProductsBanner />;
+
+       case "baby":
+      return <AllBabyProductBanner />;
 
     default:
       return (
