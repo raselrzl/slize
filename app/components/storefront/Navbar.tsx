@@ -22,24 +22,27 @@ export async function Navbar() {
 
   return (
     <>
-      <nav className="w-full max-w-7xl mx-auto px-0 sm:px-0 lg:px-0 py-4 flex items-center justify-between">
-        <div className="flex items-center">
-          <Link href="/" className="">
-            {/* This link is visible only on small screens (mobile) */}
+      <nav className="w-full max-w-7xl mx-auto px-2 md:px-0 py-4 grid grid-cols-2 items-center">
+        {/* Left - Navbar Links (hidden on mobile) */}
+       {/*  <div className="hidden md:flex justify-start">
+          <NavbarLinks />
+        </div> */}
+
+        {/* Center on desktop / Left on mobile */}
+        <div className="flex justify-start items-center">
+          <Link href="/">
             <Image
               src="/logo/kron.png"
               alt="Kron Word Logo"
               width={200}
               height={160}
-              className="md:w-full md:h-full h-[35px] w-[140px]"
+              className="h-[35px] w-[140px]"
             />
           </Link>
         </div>
-        <div className="hidden md:block">
-          <NavbarLinks />
-        </div>
 
-        <div className="flex items-center">
+        {/* Right section */}
+        <div className="flex justify-end items-center">
           {user ? (
             <>
               <Link href="/bag" className="group p-2 flex items-center mr-2">
@@ -60,19 +63,17 @@ export async function Navbar() {
               />
             </>
           ) : (
-            <div className="flex md:flex md:flex-1 md:items-center md:justify-end md:space-x-1">
+            <div className="flex items-center space-x-2">
               <LoginLink>
-                <ShoppingBagIcon className="text-gray-800 h-7 w-7 mr-2 hover:text-gray-500" />
+                <ShoppingBagIcon className="text-gray-800 h-7 w-7 hover:text-gray-500" />
               </LoginLink>
               <span className="h-6 w-px bg-gray-400 self-center"></span>
               <LoginLink>
-                <Heart className="text-gray-800 h-7 w-7 mx-2 hover:text-gray-500" />
+                <Heart className="text-gray-800 h-7 w-7 hover:text-gray-500" />
               </LoginLink>
-
               <span className="h-6 w-px bg-gray-400 self-center"></span>
-
               <LoginLink>
-                <User2 className="text-gray-800 h-7 w-7 mx-2 hover:text-gray-500" />
+                <User2 className="text-gray-800 h-7 w-7 hover:text-gray-500" />
               </LoginLink>
             </div>
           )}

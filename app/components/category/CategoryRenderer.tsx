@@ -4,6 +4,7 @@ import { AlertCircle } from "lucide-react";
 import { ExclusiveGirlsProduct} from "./ExclusiveGirlsProduct";
 import { ExclusiveProductBoys } from "./ExclusiveProductBoys";
 import { ExclusiveBabyProduct } from "./ExclusiveBabyProduct";
+import AllProductsBanner from "./AllProductsBanner";
 
 interface Props {
   category: string;
@@ -19,6 +20,9 @@ export function CategoryRenderer({ category }: Props) {
 
     case "exclusiveboys":
       return <ExclusiveProductBoys />;
+
+      case "all":
+      return <AllProductsBanner />;
 
     default:
       return (

@@ -24,11 +24,13 @@ export default function IndexPage() {
         <FeaturedProducts />
       </div>
 
-      <div className=""><ExclusiveProductBoysHomeBanner /></div>
+      <div className="">
+        <ExclusiveProductBoysHomeBanner />
+      </div>
 
-      <div><BoysFeaturedProducts /></div>
-
-      <ModelAlbum />
+      <div>
+        <BoysFeaturedProducts />
+      </div>
       <div className="bg-red-800 py-4 flex justify-end">
         <div className="max-w-7xl mx-auto w-full">
           <BabyFeaturedHomePageBanner />

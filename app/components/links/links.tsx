@@ -7,9 +7,15 @@ import { usePathname } from "next/navigation";
 export const Links = [
 
     {
-    id: 1,
+    id: 0,
     name: "Home",
     href: "/",
+  },
+
+   {
+    id: 1,
+    name: "In-kronstil",
+    href: "/products/all",
   },
   {
     id: 2,
@@ -40,7 +46,7 @@ export function AllLinks() {
             key={item.id}
             href={item.href}
             className={cn(
-              "text-sm font-semibold transition-colors duration-200",
+              "text-xs font-semibold transition-colors duration-200",
               isActive
                 ? "text-gray-400 underline underline-offset-4"
                 : "text-gray-800 hover:text-gray-600 hover:underline hover:underline-offset-4"

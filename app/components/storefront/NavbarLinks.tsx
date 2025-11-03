@@ -5,20 +5,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export const navbarLinks = [
-   /*  {
+    {
     id: 1,
-    name: "All",
+    name: "In-Kronstil",
     href: "/products/all",
-  }, */
+  },
   {
     id: 2,
     name: "Boys",
-    href: "/products/men",
+    href: "/products/boys",
   },
   {
     id: 3,
     name: "Girls",
-    href: "/products/women",
+    href: "/products/girls",
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ export function NavbarLinks() {
             location === item.href
               ? "bg-black text-gray-300 hover:bg-gray-700 border border-black"
               : "hover:bg-muted hover:bg-opacity-75 text-gray-800 border-gray-800 hover:bg-gray-100",
-            "group px-2 rounded-xs w-20 border  mx-2 py-2 text-center text-sm font-semibold  shadow-xs"
+            "group px-2 rounded-xs w-24 border  mx-1 py-1 text-center text-sm font-semibold  shadow-xs"
           )}
         >
           {item.name}
