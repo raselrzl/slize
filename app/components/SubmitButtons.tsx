@@ -39,19 +39,25 @@ export function ShoppingBagButton() {
   const { pending } = useFormStatus();
 
   return (
-    <>
+    <Button
+      disabled={pending}
+      size="lg"
+      className="w-full mt-5 bg-black text-white rounded-none hover:bg-gray-800"
+      type="submit"
+    >
       {pending ? (
-        <Button disabled size="lg" className="w-full mt-5">
+        <>
           <Loader2 className="mr-4 h-5 w-5 animate-spin" /> Please Wait
-        </Button>
+        </>
       ) : (
-        <Button variant="destructive" size="lg" className="w-full mt-5 bg-black text-white rounded-none" type="submit">
+        <>
           <ShoppingBag className="mr-4 h-5 w-5" /> Add to Bag
-        </Button>
+        </>
       )}
-    </>
+    </Button>
   );
 }
+
 
 export function DeleteItem() {
   const { pending } = useFormStatus();

@@ -1,24 +1,51 @@
+// app/products/[id]/loading.tsx
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ProductLoadingRoute() {
   return (
-    <div className="grid md:grid-cols-2 gap-6 items-start lg:gap-x-24 py-6">
-      <div>
-        <Skeleton className="w-full h-[600px]" />
-        <div className="grid grid-cols-5 gap-2 mt-6">
-          <Skeleton className="w-[100px] h-[100px]" />
-          <Skeleton className="w-[100px] h-[100px]" />
-          <Skeleton className="w-[100px] h-[100px]" />
-          <Skeleton className="w-[100px] h-[100px]" />
-          <Skeleton className="w-[100px] h-[100px]" />
+    <div className="max-w-7xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-1 lg:gap-1">
+      {/* Left: Image Slider */}
+      <div className="animate-pulse flex flex-col gap-1">
+        {/* Main Image */}
+        <Skeleton className="w-full h-[400px] bg-gray-300 dark:bg-gray-700" />
+
+        {/* Thumbnails */}
+        <div className="flex gap-1 mt-1 overflow-x-auto">
+          {Array(5)
+            .fill(0)
+            .map((_, i) => (
+              <Skeleton
+                key={i}
+                className="w-[60px] h-[60px] bg-gray-300 dark:bg-gray-700 flex-shrink-0"
+              />
+            ))}
         </div>
       </div>
 
-      <div>
-        <Skeleton className="w-56 h-12" />
-        <Skeleton className="w-36 h-12 mt-4" />
-        <Skeleton className="mt-4 w-full h-60" />
-        <Skeleton className="w-full h-12 mt-5" />
+      {/* Right: Product Info */}
+      <div className="p-1 flex flex-col gap-1 animate-pulse">
+        {/* Product Name */}
+        <Skeleton className="w-3/4 h-8 bg-gray-300 dark:bg-gray-700" />
+
+        {/* Description */}
+        <Skeleton className="w-full h-20 mt-1 bg-gray-300 dark:bg-gray-700" />
+
+        {/* Price */}
+        <Skeleton className="w-32 h-6 mt-1 bg-gray-300 dark:bg-gray-700" />
+
+        {/* VAT text */}
+        <Skeleton className="w-24 h-4 mt-1 bg-gray-300 dark:bg-gray-700" />
+
+        {/* Delivery info */}
+        <Skeleton className="w-40 h-4 mt-1 bg-gray-300 dark:bg-gray-700" />
+
+        {/* Add to cart / login button */}
+        <Skeleton className="w-full h-10 mt-1 bg-gray-300 dark:bg-gray-700" />
+      </div>
+
+      {/* Featured Products */}
+      <div className="md:col-span-2 mt-4 animate-pulse">
+        <Skeleton className="w-full h-40 bg-gray-300 dark:bg-gray-700" />
       </div>
     </div>
   );

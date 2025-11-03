@@ -10,7 +10,7 @@ import {
   RegisterLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 
-import { StarIcon } from "lucide-react";
+import { ShoppingBag, StarIcon } from "lucide-react";
 import { notFound } from "next/navigation";
 import { unstable_noStore as noStore } from "next/cache";
 import { Button } from "@/components/ui/button";
@@ -47,12 +47,15 @@ export default async function ProductIdRoute({
   const addProducttoShoppingCart = addItem.bind(null, data.id);
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+  const buttonClass =
+  "w-full mt-5 bg-black text-white rounded-none hover:bg-gray-800";
+
   return (
     <>
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start lg:gap-x-24 py-6">
         <ImageSlider images={data.images} />
-        <div className="p-4">
-          <h1 className="text-2xl font-bold tracking-tight border-b uppercase">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight border-b border-gray-700 uppercase inline-block">
             {data.name}
           </h1>
           <p className="text-sm text-gray-700 mt-6">{data.description}</p>
@@ -62,22 +65,25 @@ export default async function ProductIdRoute({
           </p>
           <p className="text-sm text-gray-500 mt-6">Free delivery over 8 kr</p>
           {user ? (
-            <>
-              {/* If user is logged in, show the form with the button */}
-              <form action={addProducttoShoppingCart}>
-                <ShoppingBagButton />
-              </form>
-            </>
-          ) : (
-            <>
-              {/* If no user, show the LoginLink*/}
-              <div className="w-full mt-5">
-                <Button variant="destructive" size="lg" className="w-full">
-                  <LoginLink>Login to Add items to Cart</LoginLink>
-                </Button>
-              </div>
-            </>
-          )}
+  // Logged in
+  <form action={addProducttoShoppingCart} className="w-full">
+    <ShoppingBagButton />
+  </form>
+) : (
+  // Not logged in
+  <div className="w-full">
+    <Button
+      asChild
+      size="lg"
+      className={buttonClass}
+    >
+      <LoginLink postLoginRedirectURL={`/product/${data.id}`}>
+        <ShoppingBag className="mr-4 h-5 w-5" /> Add to Bag
+      </LoginLink>
+    </Button>
+  </div>
+)}
+
 
           {/* <form action={addProducttoShoppingCart}>
             <ShoppingBagButton />
