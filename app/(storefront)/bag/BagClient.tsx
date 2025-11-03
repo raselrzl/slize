@@ -82,7 +82,7 @@ export default function BagClient({
                       onChange={(e) => e.currentTarget.form?.requestSubmit()}
                       className="w-16 border border-gray-300 text-center text-sm"
                     />
-                    <p className="text-sm">{item.price}.00 kr</p>
+                    <p className="text-sm"> x {item.price}.00 kr</p>
                   </form>
                 </div>
 
