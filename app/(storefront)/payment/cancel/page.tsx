@@ -20,7 +20,7 @@ export default function CancelRoute() {
             </p>
 
             <Button asChild className="w-full mt-5 sm:mt-6">
-              <Link href="/">Back to Homepage</Link>
+              <Link href="/bag">Go To Bag</Link>
             </Button>
           </div>
         </div>
