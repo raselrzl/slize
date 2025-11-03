@@ -33,8 +33,8 @@ export default function AllProductsBanner() {
   };
 
   return (
-    <div className="bg-gray-800 relative">
-      <div className=" p-4 max-w-7xl mx-auto flex justify-center items-center mb-6 rounded-lg relative overflow-hidden">
+    <div className="bg-gray-900 relative ">
+      <div className=" p-4 max-w-7xl mx-auto flex justify-center items-center rounded-lg relative overflow-hidden">
         <div className="relative w-full">
           {/* Left Arrow (only for mobile/tablet) */}
           {showLeft && (

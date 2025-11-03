@@ -27,7 +27,7 @@ export default function ProductFilterBar({
   };
 
   return (
-    <div className="w-full bg-gray-900 border-b border-gray-700 shadow-sm">
+    <div className="w-full bg-gray-900 border-t border-gray-700 shadow-sm pb-4">
       <div className="max-w-7xl mx-auto px-4 py-3">
         {/* Header */}
         <div className="flex items-center gap-2 text-gray-100 font-semibold mb-3">
