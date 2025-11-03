@@ -49,21 +49,18 @@ export default async function ProductIdRoute({
   const user = await getUser();
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start lg:gap-x-24 py-6 max-w-7xl">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start lg:gap-x-24 py-6">
         <ImageSlider images={data.images} />
-        <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-red-800">
+        <div className="p-4">
+          <h1 className="text-2xl font-bold tracking-tight border-b uppercase">
             {data.name}
           </h1>
-          <p className="text-3xl mt-2 text-red-800">{data.price} kr</p>
-          {/* <div className="mt-3 flex items-center gap-1">
-            <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-            <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-            <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-            <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-            <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-          </div> */}
-          <p className="text-base text-gray-700 mt-6">{data.description}</p>
+          <p className="text-sm text-gray-700 mt-6">{data.description}</p>
+          <p className="text-xl mt-2 font-bold">
+            kr {data.price}.00
+            <span className="text-xs ml-2 text-gray-500">(VAT included)</span>
+          </p>
+          <p className="text-sm text-gray-500 mt-6">Free delivery over 8 kr</p>
           {user ? (
             <>
               {/* If user is logged in, show the form with the button */}

@@ -31,7 +31,7 @@ export function ImageSlider({ images }: iAppProps) {
 
   return (
     <div className="grid gap-6 md:gap-3 items-start">
-      <div className="relative overflow-hidden">
+      <div className="relative flex items-center justify-center overflow-hidden">
         <Image
           width={300}
           height={300}
@@ -42,7 +42,7 @@ export function ImageSlider({ images }: iAppProps) {
 
         <div className="absolute inset-0 flex items-center justify-between px-4">
           <Button onClick={handlePreviousClick} variant="ghost" size="icon">
-            <ChevronLeft className="w-6 h-6 hover:bg-red-200"/>
+            <ChevronLeft className="w-6 h-6 hover:bg-red-200" />
           </Button>
           <Button onClick={handleNextClick} variant="ghost" size="icon">
             <ChevronRight className="w-6 h-6" />
@@ -50,17 +50,17 @@ export function ImageSlider({ images }: iAppProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="flex mx-auto gap-2 mt-2">
         {images.map((image, index) => (
           <div
-            className={cn(
-              index === mainImageIndex
-                ? "border-2 border-primary"
-                : "border border-gray-200",
-              "relative overflow-hidden rounded-lg cursor-pointer"
-            )}
             key={index}
             onClick={() => handleImageClick(index)}
+            className={cn(
+              "flex items-center justify-center cursor-pointer",
+              index === mainImageIndex
+                ? "border-2 border-gray-700 p-1"
+                : "border border-gray-200 p-1"
+            )}
           >
             <Image
               src={image}

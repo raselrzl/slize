@@ -45,8 +45,8 @@ export function ShoppingBagButton() {
           <Loader2 className="mr-4 h-5 w-5 animate-spin" /> Please Wait
         </Button>
       ) : (
-        <Button variant="destructive" size="lg" className="w-full mt-5" type="submit">
-          <ShoppingBag className="mr-4 h-5 w-5" /> Add to Cart
+        <Button variant="destructive" size="lg" className="w-full mt-5 bg-black text-white rounded-none" type="submit">
+          <ShoppingBag className="mr-4 h-5 w-5" /> Add to Bag
         </Button>
       )}
     </>
