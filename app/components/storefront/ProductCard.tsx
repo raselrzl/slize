@@ -35,18 +35,17 @@ export function ProductCard({ item }: iAppProps) {
             <CarouselItem key={index} className="p-0">
               <div className="relative w-full h-[250px] md:h-[320px] overflow-hidden">
                 <Image
-  src={img}
-  alt="Product Image"
-  width={600}
-  height={600}
-  className="object-cover w-full h-full"
-  placeholder="blur"
-  blurDataURL="/placeholder.webp" // small base64 or local tiny image
-  quality={75}
-  priority={index === 0} // preload first image for faster carousel load
-  unoptimized={false} // let Next.js optimize by default
-/>
-
+                  src={img}
+                  alt="Product Image"
+                  width={600}
+                  height={600}
+                  className="object-cover w-full h-full"
+                  placeholder="blur"
+                  blurDataURL="/placeholder.webp" // small base64 or local tiny image
+                  quality={75}
+                  priority={index === 0} // preload first image for faster carousel load
+                  unoptimized={false} // let Next.js optimize by default
+                />
               </div>
             </CarouselItem>
           ))}
@@ -54,17 +53,17 @@ export function ProductCard({ item }: iAppProps) {
       </Carousel>
       <Link href={`/product/${item.id}`} className="p-1">
         <div className="flex justify-between items-center mt-1">
-          <h1 className="font-semibold text-md line-clamp-1">{item.name}</h1>
-          <h3 className="inline-flex items-center px-2 py-1 text-xs font-medium">
+          <h1 className="font-semibold text-md line-clamp-1 text-gray-950">{item.name}</h1>
+          <h3 className="inline-flex items-center px-2 py-1 text-xs font-medium text-gray-950">
             {item.price}kr
           </h3>
         </div>
         <div className="flex flex-row items-center">
-          <p className="text-gray-600 text-sm mt-1 line-clamp-1">
+          <p className="text-gray-600 text-xs mt-1 line-clamp-1">
             {item.description}
           </p>
 
-          <div className="ml-auto pl-2 font-medium">
+          <div className="ml-auto pl-2 font-medium text-gray-900">
             <ChevronRight />
           </div>
         </div>
