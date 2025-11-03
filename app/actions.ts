@@ -237,7 +237,9 @@ export async function delItem(formData: FormData) {
   revalidatePath("/bag");
 }
 
-export async function checkOut() {
+
+/* this is works without delivery fees */
+/* export async function checkOut() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
@@ -283,4 +285,67 @@ export async function checkOut() {
 
     return redirect(session.url as string);
   }
+} */
+
+  export async function checkOut(formData: FormData) {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user) {
+    return redirect("/");
+  }
+
+  let cart: Cart | null = await redis.get(`cart-${user.id}`);
+  if (!cart || !cart.items) return;
+
+  const deliveryFee = Number(formData.get("deliveryFee")) || 0;
+
+  const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] =
+    cart.items.map((item) => ({
+      price_data: {
+        currency: "sek",
+        unit_amount: item.price * 100,
+        product_data: {
+          name: item.name,
+          images: [item.imageString],
+        },
+      },
+      quantity: item.quantity,
+    }));
+
+  // ✅ Add delivery fee if applicable
+  if (deliveryFee > 0) {
+    lineItems.push({
+      price_data: {
+        currency: "sek",
+        unit_amount: deliveryFee * 100,
+        product_data: {
+          name: "Delivery Fee",
+        },
+      },
+      quantity: 1,
+    });
+  }
+
+  const session = await stripe.checkout.sessions.create({
+    mode: "payment",
+    billing_address_collection: "required",
+    shipping_address_collection: {
+      allowed_countries: ["SE"],
+    },
+    line_items: lineItems,
+    success_url:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/payment/success"
+        : "https://kronstil.store/payment/success",
+    cancel_url:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/payment/cancel"
+        : "https://kronstil.store/payment/cancel",
+    metadata: {
+      userId: user.id,
+    },
+  });
+
+  return redirect(session.url as string);
 }
