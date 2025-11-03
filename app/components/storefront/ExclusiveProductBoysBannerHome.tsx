@@ -25,7 +25,7 @@ export function ExclusiveProductBoysHomeBanner() {
 
             {/* Button */}
             <div>
-              <span className="inline-block mt-2 bg-yellow-300 text-gray-900 font-semibold px-5 py-2 rounded-full hover:bg-yellow-400 transition">
+              <span className="mt-2 inline-block bg-yellow-500 text-black font-semibold py-2 px-4 rounded-full hover:bg-yellow-400 transition-colors">
                 Shop Now →
               </span>
             </div>

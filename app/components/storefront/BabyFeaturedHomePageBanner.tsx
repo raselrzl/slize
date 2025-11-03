@@ -1,6 +1,7 @@
 // components/NewArrival.tsx
 import {
   ArrowBigRightDash,
+  FileQuestion,
   FileQuestionIcon,
   Info,
   InfoIcon,
@@ -13,10 +14,10 @@ import InfoAlert from "./infoAlert";
 const BabyFeaturedHomePageBanner = () => {
   return (
     <div className="flex flex-wrap gap-4 bg-red-800 text-white w-full max-w-screen-xl mx-auto px-4 py-8 mt-2">
-      <Link href="/products/all" className="flex flex-col md:flex-row w-full max-w-6xl gap-4">
-        <div className="flex-1 w-full h-[250px] my-2 flex items-center justify-center">
-          <div>
-            <InfoAlert />
+      <Link href="/products/exclusivebaby" className="flex flex-col md:flex-row w-full max-w-6xl gap-4">
+        <div className="flex-1 w-full h-[250px] my-2 flex items-center justify-center g">
+          <div className="">
+            <FileQuestion className="w-10 h-10 text-yellow-300 mb-8" />
             <p className="text-xl md:text-2xl font-extrabold text-white">
               Discover Our Newborn Exclusive Collection
             </p>
@@ -24,7 +25,7 @@ const BabyFeaturedHomePageBanner = () => {
               Gentle, cozy, and crafted with love – perfect for your little
               bundle of joy.
             </p>
-            <div className="font-bold flex items-center mt-2">
+            <div className="mt-8 inline-block bg-yellow-500 text-black font-semibold py-2 px-4 rounded-full hover:bg-yellow-400 transition-colors">
               <p className="flex items-center gap-2">
                 Shop now <ArrowBigRightDash />
               </p>

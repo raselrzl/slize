@@ -21,18 +21,18 @@ export const Links = [
     name: "Exclusive-Boys",
     href: "/products/exclusiveboys",
   },
- /*  {
+ {
     id: 4,
-    name: "Newborn",
-    href: "/products/kids",
-  }, */
+    name: "Exclusive-Newborn",
+    href: "/products/exclusivebaby",
+  },
 ];
 
 export function AllLinks() {
   const location = usePathname();
 
   return (
-    <div className="max-w-7xl mx-auto flex gap-2 mb-4 pl-2 md:pl-0">
+    <div className="max-w-7xl mx-auto flex flex-wrap gap-2 mb-4 pl-2 md:pl-0">
       {Links.map((item) => {
         const isActive = location === item.href;
         return (
