@@ -53,7 +53,7 @@ export function ProductCard({ item }: iAppProps) {
       </Carousel>
       <Link href={`/product/${item.id}`} className="p-1">
         <div className="flex justify-between items-center mt-1">
-          <h1 className="font-semibold text-md line-clamp-1 text-gray-950">{item.name}</h1>
+          <h1 className="font-semibold md:text-md text-sm line-clamp-1 text-gray-950">{item.name}</h1>
           <h3 className="inline-flex items-center px-2 py-1 text-xs font-medium text-gray-950">
             {item.price}kr
           </h3>

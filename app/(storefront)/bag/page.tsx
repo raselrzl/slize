@@ -4,7 +4,7 @@ import { Cart } from "@/app/lib/interfaces";
 import { redis } from "@/app/lib/redis";
 import { Button } from "@/components/ui/button";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { ShoppingBag } from "lucide-react";
+import { Info, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { unstable_noStore as noStore } from "next/cache";
@@ -29,11 +29,12 @@ export default async function BagRoute() {
   });
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 min-h-[55vh]">
-      {!cart || !cart.items ||cart.items.length===0  ? (
+    <div className="max-w-7xl mx-auto mt-10 min-h-[55vh]">
+      <p className="text-gray-900 text-2xl font-bold mb-4 ml-2">Your bag</p>
+      {!cart || !cart.items || cart.items.length === 0 ? (
         <div className="flex min-h-[400px] flex-col items-center justify-center rounded-lg border border-dashed p-8 text-center mt-20">
           <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
-            <ShoppingBag className="w-10 h-10 text-red-800" />
+            <ShoppingBag className="w-10 h-10 text-gray-800" />
           </div>
 
           <h2 className="mt-6 text-xl font-semibold">
@@ -49,44 +50,85 @@ export default async function BagRoute() {
           </Button>
         </div>
       ) : (
-        <div className="flex flex-col gap-y-1">
-          
-
-          {cart?.items.map((item) => (
-            <div key={item.id} className="flex border-b-2 border-gray-200">
-              <div className="w-20 h-20 sm:w-32 sm:h-32 relative">
-                <Image
-                  className="rounded-md object-contain"
-                  fill
-                  src={item.imageString}
-                  alt="Product image"
-                />
-              </div>
-              <div className="ml-5 flex justify-between w-full font-medium">
-                <p>{item.name}</p>
-                <div className="flex flex-col h-full justify-between">
-                  <div className="flex items-center gap-x-2">
-                    <p>{item.quantity} x</p>
-                    <p>{item.price}kr</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 px-2 gap-2">
+          <div className="grid grid-cols-1 gap-y-1">
+            {cart?.items.map((item) => (
+              <div key={item.id} className="flex border border-gray-950/10 p-4">
+                <div className="w-20 h-24 relative">
+                  <Image
+                    className="rounded-md object-contain"
+                    fill
+                    src={item.imageString}
+                    alt="Product image"
+                  />
+                </div>
+                <div className="ml-5 flex justify-between w-full font-medium text-gray-800">
+                  <div className="flex flex-col">
+                    <p className="text-sm font-bold">{item.name}</p>
+                    <p className="text-xs items-center justify-center">
+                      Item Price:
+                      <span className="text-lg font-bold px-2">
+                        {item.price}.00
+                      </span>
+                      kr
+                    </p>
                   </div>
+                  <div className="flex flex-col h-full justify-between">
+                    <div className="flex items-center gap-x-2">
+                      <p>
+                        {item.quantity} <span className="font-bold">x</span>
+                      </p>
+                      <p>{item.price}.00 kr</p>
+                    </div>
 
-                  <form action={delItem} className="text-end">
-                    <input type="hidden" name="productId" value={item.id} />
-                    <DeleteItem />
-                  </form>
+                    <form action={delItem} className="text-end">
+                      <input type="hidden" name="productId" value={item.id} />
+                      <DeleteItem />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            ))}
+            <p className="text-sm flex justify-center items-center py-4">
+              {" "}
+              <Info />
+              Items placed in this bag are not reserved.
+            </p>
+          </div>
+          <div className="md:sticky md:top-24 flex justify-center ">
+            <div className="bg-gray-200 rounded-none w-[300px] h-[300px] shadow-md mb-4">
+              <div className="flex items-center text-gray-800 justify-between bg-gray-200 p-3">
+                <p>Subtotal:</p>
+                <p>{new Intl.NumberFormat("en-US").format(totalPrice)}.00 kr</p>
+              </div>
+
+              <div className="flex items-center text-gray-800 justify-between border-b border-gray-950/10 bg-gray-200 p-3">
+                <p>Delivery:</p>
+                <p>0.00 kr</p>
+              </div>
+
+              <div className="flex items-center text-md font-bold text-gray-800 justify-between bg-gray-200 p-3">
+                <p className="">Total:</p>
+                <p>{new Intl.NumberFormat("en-US").format(totalPrice)}.00 kr</p>
+              </div>
+
+              <div className="p-3 flex flex-col gap-3">
+                <form action={checkOut}>
+                  <ChceckoutButton />
+                </form>
+
+                <div className="flex flex-wrap gap-2 justify-center p-2">
+                  {["ax.png", "mastercard.png", "visa.png"].map((src, i) => (
+                    <img
+                      key={i}
+                      src={`/payments/${src}`}
+                      alt={src}
+                      className="h-8 w-20 shadow-md object-cover"
+                    />
+                  ))}
                 </div>
               </div>
             </div>
-          ))}
-          <div className="mt-10 ">
-            <div className="flex items-center justify-between font-medium bg-[rgb(247,247,247)] p-2">
-              <p>Subtotal:</p>
-              <p>{new Intl.NumberFormat("en-US").format(totalPrice)} kr</p>
-            </div>
-
-            <form action={checkOut}>
-              <ChceckoutButton />
-            </form>
           </div>
         </div>
       )}

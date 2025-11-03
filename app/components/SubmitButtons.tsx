@@ -64,7 +64,7 @@ export function DeleteItem() {
         </button>
       ) : (
         <button type="submit" className="font-medium text-destructive text-end ">
-          Delete
+          X
         </button>
       )}
     </>
@@ -76,11 +76,11 @@ export function ChceckoutButton() {
   return (
     <>
       {pending ? (
-        <Button disabled size="lg" className="w-full mt-5">
-          <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Please Wait
+        <Button disabled size="lg" className="w-full mt-5 bg-gray-900 hover:bg-gray-800 text-white rounded-none">
+          <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Please Wait...
         </Button>
       ) : (
-        <Button variant="destructive" type="submit" size="lg" className="w-full mt-5">
+        <Button variant="destructive" type="submit" size="lg" className="w-full mt-5 bg-gray-900 hover:bg-gray-800 text-white rounded-none">
           Checkout
         </Button>
       )}
