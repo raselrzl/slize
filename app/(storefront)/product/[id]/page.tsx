@@ -48,7 +48,7 @@ export default async function ProductIdRoute({
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   const buttonClass =
-  "w-full mt-5 bg-black text-white rounded-none hover:bg-gray-800";
+    "w-full mt-5 bg-black text-white rounded-none hover:bg-gray-800";
 
   return (
     <>
@@ -65,25 +65,20 @@ export default async function ProductIdRoute({
           </p>
           <p className="text-sm text-gray-500 mt-6">Free delivery over 8 kr</p>
           {user ? (
-  // Logged in
-  <form action={addProducttoShoppingCart} className="w-full">
-    <ShoppingBagButton />
-  </form>
-) : (
-  // Not logged in
-  <div className="w-full">
-    <Button
-      asChild
-      size="lg"
-      className={buttonClass}
-    >
-      <LoginLink postLoginRedirectURL={`/product/${data.id}`}>
-        <ShoppingBag className="mr-4 h-5 w-5" /> Add to Bag
-      </LoginLink>
-    </Button>
-  </div>
-)}
-
+            // Logged in
+            <form action={addProducttoShoppingCart} className="w-full">
+              <ShoppingBagButton />
+            </form>
+          ) : (
+            // Not logged in
+            <div className="w-full">
+              <Button asChild size="lg" className={buttonClass}>
+                <LoginLink postLoginRedirectURL={`/product/${data.id}`}>
+                  <ShoppingBag className="mr-4 h-5 w-5" /> Add to Bag
+                </LoginLink>
+              </Button>
+            </div>
+          )}
 
           {/* <form action={addProducttoShoppingCart}>
             <ShoppingBagButton />
