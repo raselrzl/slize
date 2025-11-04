@@ -36,6 +36,21 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
+
+export interface Banner {
+  id: string;
+  title: string;
+  imageString: string;
+  createdAt: Date;
+}
+
+export interface BannerPageProps {
+  searchParams?: {
+    page?: string | string[];
+  };
+}
+
+
 async function getData(page: number, perPage: number) {
   const skip = (page - 1) * perPage;
   const [data, totalCount] = await Promise.all([
@@ -46,13 +61,18 @@ async function getData(page: number, perPage: number) {
     }),
     prisma.banner.count(),
   ]);
+
   return { data, totalCount };
 }
 
-export default async function BannerRoute({ searchParams }: { searchParams?: Record<string, string | string[]> }) {
+export default async function BannerRoute({ searchParams }: BannerPageProps) {
   noStore();
 
-  const currentPage = Number(searchParams?.page || "1");
+  const pageParam = Array.isArray(searchParams?.page)
+    ? searchParams.page[0]
+    : searchParams?.page;
+
+  const currentPage = Number(pageParam) || 1;
   const perPage = 10;
 
   const { data, totalCount } = await getData(currentPage, perPage);
@@ -61,15 +81,15 @@ export default async function BannerRoute({ searchParams }: { searchParams?: Rec
   return (
     <>
       <div className="flex items-center justify-end">
-        <Button asChild className="flex gap-x-2 rounded-none" variant={"destructive"}>
-          <Link href="/dashboard/banner/create" className="rounded-none bg-gray-500 hover:bg-gray-400">
+        <Button asChild className="flex gap-x-2 rounded-none" variant="destructive">
+          <Link href="/dashboard/banner/create" className="bg-gray-500 hover:bg-gray-400">
             <PlusCircle className="h-3.5 w-3.5" />
             <span>Add Banner</span>
           </Link>
         </Button>
       </div>
 
-      <Card className="mt-5 rounded-none">
+      <Card className="mt-5 rounded-none border border-gray-400">
         <CardHeader>
           <CardTitle>Banners ({totalCount})</CardTitle>
           <CardDescription>Manage your banners</CardDescription>
@@ -85,7 +105,7 @@ export default async function BannerRoute({ searchParams }: { searchParams?: Rec
             </TableHeader>
 
             <TableBody>
-              {data.map((item) => (
+              {data.map((item: Banner) => (
                 <TableRow key={item.id}>
                   <TableCell>
                     <Image
@@ -108,9 +128,7 @@ export default async function BannerRoute({ searchParams }: { searchParams?: Rec
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem asChild className="rounded-none">
-                          <Link href={`/dashboard/banner/${item.id}/delete`}>
-                            Delete
-                          </Link>
+                          <Link href={`/dashboard/banner/${item.id}/delete`}>Delete</Link>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -123,33 +141,28 @@ export default async function BannerRoute({ searchParams }: { searchParams?: Rec
           {/* Pagination */}
           {totalPages > 1 && (
             <div className="mt-6">
-              <Pagination className="rounded-none">
+              <Pagination>
                 <PaginationContent>
                   {currentPage > 1 && (
                     <PaginationItem>
-                      <PaginationPrevious
-                        href={`?page=${currentPage - 1}`}
-                        className="rounded-none"
-                      />
+                      <PaginationPrevious href={`?page=${currentPage - 1}`} />
                     </PaginationItem>
                   )}
+
                   {Array.from({ length: totalPages }).map((_, i) => (
                     <PaginationItem key={i}>
                       <PaginationLink
                         href={`?page=${i + 1}`}
                         isActive={currentPage === i + 1}
-                        className="rounded-none"
                       >
                         {i + 1}
                       </PaginationLink>
                     </PaginationItem>
                   ))}
+
                   {currentPage < totalPages && (
                     <PaginationItem>
-                      <PaginationNext
-                        href={`?page=${currentPage + 1}`}
-                        className="rounded-none"
-                      />
+                      <PaginationNext href={`?page=${currentPage + 1}`} />
                     </PaginationItem>
                   )}
                 </PaginationContent>
@@ -161,3 +174,4 @@ export default async function BannerRoute({ searchParams }: { searchParams?: Rec
     </>
   );
 }
+
