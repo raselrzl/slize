@@ -47,7 +47,7 @@ export function ShoppingBagButton() {
     >
       {pending ? (
         <>
-          <Loader2 className="mr-4 h-5 w-5 animate-spin" /> Please Wait
+          <Loader2 className="mr-4 h-5 w-5 animate-spin" /> Added to the Bag
         </>
       ) : (
         <>
