@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { HelpSidebar } from "./HelpSidebar";
+import { Footer } from "../components/storefront/Footer";
 
 interface HelpLayoutProps {
   children: ReactNode;
@@ -7,7 +8,7 @@ interface HelpLayoutProps {
 
 export default function HelpLayout({ children }: HelpLayoutProps) {
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-200 min-h-screen">
       {/* Wrapper for sidebar + content */}
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row">
         {/* Sidebar / mobile menu */}
@@ -19,8 +20,11 @@ export default function HelpLayout({ children }: HelpLayoutProps) {
         <main className="flex-1 p-4 md:p-6 mt-16 md:mt-0">
           {/* On mobile, add top margin equal to fixed mobile nav height */}
           {children}
+         
         </main>
+        
       </div>
+       <Footer />
     </div>
   );
 }
