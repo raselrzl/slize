@@ -23,7 +23,7 @@ export function ExclusiveProductBoys() {
         </div>
 
         {/* Left side image */}
-        <div className="relative w-full md:w-[600px] h-[300px] justify-end flex-shrink-0 overflow-hidden">
+        <div className="relative w-full md:w-[600px] h-[200px] md:h-[300px] justify-end flex-shrink-0 overflow-hidden">
           <Image
             src="/featuredproductallboys.jpg"
             alt="Exclusive Boys Product"

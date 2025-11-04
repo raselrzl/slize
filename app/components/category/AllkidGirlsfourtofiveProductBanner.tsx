@@ -22,7 +22,7 @@ export function AllkidGirlsfourtofiveProductBanner() {
           </p>
         </div>
          {/* Left side image */}
-        <div className="relative w-full md:w-[600px] h-[300px] justify-end flex-shrink-0 overflow-hidden">
+        <div className="relative w-full md:w-[600px] h-[200px] md:h-[300px] justify-end flex-shrink-0 overflow-hidden">
           <Image
             src="/kidgirlsfourtofive.png"
             alt="Exclusive Product"

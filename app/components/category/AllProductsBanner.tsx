@@ -34,9 +34,8 @@ export default function AllProductsBanner() {
 
   return (
     <div className="bg-gray-900 relative ">
-      <div className=" p-4 max-w-7xl mx-auto flex justify-center items-center rounded-lg relative overflow-hidden">
+    {/*   <div className=" p-4 max-w-7xl mx-auto flex justify-center items-center rounded-lg relative overflow-hidden">
         <div className="relative w-full">
-          {/* Left Arrow (only for mobile/tablet) */}
           {showLeft && (
             <button
               className="absolute left-0 top-1/2 transform -translate-y-1/2 shadow p-2 z-20 bg-white/80 hover:bg-white rounded-full md:hidden"
@@ -46,7 +45,6 @@ export default function AllProductsBanner() {
             </button>
           )}
 
-          {/* Responsive container */}
           <div
             ref={scrollRef}
             className="relative flex md:grid md:grid-cols-5 space-x-4 md:space-x-0 overflow-x-auto md:overflow-visible overflow-y-hidden px-4 scroll-smooth hide-scrollbar"
@@ -80,11 +78,7 @@ export default function AllProductsBanner() {
             ))}
           </div>
 
-          {/* Text Overlay */}
-     
-
-          {/* Right Arrow (only for mobile/tablet) */}
-          {showRight && (
+              {showRight && (
             <button
               className="absolute right-0 top-1/2 transform -translate-y-1/2 shadow p-2 z-20 bg-white/80 hover:bg-white rounded-full md:hidden"
               onClick={() => scroll("right")}
@@ -93,7 +87,7 @@ export default function AllProductsBanner() {
             </button>
           )}
         </div>
-      </div>
+      </div> */}
 
       <style jsx>{`
         /* Hide scrollbar for all browsers */
