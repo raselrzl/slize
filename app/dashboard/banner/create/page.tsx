@@ -21,7 +21,6 @@ import { ChevronLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useActionState, useState } from "react";
-import { useFormState } from "react-dom";
 
 export default function BannerRoute() {
   const [image, setImages] = useState<string | undefined>(undefined);
@@ -42,14 +41,14 @@ export default function BannerRoute() {
     <form id={form.id} onSubmit={form.onSubmit} action={action}>
       <div className="flex items-center gap-x-4">
         <Button variant="outline" size="icon" asChild>
-          <Link href="/dashboard/products">
+          <Link href="/dashboard/products" className="rounded-none px-8">
             <ChevronLeft className="w-4 h-4" />
           </Link>
         </Button>
         <h1 className="text-xl font-semibold tracking-tight">New Banner</h1>
       </div>
 
-      <Card className="mt-5">
+      <Card className="mt-5 rounded-none">
         <CardHeader>
           <CardTitle>Banner Details</CardTitle>
           <CardDescription>Create your banner right here</CardDescription>
@@ -64,6 +63,7 @@ export default function BannerRoute() {
                 defaultValue={fields.title.initialValue}
                 type="text"
                 placeholder="Create title for Banner"
+                className="rounded-none"
               />
               <p className="text-red-500">{fields.title.errors}</p>
             </div>
