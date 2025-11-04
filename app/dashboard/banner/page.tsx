@@ -36,25 +36,18 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { Skeleton } from "@/components/ui/skeleton"; // optional skeleton component
+import { Skeleton } from "@/components/ui/skeleton";
 
-// Banner interface
-export interface Banner {
+interface Banner {
   id: string;
   title: string;
   imageString: string;
   createdAt: Date;
 }
 
-// Page props interface
-interface BannerPageProps {
-  searchParams?: {
-    page?: string | string[];
-  };
-}
-
 async function getData(page: number, perPage: number) {
   const skip = (page - 1) * perPage;
+
   const [data, totalCount] = await Promise.all([
     prisma.banner.findMany({
       skip,
@@ -63,10 +56,11 @@ async function getData(page: number, perPage: number) {
     }),
     prisma.banner.count(),
   ]);
+
   return { data, totalCount };
 }
 
-export default async function BannerRoute({ searchParams }: BannerPageProps) {
+export default async function BannerRoute({ searchParams }: any) {
   noStore();
 
   const pageParam = Array.isArray(searchParams?.page)
@@ -107,7 +101,6 @@ export default async function BannerRoute({ searchParams }: BannerPageProps) {
                 <TableHead className="text-end">Actions</TableHead>
               </TableRow>
             </TableHeader>
-
             <TableBody>
               {data.length === 0
                 ? Array.from({ length: perPage }).map((_, i) => (
@@ -138,11 +131,7 @@ export default async function BannerRoute({ searchParams }: BannerPageProps) {
                       <TableCell className="text-end">
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button
-                              size="icon"
-                              variant="ghost"
-                              className="rounded-none"
-                            >
+                            <Button size="icon" variant="ghost" className="rounded-none">
                               <MoreHorizontal className="h-4 w-4" />
                             </Button>
                           </DropdownMenuTrigger>
