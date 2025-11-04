@@ -1,4 +1,6 @@
 import prisma from "@/app/lib/db";
+import Link from "next/link";
+import { unstable_noStore as noStore } from "next/cache";
 import {
   Card,
   CardContent,
@@ -14,73 +16,175 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { unstable_noStore as noStore } from "next/cache";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { MoreHorizontal, PenBoxIcon, XCircle } from "lucide-react";
+import { PaginationComponent } from "@/app/components/PaginationComponent";
 
-async function getData() {
-  const data = await prisma.order.findMany({
-    select: {
-      amount: true,
-      createdAt: true,
-      status: true,
-      id: true,
-      User: {
-        select: {
-          firstName: true,
-          email: true,
-          profileImage: true,
+type SearchParamsProps = {
+  searchParams: Promise<{ page?: string }>;
+};
+
+// 🔹 Pagination logic
+async function getPaginatedOrders(
+  page: number = 1,
+  pageSize: number = 10
+): Promise<{
+  orders: any[];
+  totalCount: number;
+  totalPages: number;
+}> {
+  const skip = (page - 1) * pageSize;
+
+  const [orders, totalCount] = await Promise.all([
+    prisma.order.findMany({
+      take: pageSize,
+      skip,
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        amount: true,
+        createdAt: true,
+        status: true,
+        User: {
+          select: {
+            firstName: true,
+            email: true,
+            profileImage: true,
+          },
         },
       },
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+    }),
+    prisma.order.count(),
+  ]);
 
-  return data;
+  return {
+    orders,
+    totalCount,
+    totalPages: Math.ceil(totalCount / pageSize),
+  };
 }
 
-export default async function OrdersPage() {
+export default async function OrdersPage({ searchParams }: SearchParamsProps) {
   noStore();
-  const data = await getData();
+
+  const params = await searchParams;
+  const currentPage = Number(params.page) || 1;
+
+  const { orders, totalCount, totalPages } = await getPaginatedOrders(
+    currentPage
+  );
+
   return (
-    <Card>
-      <CardHeader className="px-7">
-        <CardTitle>Orders</CardTitle>
-        <CardDescription>Recent orders from your store!</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Customer</TableHead>
-              <TableHead>Type</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {data.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>
-                  <p className="font-medium">{item.User?.firstName}</p>
-                  <p className="hidden md:flex text-sm text-muted-foreground">
-                    {item.User?.email}
-                  </p>
-                </TableCell>
-                <TableCell>Order</TableCell>
-                <TableCell>{item.status}</TableCell>
-                <TableCell>
-                  {new Intl.DateTimeFormat("en-US").format(item.createdAt)}
-                </TableCell>
-                <TableCell className="text-right">
-                  {new Intl.NumberFormat("en-US").format(item.amount / 100)} kr
-                </TableCell>
-              </TableRow>
-           ))}
-          </TableBody>
-        </Table>
-      </CardContent>
-    </Card>
+    <>
+      {/* ✅ Header identical to your AllNewsArticleList */}
+      <div className="flex items-center justify-between mb-8 bg-accent-foreground/5 p-2">
+        <h1 className="text-xl font-bold">Manage All Orders</h1>
+        <div className="text-sm bg-primary text-gray-800 px-3 py-1 rounded-md">
+          Total: {totalCount}
+        </div>
+      </div>
+
+      {orders.length > 0 ? (
+        <div className="flex flex-col gap-6">
+          <Card className="rounded-xs">
+            <CardContent className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Customer</TableHead>
+                    <TableHead>Type</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Date</TableHead>
+                    <TableHead className="text-right">Amount</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {orders.map((item) => (
+                    <TableRow key={item.id}>
+                      <TableCell>
+                        <div className="flex flex-col">
+                          <p className="font-medium">{item.User?.firstName}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {item.User?.email ?? "No Email"}
+                          </p>
+                        </div>
+                      </TableCell>
+                      <TableCell>Order</TableCell>
+                      <TableCell>{item.status}</TableCell>
+                      <TableCell>
+                        {new Date(item.createdAt).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        {new Intl.NumberFormat("en-US").format(
+                          item.amount / 100
+                        )}{" "}
+                        kr
+                      </TableCell>
+
+                      {/* ✅ Dropdown Actions identical style */}
+                      <TableCell className="text-right">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <MoreHorizontal className="w-4 h-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end" className="bg-gray-400 rounded-none">
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+
+                            <DropdownMenuItem asChild>
+                              <Link
+                                href={`/dashboard/orders/${item.id}/updatestatus`}
+                              >
+                                <PenBoxIcon className="w-4 h-4 mr-2" />
+                                Update Status
+                              </Link>
+                            </DropdownMenuItem>
+
+                            <DropdownMenuSeparator />
+
+                            <DropdownMenuItem asChild>
+                              <Link
+                                href={`/dashboard/orders/${item.id}/delete`}
+                              >
+                                <XCircle className="w-4 h-4 mr-2 text-red-600" />
+                                Delete
+                              </Link>
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+
+          {/* ✅ Same pagination layout */}
+          <PaginationComponent
+            totalPages={totalPages}
+            currentPage={currentPage}
+          />
+        </div>
+      ) : (
+        <div className="p-6 text-center text-muted-foreground">
+          No orders found.
+        </div>
+      )}
+    </>
   );
 }

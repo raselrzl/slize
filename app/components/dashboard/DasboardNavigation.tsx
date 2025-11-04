@@ -33,8 +33,8 @@ export function DashboardNavigation() {
           href={link.href}
           className={cn(
             link.href === pathname
-              ? "text-foreground"
-              : "text-muted-foreground hover:text-foreground"
+              ? "text-black text-sm bg-gray-400 px-2 py-1 rounded-xs shadow-xs"
+              : "text-sm hover:text-gray-400"
           )}
         >
           {link.name}
