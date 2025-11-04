@@ -36,14 +36,21 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { PageProps } from "next/types";
-import { Skeleton } from "@/components/ui/skeleton"; // assume you have a Skeleton component
+import { Skeleton } from "@/components/ui/skeleton"; // optional skeleton component
 
+// Banner interface
 export interface Banner {
   id: string;
   title: string;
   imageString: string;
   createdAt: Date;
+}
+
+// Page props interface
+interface BannerPageProps {
+  searchParams?: {
+    page?: string | string[];
+  };
 }
 
 async function getData(page: number, perPage: number) {
@@ -59,7 +66,7 @@ async function getData(page: number, perPage: number) {
   return { data, totalCount };
 }
 
-export default async function BannerRoute({ searchParams }: PageProps) {
+export default async function BannerRoute({ searchParams }: BannerPageProps) {
   noStore();
 
   const pageParam = Array.isArray(searchParams?.page)
@@ -74,7 +81,6 @@ export default async function BannerRoute({ searchParams }: PageProps) {
 
   return (
     <>
-      {/* Add Banner Button */}
       <div className="flex items-center justify-end">
         <Button asChild className="flex gap-x-2 rounded-none" variant="destructive">
           <Link
@@ -103,59 +109,62 @@ export default async function BannerRoute({ searchParams }: PageProps) {
             </TableHeader>
 
             <TableBody>
-              {data.length === 0 ? (
-                // Skeleton loading
-                Array.from({ length: perPage }).map((_, i) => (
-                  <TableRow key={i}>
-                    <TableCell>
-                      <Skeleton className="h-16 w-16" />
-                    </TableCell>
-                    <TableCell>
-                      <Skeleton className="h-6 w-32" />
-                    </TableCell>
-                    <TableCell className="text-end">
-                      <Skeleton className="h-6 w-10 ml-auto" />
-                    </TableCell>
-                  </TableRow>
-                ))
-              ) : (
-                data.map((item: Banner) => (
-                  <TableRow key={item.id}>
-                    <TableCell>
-                      <Image
-                        alt="Banner Image"
-                        src={item.imageString}
-                        width={64}
-                        height={64}
-                        className="object-contain h-16 w-16"
-                      />
-                    </TableCell>
-                    <TableCell className="font-medium">{item.title}</TableCell>
-                    <TableCell className="text-end">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button size="icon" variant="ghost" className="rounded-none">
-                            <MoreHorizontal className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="rounded-none bg-gray-300">
-                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem asChild className="rounded-none">
-                            <Link href={`/dashboard/banner/${item.id}/delete`}>
-                              Delete
-                            </Link>
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
-                ))
-              )}
+              {data.length === 0
+                ? Array.from({ length: perPage }).map((_, i) => (
+                    <TableRow key={i}>
+                      <TableCell>
+                        <Skeleton className="h-16 w-16" />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton className="h-6 w-32" />
+                      </TableCell>
+                      <TableCell className="text-end">
+                        <Skeleton className="h-6 w-10 ml-auto" />
+                      </TableCell>
+                    </TableRow>
+                  ))
+                : data.map((item: Banner) => (
+                    <TableRow key={item.id}>
+                      <TableCell>
+                        <Image
+                          alt="Banner Image"
+                          src={item.imageString}
+                          width={64}
+                          height={64}
+                          className="object-contain h-16 w-16"
+                        />
+                      </TableCell>
+                      <TableCell className="font-medium">{item.title}</TableCell>
+                      <TableCell className="text-end">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button
+                              size="icon"
+                              variant="ghost"
+                              className="rounded-none"
+                            >
+                              <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent
+                            align="end"
+                            className="rounded-none bg-gray-300"
+                          >
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem asChild className="rounded-none">
+                              <Link href={`/dashboard/banner/${item.id}/delete`}>
+                                Delete
+                              </Link>
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  ))}
             </TableBody>
           </Table>
 
-          {/* Pagination */}
           {totalPages > 1 && (
             <div className="mt-6">
               <Pagination>
@@ -165,7 +174,6 @@ export default async function BannerRoute({ searchParams }: PageProps) {
                       <PaginationPrevious href={`?page=${currentPage - 1}`} />
                     </PaginationItem>
                   )}
-
                   {Array.from({ length: totalPages }).map((_, i) => (
                     <PaginationItem key={i}>
                       <PaginationLink
@@ -176,7 +184,6 @@ export default async function BannerRoute({ searchParams }: PageProps) {
                       </PaginationLink>
                     </PaginationItem>
                   ))}
-
                   {currentPage < totalPages && (
                     <PaginationItem>
                       <PaginationNext href={`?page=${currentPage + 1}`} />
