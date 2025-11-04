@@ -51,7 +51,11 @@ export default function BagClient({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 px-2 gap-2">
       <div className="grid grid-cols-1 gap-y-1">
-        <p className="text-gray-900 text-2xl font-bold mb-4 ml-2">Your bag</p>
+        <p className="text-gray-900 text-2xl font-bold mb-4 ml-2">
+          Your bag contains {cart.items.length}{" "}
+          {cart.items.length === 1 ? "type of item" : "types of items"}
+        </p>
+
         {cart.items.map((item) => (
           <div key={item.id} className="flex border border-gray-950/10 p-4">
             <div className="w-20 h-24 relative">
@@ -65,23 +69,25 @@ export default function BagClient({
             <div className="ml-5 flex justify-between w-full font-medium text-gray-800">
               <div className="flex flex-col">
                 <p className="text-sm font-bold">{item.name}</p>
-                <p className="text-xs items-center justify-center">
-                  Total Price:
-                  <span className="text-lg font-bold px-2">
-                    {(item.price * item.quantity).toFixed(2)}kr
-                  </span>
-                  
-                  
+                <p className="text-xs">
+                  Unit Price: <span className="font-bold">{item.price}.00</span>{" "}
+                  kr
                 </p>
                 <span className="text-xs">
-                    ({item.quantity} item{item.quantity > 1 ? "s" : ""})
-                  </span>
-              </div>
-
-              <div className="flex flex-col h-full justify-between">
+                  ({item.quantity} item{item.quantity > 1 ? "s" : ""})
+                </span>
                 <div className="flex items-center gap-x-2">
                   <QuantitySelector item={item} />
                 </div>
+              </div>
+
+              <div className="flex flex-col h-full justify-between">
+                <p className="text-xs items-center justify-center">
+                  <span className="text-lg font-bold px-2">
+                    {(item.price * item.quantity).toFixed(2)}
+                  </span>
+                  kr
+                </p>
 
                 <form action={delItem} className="text-end mt-2">
                   <input type="hidden" name="productId" value={item.id} />
@@ -92,7 +98,7 @@ export default function BagClient({
           </div>
         ))}
         <p className="text-sm flex justify-center items-center py-4">
-          <Info className="pr-2"/>
+          <Info className="pr-2" />
           Items placed in this bag are not reserved.
         </p>
       </div>

@@ -31,7 +31,7 @@ export function QuantitySelector({ item }: QuantitySelectorProps) {
   }
 
   return (
-    <div className="flex items-center gap-x-2">
+    <div className="flex items-center gap-x-2 mt-3">
       <select
         name="quantity"
         value={quantity} // controlled input
