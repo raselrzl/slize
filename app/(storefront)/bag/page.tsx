@@ -294,6 +294,8 @@ import { redirect } from "next/navigation";
 import BagClient from "./BagClient";
 import { FeaturedProducts } from "@/app/components/girlsfeatured/FeaturedProducts";
 import { FileQuestion } from "lucide-react";
+import { BoysFeaturedProducts } from "@/app/components/boysfeatured/BoysFeaturedProducts";
+import { NewBornFeaturedProducts } from "@/app/components/newborn/NewBornFeaturedProducts";
 
 export default async function BagRoute() {
   noStore();
@@ -329,7 +331,10 @@ export default async function BagRoute() {
         </h1>
         <FileQuestion className="w-10 h-10 text-yellow-500" />
       </div>
+      
+      <BoysFeaturedProducts />
       <FeaturedProducts />
+      <NewBornFeaturedProducts />
     </div>
   );
 }
