@@ -19,7 +19,7 @@ export function HelpSidebar({ className }: HelpSidebarProps) {
     <>
       {/* Mobile top fixed nav */}
       <div className="md:hidden fixed top-0 left-0 right-0 flex justify-between items-center p-2 border-b border-gray-200 bg-white z-50">
-        <span className="font-semibold text-lg">Help Menu</span>
+        <span className="font-semibold text-lg">Help</span>
         <button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>

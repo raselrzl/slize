@@ -10,7 +10,7 @@ export interface LinkItem {
 
 export const HelpSidebarLinks: LinkItem[] = [
   // Help & Contact
-  { id: 0, name: "Help & Contact", href: "/help-contact" },
+  { id: 0, name: "Contact", href: "/help-contact" },
   { id: 1, name: "Frequently asked questions", href: "/faq" },
   { id: 2, name: "Delivery time", href: "/delivery-time" },
   { id: 3, name: "Payment & security", href: "/payment-security" },
