@@ -30,13 +30,13 @@ export default async function DashboardLayout({
   }
   return (
     <div className="flex w-full flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
-      <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-white rounded-lg">
+      <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border border-gray-400 bg-gray-700 text-white">
         <nav className="hidden font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 ml-6">
           <DashboardNavigation />
         </nav>
 
         <Sheet>
-          <SheetTrigger asChild>
+          <SheetTrigger asChild className="border-none">
             <Button
               className="shrink-0 md:hidden"
               variant="outline"
@@ -45,7 +45,7 @@ export default async function DashboardLayout({
               <MenuIcon className="h-5 w-5" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="bg-black w-[200px] h-[400px]">
+          <SheetContent side="left" className="bg-black w-[200px] h-[400px] text-white">
             <nav className="flex flex-col gap-6 text-lg font-medium mt-5">
               <DashboardNavigation />
             </nav>
@@ -58,12 +58,12 @@ export default async function DashboardLayout({
               <CircleUser className="w-5 h-5" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className="bg-gray-200 border-gray-400 rounded-none">
             <DropdownMenuLabel>{user.given_name}</DropdownMenuLabel>
             <DropdownMenuLabel className="text-xs text-gray-600">{user.email}</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <LogoutLink>Logout</LogoutLink>
+            <DropdownMenuItem asChild className="text-gray-800 border-t rounded-none border-gray-400">
+              <LogoutLink >Logout</LogoutLink>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -27,13 +27,13 @@ async function getData() {
 export async function RecentSales() {
   const data = await getData();
   return (
-    <Card>
+    <Card className="border border-gray-400 rounded-none">
       <CardHeader>
         <CardTitle>Recent sales</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-8">
         {data.map((item) => (
-          <div className="flex items-center gap-4" key={item.id}>
+          <div className="flex items-center gap-4 border-b pb-2 border-gray-400 rounded-none" key={item.id}>
             <Avatar className="hidden sm:flex h-9 w-9">
               <AvatarImage src={item.User?.profileImage} alt="Avatar Image" />
               <AvatarFallback>
