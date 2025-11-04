@@ -48,7 +48,7 @@ export async function Navbar() {
               <Link href="/bag" className="group p-2 flex items-center mr-2">
                 <div className="relative">
                   <ShoppingBagIcon className="text-gray-800 h-7 w-7 mr-2 hover:text-gray-500" />
-                  <span className="absolute top-0 right-0 text-xs font-bold text-gray-100 group-hover:text-gray-800 transform translate-x-1/2 -translate-y-1/2 bg-gray-800 p-2 rounded-full w-5 h-5 flex items-center justify-center">
+                  <span className="absolute top-0 right-0 text-xs font-bold text-gray-300 group-hover:text-gray-200 transform translate-x-1/2 -translate-y-1/2 bg-gray-800 p-2 rounded-full w-5 h-5 flex items-center justify-center">
                     {total}
                   </span>
                 </div>
