@@ -292,6 +292,8 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { unstable_noStore as noStore } from "next/cache";
 import { redirect } from "next/navigation";
 import BagClient from "./BagClient";
+import { FeaturedProducts } from "@/app/components/girlsfeatured/FeaturedProducts";
+import { FileQuestion } from "lucide-react";
 
 export default async function BagRoute() {
   noStore();
@@ -320,6 +322,14 @@ export default async function BagRoute() {
         deliveryFee={deliveryFee}
         finalTotal={finalTotal}
       />
+       <div className="flex justify-between items-center my-6 pb-8">
+        <h1 className="font-bold text-2xl text-gray-800 mt-4 leading-tight">
+          Don’t Miss Out <br />
+          Boys, Girls and Babies
+        </h1>
+        <FileQuestion className="w-10 h-10 text-yellow-500" />
+      </div>
+      <FeaturedProducts />
     </div>
   );
 }
