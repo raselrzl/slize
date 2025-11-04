@@ -69,7 +69,7 @@ export function HeroOneClient({ data }: { data: Banner[] }) {
           Don’t Miss Out <br />
           Boys, Girls and Babies
         </h1>
-        <FileQuestion className="w-6 h-6 text-gray-800" />
+        <FileQuestion className="w-10 h-10 text-yellow-500" />
       </div>
 
       {/* Scrollable row */}
