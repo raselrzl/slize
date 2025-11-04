@@ -1,3 +1,4 @@
+// app/dashboard/banner/page.tsx
 import prisma from "@/app/lib/db";
 import { Button } from "@/components/ui/button";
 import {
@@ -35,7 +36,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-
+import { PageProps } from "next/types";
+import { Skeleton } from "@/components/ui/skeleton"; // assume you have a Skeleton component
 
 export interface Banner {
   id: string;
@@ -43,13 +45,6 @@ export interface Banner {
   imageString: string;
   createdAt: Date;
 }
-
-export interface BannerPageProps {
-  searchParams?: {
-    page?: string | string[];
-  };
-}
-
 
 async function getData(page: number, perPage: number) {
   const skip = (page - 1) * perPage;
@@ -61,11 +56,10 @@ async function getData(page: number, perPage: number) {
     }),
     prisma.banner.count(),
   ]);
-
   return { data, totalCount };
 }
 
-export default async function BannerRoute({ searchParams }: BannerPageProps) {
+export default async function BannerRoute({ searchParams }: PageProps) {
   noStore();
 
   const pageParam = Array.isArray(searchParams?.page)
@@ -80,16 +74,20 @@ export default async function BannerRoute({ searchParams }: BannerPageProps) {
 
   return (
     <>
+      {/* Add Banner Button */}
       <div className="flex items-center justify-end">
         <Button asChild className="flex gap-x-2 rounded-none" variant="destructive">
-          <Link href="/dashboard/banner/create" className="bg-gray-500 hover:bg-gray-400">
+          <Link
+            href="/dashboard/banner/create"
+            className="bg-gray-500 hover:bg-gray-400"
+          >
             <PlusCircle className="h-3.5 w-3.5" />
             <span>Add Banner</span>
           </Link>
         </Button>
       </div>
 
-      <Card className="mt-5 rounded-none border border-gray-400">
+      <Card className="mt-5 border border-gray-400 rounded-none">
         <CardHeader>
           <CardTitle>Banners ({totalCount})</CardTitle>
           <CardDescription>Manage your banners</CardDescription>
@@ -105,36 +103,55 @@ export default async function BannerRoute({ searchParams }: BannerPageProps) {
             </TableHeader>
 
             <TableBody>
-              {data.map((item: Banner) => (
-                <TableRow key={item.id}>
-                  <TableCell>
-                    <Image
-                      alt="Banner Image"
-                      src={item.imageString}
-                      width={64}
-                      height={64}
-                      className="object-contain h-16 w-16"
-                    />
-                  </TableCell>
-                  <TableCell className="font-medium">{item.title}</TableCell>
-                  <TableCell className="text-end">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button size="icon" variant="ghost" className="rounded-none">
-                          <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="rounded-none bg-gray-300">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem asChild className="rounded-none">
-                          <Link href={`/dashboard/banner/${item.id}/delete`}>Delete</Link>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {data.length === 0 ? (
+                // Skeleton loading
+                Array.from({ length: perPage }).map((_, i) => (
+                  <TableRow key={i}>
+                    <TableCell>
+                      <Skeleton className="h-16 w-16" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton className="h-6 w-32" />
+                    </TableCell>
+                    <TableCell className="text-end">
+                      <Skeleton className="h-6 w-10 ml-auto" />
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                data.map((item: Banner) => (
+                  <TableRow key={item.id}>
+                    <TableCell>
+                      <Image
+                        alt="Banner Image"
+                        src={item.imageString}
+                        width={64}
+                        height={64}
+                        className="object-contain h-16 w-16"
+                      />
+                    </TableCell>
+                    <TableCell className="font-medium">{item.title}</TableCell>
+                    <TableCell className="text-end">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button size="icon" variant="ghost" className="rounded-none">
+                            <MoreHorizontal className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" className="rounded-none bg-gray-300">
+                          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem asChild className="rounded-none">
+                            <Link href={`/dashboard/banner/${item.id}/delete`}>
+                              Delete
+                            </Link>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </Table>
 
@@ -174,4 +191,3 @@ export default async function BannerRoute({ searchParams }: BannerPageProps) {
     </>
   );
 }
-
