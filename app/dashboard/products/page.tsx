@@ -1,6 +1,6 @@
+// app/dashboard/products/page.tsx
 import prisma from "@/app/lib/db";
 import { Button } from "@/components/ui/button";
-
 import {
   Card,
   CardContent,
@@ -37,8 +37,29 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
+// Product type based on your Prisma schema
+export interface Product {
+  id: string;
+  name: string;
+  description: string;
+  status: "draft" | "published" | "archived";
+  price: number;
+  images: string[];
+  category: string;
+  isFeatured: boolean;
+  createdAt: Date;
+}
+
+// Props type for page
+interface ProductsPageProps {
+  searchParams?: {
+    page?: string | string[];
+  };
+}
+
 async function getData(page: number, perPage: number) {
   const skip = (page - 1) * perPage;
+
   const [data, totalCount] = await Promise.all([
     prisma.product.findMany({
       skip,
@@ -51,14 +72,14 @@ async function getData(page: number, perPage: number) {
   return { data, totalCount };
 }
 
-export default async function ProductsRoute({
-  searchParams,
-}: {
-  searchParams?: { page?: string };
-}) {
+export default async function ProductsRoute({ searchParams }: ProductsPageProps) {
   noStore();
 
-  const currentPage = Number(searchParams?.page) || 1;
+  const pageParam = Array.isArray(searchParams?.page)
+    ? searchParams.page[0]
+    : searchParams?.page;
+
+  const currentPage = Number(pageParam) || 1;
   const perPage = 10;
 
   const { data, totalCount } = await getData(currentPage, perPage);
@@ -67,11 +88,7 @@ export default async function ProductsRoute({
   return (
     <>
       <div className="flex items-center justify-end">
-        <Button
-          asChild
-          className="flex items-center gap-x-2"
-          variant={"destructive"}
-        >
+        <Button asChild className="flex items-center gap-x-2 rounded-none" variant="destructive">
           <Link
             href="/dashboard/products/create"
             className="bg-gray-500 hover:bg-gray-400 rounded-none"
@@ -82,12 +99,10 @@ export default async function ProductsRoute({
         </Button>
       </div>
 
-      <Card className="mt-5 rounded-none">
+      <Card className="mt-5 rounded-none border border-gray-400">
         <CardHeader>
           <CardTitle>Products ({totalCount})</CardTitle>
-          <CardDescription>
-            Manage products and view their sales performance
-          </CardDescription>
+          <CardDescription>Manage products and view their sales performance</CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
@@ -102,7 +117,7 @@ export default async function ProductsRoute({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.map((item) => (
+              {data.map((item: Product) => (
                 <TableRow key={item.id}>
                   <TableCell>
                     <Image
@@ -110,7 +125,7 @@ export default async function ProductsRoute({
                       src={item.images[0]}
                       height={64}
                       width={64}
-                      className="rounded-md object-contain h-16 w-16"
+                      className="object-contain h-16 w-16"
                     />
                   </TableCell>
                   <TableCell>{item.name}</TableCell>
@@ -122,22 +137,18 @@ export default async function ProductsRoute({
                   <TableCell className="text-end">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button size="icon" variant="ghost">
+                        <Button size="icon" variant="ghost" className="rounded-none">
                           <MoreHorizontal className="h-4 w-4" />
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end" className="rounded-none bg-gray-300">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem asChild>
-                          <Link href={`/dashboard/products/${item.id}`}>
-                            Edit
-                          </Link>
+                        <DropdownMenuItem asChild className="rounded-none">
+                          <Link href={`/dashboard/products/${item.id}`}>Edit</Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                          <Link href={`/dashboard/products/${item.id}/delete`}>
-                            Delete
-                          </Link>
+                        <DropdownMenuItem asChild className="rounded-none">
+                          <Link href={`/dashboard/products/${item.id}/delete`}>Delete</Link>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
@@ -147,16 +158,13 @@ export default async function ProductsRoute({
             </TableBody>
           </Table>
 
-          {/* Pagination */}
           {totalPages > 1 && (
             <div className="mt-6">
               <Pagination>
                 <PaginationContent>
                   {currentPage > 1 && (
                     <PaginationItem>
-                      <PaginationPrevious
-                        href={`?page=${currentPage - 1}`}
-                      />
+                      <PaginationPrevious href={`?page=${currentPage - 1}`} />
                     </PaginationItem>
                   )}
 
