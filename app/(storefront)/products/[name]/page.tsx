@@ -12,16 +12,17 @@ async function getData(productCategory: string) {
       const data = await prisma.product.findMany({
         select: {
           id: true,
-  name: true,
-  images: true,
-  price: true,
-  description: true,
-  category: true,
-  createdAt: true, 
+          name: true,
+          images: true,
+          price: true,
+          description: true,
+          category: true,
+          createdAt: true,
         },
         where: {
           status: "published",
         },
+        orderBy: { createdAt: "desc" },
       });
 
       return {
@@ -33,9 +34,9 @@ async function getData(productCategory: string) {
       const data = await prisma.product.findMany({
         where: {
           status: "published",
-           category: {
-        in: ["kidboysfourtofive", "toddlerboys"],
-      },
+          category: {
+            in: ["kidboysfourtofive", "toddlerboys"],
+          },
         },
         select: {
           name: true,
@@ -44,6 +45,7 @@ async function getData(productCategory: string) {
           id: true,
           description: true,
         },
+        orderBy: { createdAt: "desc" },
       });
 
       return {
@@ -55,9 +57,9 @@ async function getData(productCategory: string) {
       const data = await prisma.product.findMany({
         where: {
           status: "published",
-           category: {
-        in: ["kidgirlsfourtofive", "toddlergirls"],
-      },
+          category: {
+            in: ["kidgirlsfourtofive", "toddlergirls"],
+          },
         },
         select: {
           name: true,
@@ -66,6 +68,7 @@ async function getData(productCategory: string) {
           id: true,
           description: true,
         },
+        orderBy: { createdAt: "desc" },
       });
 
       return {
@@ -86,6 +89,7 @@ async function getData(productCategory: string) {
           id: true,
           description: true,
         },
+        orderBy: { createdAt: "desc" },
       });
 
       return {
@@ -107,6 +111,7 @@ async function getData(productCategory: string) {
           id: true,
           description: true,
         },
+        orderBy: { createdAt: "desc" },
       });
 
       return {
@@ -128,12 +133,14 @@ async function getData(productCategory: string) {
           id: true,
           description: true,
         },
+        orderBy: { createdAt: "desc" },
       });
 
       return {
         title: "Products for toddlergirls",
         data: data,
       };
+      
     }
 
     case "toddlerboys": {
@@ -149,6 +156,7 @@ async function getData(productCategory: string) {
           id: true,
           description: true,
         },
+        orderBy: { createdAt: "desc" },
       });
 
       return {
@@ -170,6 +178,7 @@ async function getData(productCategory: string) {
           id: true,
           description: true,
         },
+        orderBy: { createdAt: "desc" },
       });
 
       return {
@@ -191,6 +200,7 @@ async function getData(productCategory: string) {
           id: true,
           description: true,
         },
+        orderBy: { createdAt: "desc" },
       });
 
       return {
@@ -204,9 +214,9 @@ async function getData(productCategory: string) {
         where: {
           status: "published",
           isFeatured: true,
-             category: {
-        in: ["kidgirlsfourtofive", "toddlergirls"], 
-      },
+          category: {
+            in: ["kidgirlsfourtofive", "toddlergirls"],
+          },
         },
         select: {
           name: true,
@@ -215,6 +225,7 @@ async function getData(productCategory: string) {
           id: true,
           description: true,
         },
+        orderBy: { createdAt: "desc" },
       });
 
       return {
@@ -223,12 +234,12 @@ async function getData(productCategory: string) {
       };
     }
 
-     case "exclusivebaby": {
+    case "exclusivebaby": {
       const data = await prisma.product.findMany({
         where: {
           status: "published",
           isFeatured: true,
-          category: "baby"
+          category: "baby",
         },
         select: {
           name: true,
@@ -237,6 +248,7 @@ async function getData(productCategory: string) {
           id: true,
           description: true,
         },
+        orderBy: { createdAt: "desc" },
       });
 
       return {
@@ -245,14 +257,14 @@ async function getData(productCategory: string) {
       };
     }
 
-      case "exclusiveboys": {
+    case "exclusiveboys": {
       const data = await prisma.product.findMany({
         where: {
           status: "published",
           isFeatured: true,
           category: {
-        in: ["kidboysfourtofive", "toddlerboys"],
-      },
+            in: ["kidboysfourtofive", "toddlerboys"],
+          },
         },
         select: {
           name: true,
@@ -261,6 +273,7 @@ async function getData(productCategory: string) {
           id: true,
           description: true,
         },
+        orderBy: { createdAt: "desc" },
       });
 
       return {
@@ -268,7 +281,6 @@ async function getData(productCategory: string) {
         data: data,
       };
     }
-    
 
     default: {
       return notFound();
@@ -287,14 +299,14 @@ export default async function CategoriesPage({
   console.log("params name", params.name);
 
   const bgColor =
-      params.name === "exclusivegirls"
-    ? "bg-[#8e6b48]"
-    : params.name === "exclusivebaby"
-    ? "bg-teal-50"
-    : "bg-white";
+    params.name === "exclusivegirls"
+      ? "bg-[#8e6b48]"
+      : params.name === "exclusivebaby"
+      ? "bg-teal-50"
+      : "bg-white";
 
   return (
-   <section>
+    <section>
       <CategoryRenderer category={params.name} />
       <div className={bgColor}>
         {params.name === "all" ? (

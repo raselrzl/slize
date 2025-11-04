@@ -7,6 +7,7 @@ import { Info, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { QuantitySelector } from "./QuantitySelector";
 
 interface BagClientProps {
   cart: Cart | null;
@@ -79,21 +80,7 @@ export default function BagClient({
 
               <div className="flex flex-col h-full justify-between">
                 <div className="flex items-center gap-x-2">
-                  <form
-                    action={updateItemQuantity}
-                    className="flex items-center gap-x-2"
-                  >
-                    <input type="hidden" name="productId" value={item.id} />
-                    <input
-                      type="number"
-                      name="quantity"
-                      min="1"
-                      defaultValue={item.quantity}
-                      onChange={(e) => e.currentTarget.form?.requestSubmit()}
-                      className="w-16 border border-gray-300 text-center text-sm"
-                    />
-                    <p className="text-sm"> x {item.price}.00 kr</p>
-                  </form>
+                  <QuantitySelector item={item} />
                 </div>
 
                 <form action={delItem} className="text-end mt-2">
@@ -105,7 +92,7 @@ export default function BagClient({
           </div>
         ))}
         <p className="text-sm flex justify-center items-center py-4">
-          <Info />
+          <Info className="pr-2"/>
           Items placed in this bag are not reserved.
         </p>
       </div>
