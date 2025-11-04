@@ -24,7 +24,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { ChevronLeft, XIcon } from "lucide-react";
 import Link from "next/link";
-import { useForm } from "@conform-to/react"; 
+import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { productSchema } from "@/app/lib/zodSchemas";
 import { useActionState, useState } from "react";
@@ -34,7 +34,7 @@ import { SubmitButton } from "@/app/components/SubmitButtons";
 import { categories } from "@/app/lib/categories";
 
 export default function ProductCreateRoute() {
- const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<string[]>([]);
   const [lastResult, action] = useActionState(createProduct, undefined);
   const [form, fields] = useForm({
     lastResult,
@@ -55,22 +55,20 @@ export default function ProductCreateRoute() {
     <form id={form.id} onSubmit={form.onSubmit} action={action}>
       <div className="flex items-center gap-4">
         <Button variant="outline" size="icon" asChild>
-          <Link href="/dashboard/products">
+          <Link href="/dashboard/products" className="rounded-none px-8">
             <ChevronLeft className="w-4 h-4" />
           </Link>
         </Button>
         <h1 className="text-xl font-semibold tracking-tight">New Product</h1>
       </div>
 
-      <Card className="mt-5">
-        <CardHeader>
+      <Card className="mt-5 rounded-none">
+        <CardHeader className="mb-4">
           <CardTitle>Product Details</CardTitle>
-          <CardDescription>
-           Create Product
-          </CardDescription>
+          <CardDescription>Create Product</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-col gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2  gap-6">
             <div className="flex flex-col gap-3">
               <Label>Name</Label>
               <Input
@@ -78,23 +76,13 @@ export default function ProductCreateRoute() {
                 key={fields.name.key}
                 name={fields.name.name}
                 defaultValue={fields.name.initialValue}
-                className="w-full"
+                className="w-full rounded-none"
                 placeholder="Product Name"
               />
 
               <p className="text-red-500">{fields.name.errors}</p>
             </div>
 
-            <div className="flex flex-col gap-3">
-              <Label>Description</Label>
-              <Textarea
-                key={fields.description.key}
-                name={fields.description.name}
-                defaultValue={fields.description.initialValue}
-                placeholder="Write your description right here..."
-              />
-              <p className="text-red-500">{fields.description.errors}</p>
-            </div>
             <div className="flex flex-col gap-3">
               <Label>Price</Label>
               <Input
@@ -103,19 +91,12 @@ export default function ProductCreateRoute() {
                 defaultValue={fields.price.initialValue}
                 type="number"
                 placeholder="55 kr"
+                className="w-full rounded-none"
               />
               <p className="text-red-500">{fields.price.errors}</p>
             </div>
 
-            <div className="flex flex-col gap-3">
-              <Label>Featured Product</Label>
-              <Switch
-                key={fields.isFeatured.key}
-                name={fields.isFeatured.name}
-                defaultValue={fields.isFeatured.initialValue}
-              />
-              <p className="text-red-500">{fields.isFeatured.errors}</p>
-            </div>
+         
 
             <div className="flex flex-col gap-3">
               <Label>Status</Label>
@@ -124,10 +105,10 @@ export default function ProductCreateRoute() {
                 name={fields.status.name}
                 defaultValue={fields.status.initialValue}
               >
-                <SelectTrigger>
+                <SelectTrigger className="w-full rounded-none">
                   <SelectValue placeholder="Select Status" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="w-full rounded-none bg-gray-200">
                   <SelectItem value="draft">Draft</SelectItem>
                   <SelectItem value="published">Published</SelectItem>
                   <SelectItem value="archived">Archived</SelectItem>
@@ -143,10 +124,10 @@ export default function ProductCreateRoute() {
                 name={fields.category.name}
                 defaultValue={fields.category.initialValue}
               >
-                <SelectTrigger>
+                <SelectTrigger className="w-full rounded-none">
                   <SelectValue placeholder="Select Category" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="w-full rounded-none bg-gray-300">
                   {categories.map((category) => (
                     <SelectItem key={category.id} value={category.name}>
                       {category.title}
@@ -155,6 +136,27 @@ export default function ProductCreateRoute() {
                 </SelectContent>
               </Select>
               <p className="text-red-500">{fields.category.errors}</p>
+            </div>
+              <div className="flex flex-col gap-3">
+              <Label>Description</Label>
+              <Textarea
+                className="rounded-none"
+                key={fields.description.key}
+                name={fields.description.name}
+                defaultValue={fields.description.initialValue}
+                placeholder="Write your description right here..."
+              />
+              <p className="text-red-500">{fields.description.errors}</p>
+            </div>
+               <div className="flex flex-col gap-3">
+              <Label>Featured Product</Label>
+              <Switch
+                className="bg-gray-300 data-[state=checked]:bg-black"
+                key={fields.isFeatured.key}
+                name={fields.isFeatured.name}
+                defaultValue={fields.isFeatured.initialValue}
+              />
+              <p className="text-red-500">{fields.isFeatured.errors}</p>
             </div>
 
             <div className="flex flex-col gap-3">
@@ -203,6 +205,7 @@ export default function ProductCreateRoute() {
 
               <p className="text-red-500">{fields.images.errors}</p>
             </div>
+            
           </div>
         </CardContent>
         <CardFooter>
