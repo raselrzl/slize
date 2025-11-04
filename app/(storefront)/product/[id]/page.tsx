@@ -54,7 +54,7 @@ export default async function ProductIdRoute({
     <>
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start lg:gap-x-24 py-6">
         <ImageSlider images={data.images} />
-        <div>
+        <div className="px-4">
           <h1 className="text-2xl font-bold tracking-tight border-b border-gray-700 uppercase inline-block">
             {data.name}
           </h1>
