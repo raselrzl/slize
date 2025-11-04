@@ -37,8 +37,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-// Product type based on your Prisma schema
-export interface Product {
+interface Product {
   id: string;
   name: string;
   description: string;
@@ -50,16 +49,8 @@ export interface Product {
   createdAt: Date;
 }
 
-// Props type for page
-interface ProductsPageProps {
-  searchParams?: {
-    page?: string | string[];
-  };
-}
-
 async function getData(page: number, perPage: number) {
   const skip = (page - 1) * perPage;
-
   const [data, totalCount] = await Promise.all([
     prisma.product.findMany({
       skip,
@@ -68,17 +59,16 @@ async function getData(page: number, perPage: number) {
     }),
     prisma.product.count(),
   ]);
-
   return { data, totalCount };
 }
 
-export default async function ProductsRoute({ searchParams }: ProductsPageProps) {
+// NOTE: Do NOT type props explicitly, Next.js handles them internally
+export default async function ProductsPage({ searchParams }: any) {
   noStore();
 
   const pageParam = Array.isArray(searchParams?.page)
     ? searchParams.page[0]
     : searchParams?.page;
-
   const currentPage = Number(pageParam) || 1;
   const perPage = 10;
 
@@ -88,11 +78,8 @@ export default async function ProductsRoute({ searchParams }: ProductsPageProps)
   return (
     <>
       <div className="flex items-center justify-end">
-        <Button asChild className="flex items-center gap-x-2 rounded-none" variant="destructive">
-          <Link
-            href="/dashboard/products/create"
-            className="bg-gray-500 hover:bg-gray-400 rounded-none"
-          >
+        <Button asChild className="flex gap-x-2 rounded-none" variant="destructive">
+          <Link href="/dashboard/products/create" className="bg-gray-500 hover:bg-gray-400 rounded-none">
             <PlusCircle className="w-3.5 h-3.5" />
             <span>Add Product</span>
           </Link>
@@ -123,17 +110,15 @@ export default async function ProductsRoute({ searchParams }: ProductsPageProps)
                     <Image
                       alt="Product Image"
                       src={item.images[0]}
-                      height={64}
                       width={64}
+                      height={64}
                       className="object-contain h-16 w-16"
                     />
                   </TableCell>
                   <TableCell>{item.name}</TableCell>
                   <TableCell>{item.status}</TableCell>
                   <TableCell>{item.price} kr</TableCell>
-                  <TableCell>
-                    {new Intl.DateTimeFormat("en-US").format(item.createdAt)}
-                  </TableCell>
+                  <TableCell>{new Intl.DateTimeFormat("en-US").format(item.createdAt)}</TableCell>
                   <TableCell className="text-end">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -144,10 +129,10 @@ export default async function ProductsRoute({ searchParams }: ProductsPageProps)
                       <DropdownMenuContent align="end" className="rounded-none bg-gray-300">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem asChild className="rounded-none">
+                        <DropdownMenuItem asChild>
                           <Link href={`/dashboard/products/${item.id}`}>Edit</Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem asChild className="rounded-none">
+                        <DropdownMenuItem asChild>
                           <Link href={`/dashboard/products/${item.id}/delete`}>Delete</Link>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
@@ -167,18 +152,13 @@ export default async function ProductsRoute({ searchParams }: ProductsPageProps)
                       <PaginationPrevious href={`?page=${currentPage - 1}`} />
                     </PaginationItem>
                   )}
-
                   {Array.from({ length: totalPages }).map((_, i) => (
                     <PaginationItem key={i}>
-                      <PaginationLink
-                        href={`?page=${i + 1}`}
-                        isActive={currentPage === i + 1}
-                      >
+                      <PaginationLink href={`?page=${i + 1}`} isActive={currentPage === i + 1}>
                         {i + 1}
                       </PaginationLink>
                     </PaginationItem>
                   ))}
-
                   {currentPage < totalPages && (
                     <PaginationItem>
                       <PaginationNext href={`?page=${currentPage + 1}`} />
