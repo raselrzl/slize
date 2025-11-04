@@ -10,10 +10,12 @@ import {
   RegisterLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 
-import { ShoppingBag, StarIcon } from "lucide-react";
+import { FileQuestion, RouterIcon, ShoppingBag, StarIcon, Undo2 } from "lucide-react";
 import { notFound } from "next/navigation";
 import { unstable_noStore as noStore } from "next/cache";
 import { Button } from "@/components/ui/button";
+import { BoysFeaturedProducts } from "@/app/components/boysfeatured/BoysFeaturedProducts";
+import { NewBornFeaturedProducts } from "@/app/components/newborn/NewBornFeaturedProducts";
 
 async function getData(productId: string) {
   const data = await prisma.product.findUnique({
@@ -80,14 +82,26 @@ export default async function ProductIdRoute({
             </div>
           )}
 
+          <p className="mt-8 text-center bg-gray-200 py-2 flex items-center justify-center gap-4 text-xs font-bold"> <Undo2 />30s day return policy</p>
+
           {/* <form action={addProducttoShoppingCart}>
             <ShoppingBagButton />
           </form> */}
         </div>
       </div>
 
-      <div className="mt-16">
-        <FeaturedProducts />
+      <div className="mt-16 max-w-7xl mx-auto">
+        <div className="flex justify-between items-center my-6 pb-8">
+        <h1 className="font-bold text-2xl text-gray-800 mt-4 leading-tight">
+          Don’t Miss Out <br />
+          Boys, Girls and Babies
+        </h1>
+        <FileQuestion className="w-10 h-10 text-yellow-500" />
+      </div>
+      
+      <BoysFeaturedProducts />
+      <FeaturedProducts />
+      <NewBornFeaturedProducts />
       </div>
     </>
   );
