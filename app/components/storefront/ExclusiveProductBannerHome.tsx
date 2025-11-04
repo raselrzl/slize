@@ -6,7 +6,7 @@ export function ExclusiveProductBannerHome() {
   return (
     <section className=" mt-16 text-white py-8 px-4 md:px-8 max-w-7xl mx-auto">
       <Link
-        href="/products/exclusive"
+        href="/products/exclusivegirls" 
         className="flex flex-col md:flex-row items-center md:items-stretch gap-6"
       >
         {/* Right side text section */}
