@@ -24,37 +24,67 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MoreHorizontal, PlusCircle, UserIcon } from "lucide-react";
+import { MoreHorizontal, PlusCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { unstable_noStore as noStore } from "next/cache";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
-async function getData() {
-  const data = await prisma.product.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+async function getData(page: number, perPage: number) {
+  const skip = (page - 1) * perPage;
+  const [data, totalCount] = await Promise.all([
+    prisma.product.findMany({
+      skip,
+      take: perPage,
+      orderBy: { createdAt: "desc" },
+    }),
+    prisma.product.count(),
+  ]);
 
-  return data;
+  return { data, totalCount };
 }
 
-export default async function ProductsRoute() {
+export default async function ProductsRoute({
+  searchParams,
+}: {
+  searchParams?: { page?: string };
+}) {
   noStore();
-  const data = await getData();
+
+  const currentPage = Number(searchParams?.page) || 1;
+  const perPage = 10;
+
+  const { data, totalCount } = await getData(currentPage, perPage);
+  const totalPages = Math.ceil(totalCount / perPage);
+
   return (
     <>
       <div className="flex items-center justify-end">
-        <Button asChild className="flex items-center gap-x-2" variant={"destructive"}>
-          <Link href="/dashboard/products/create">
+        <Button
+          asChild
+          className="flex items-center gap-x-2"
+          variant={"destructive"}
+        >
+          <Link
+            href="/dashboard/products/create"
+            className="bg-gray-500 hover:bg-gray-400 rounded-none"
+          >
             <PlusCircle className="w-3.5 h-3.5" />
             <span>Add Product</span>
           </Link>
         </Button>
       </div>
-      <Card className="mt-5">
+
+      <Card className="mt-5 rounded-none">
         <CardHeader>
-          <CardTitle>Products</CardTitle>
+          <CardTitle>Products ({totalCount})</CardTitle>
           <CardDescription>
             Manage products and view their sales performance
           </CardDescription>
@@ -96,7 +126,7 @@ export default async function ProductsRoute() {
                           <MoreHorizontal className="h-4 w-4" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
+                      <DropdownMenuContent align="end" className="rounded-none bg-gray-300">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem asChild>
@@ -116,6 +146,40 @@ export default async function ProductsRoute() {
               ))}
             </TableBody>
           </Table>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="mt-6">
+              <Pagination>
+                <PaginationContent>
+                  {currentPage > 1 && (
+                    <PaginationItem>
+                      <PaginationPrevious
+                        href={`?page=${currentPage - 1}`}
+                      />
+                    </PaginationItem>
+                  )}
+
+                  {Array.from({ length: totalPages }).map((_, i) => (
+                    <PaginationItem key={i}>
+                      <PaginationLink
+                        href={`?page=${i + 1}`}
+                        isActive={currentPage === i + 1}
+                      >
+                        {i + 1}
+                      </PaginationLink>
+                    </PaginationItem>
+                  ))}
+
+                  {currentPage < totalPages && (
+                    <PaginationItem>
+                      <PaginationNext href={`?page=${currentPage + 1}`} />
+                    </PaginationItem>
+                  )}
+                </PaginationContent>
+              </Pagination>
+            </div>
+          )}
         </CardContent>
       </Card>
     </>
