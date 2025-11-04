@@ -49,14 +49,10 @@ async function getData(page: number, perPage: number) {
   return { data, totalCount };
 }
 
-export default async function BannerRoute({
-  searchParams,
-}: {
-  searchParams?: { page?: string };
-}) {
+export default async function BannerRoute({ searchParams }: { searchParams?: Record<string, string | string[]> }) {
   noStore();
 
-  const currentPage = Number(searchParams?.page) || 1;
+  const currentPage = Number(searchParams?.page || "1");
   const perPage = 10;
 
   const { data, totalCount } = await getData(currentPage, perPage);
