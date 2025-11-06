@@ -10,7 +10,13 @@ import {
   RegisterLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 
-import { FileQuestion, RouterIcon, ShoppingBag, StarIcon, Undo2 } from "lucide-react";
+import {
+  FileQuestion,
+  RouterIcon,
+  ShoppingBag,
+  StarIcon,
+  Undo2,
+} from "lucide-react";
 import { notFound } from "next/navigation";
 import { unstable_noStore as noStore } from "next/cache";
 import { Button } from "@/components/ui/button";
@@ -24,6 +30,8 @@ async function getData(productId: string) {
     },
     select: {
       price: true,
+      discount: true,
+      inputPrice: true,
       images: true,
       available: true,
       description: true,
@@ -63,9 +71,19 @@ export default async function ProductIdRoute({
           </h1>
           <p className="text-sm text-gray-700 mt-6">{data.description}</p>
           <p className="text-xl mt-2 font-bold">
-            kr {data.price}.00
+            {data.discount && data.discount > 0 ? (
+              <>
+                <span className="line-through text-gray-500 mr-2">
+                  kr {data.inputPrice ?? data.price}.00
+                </span>
+                <span className="text-red-600">kr {data.price}.00</span>
+              </>
+            ) : (
+              <>kr {data.price}.00</>
+            )}
             <span className="text-xs ml-2 text-gray-500">(VAT included)</span>
           </p>
+
           <p className="text-sm text-gray-500 mt-6">Free delivery over 8 kr</p>
           <p className="text-sm text-green-600 font-semibold mt-1">
             {data.available > 0 ? `${data.available} in stock` : "Out of stock"}
@@ -87,7 +105,11 @@ export default async function ProductIdRoute({
             </div>
           )}
 
-          <p className="mt-8 text-center bg-gray-200 py-2 flex items-center justify-center gap-4 text-xs font-bold"> <Undo2 />30s day return policy</p>
+          <p className="mt-8 text-center bg-gray-200 py-2 flex items-center justify-center gap-4 text-xs font-bold">
+            {" "}
+            <Undo2 />
+            30s day return policy
+          </p>
 
           {/* <form action={addProducttoShoppingCart}>
             <ShoppingBagButton />
@@ -97,16 +119,16 @@ export default async function ProductIdRoute({
 
       <div className="mt-16 max-w-7xl mx-auto ">
         <div className="flex justify-between items-center my-6 pb-8 px-2 md:px-0">
-        <h1 className="font-bold text-2xl text-gray-800 mt-4 leading-tight">
-          Don’t Miss Out <br />
-          Boys, Girls and Babies
-        </h1>
-        <FileQuestion className="w-10 h-10 text-yellow-500" />
-      </div>
-      
-      <BoysFeaturedProducts />
-      <FeaturedProducts />
-      <NewBornFeaturedProducts />
+          <h1 className="font-bold text-2xl text-gray-800 mt-4 leading-tight">
+            Don’t Miss Out <br />
+            Boys, Girls and Babies
+          </h1>
+          <FileQuestion className="w-10 h-10 text-yellow-500" />
+        </div>
+
+        <BoysFeaturedProducts />
+        <FeaturedProducts />
+        <NewBornFeaturedProducts />
       </div>
     </>
   );

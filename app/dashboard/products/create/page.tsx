@@ -84,19 +84,30 @@ export default function ProductCreateRoute() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <Label>Price</Label>
+              <Label>Price Input</Label>
               <Input
-                key={fields.price.key}
-                name={fields.price.name}
-                defaultValue={fields.price.initialValue}
+                key={fields.inputPrice.key}
+                name={fields.inputPrice.name}
+                defaultValue={fields.inputPrice.initialValue}
                 type="number"
                 placeholder="55 kr"
                 className="w-full rounded-none"
               />
-              <p className="text-red-500">{fields.price.errors}</p>
+              <p className="text-red-500">{fields.inputPrice.errors}</p>
             </div>
 
-         
+            <div className="flex flex-col gap-3">
+              <Label>Discount</Label>
+              <Input
+                type="number"
+                key={fields.discount?.key} // optional chaining in case initial value is undefined
+                name={fields.discount?.name}
+                defaultValue={fields.discount?.initialValue ?? 0}
+                placeholder="Discount amount"
+                className="w-full rounded-none"
+              />
+              <p className="text-red-500">{fields.discount?.errors}</p>
+            </div>
 
             <div className="flex flex-col gap-3">
               <Label>Status</Label>
@@ -137,7 +148,7 @@ export default function ProductCreateRoute() {
               </Select>
               <p className="text-red-500">{fields.category.errors}</p>
             </div>
-              <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3">
               <Label>Description</Label>
               <Textarea
                 className="rounded-none"
@@ -149,19 +160,19 @@ export default function ProductCreateRoute() {
               <p className="text-red-500">{fields.description.errors}</p>
             </div>
             <div className="flex flex-col gap-3">
-  <Label>Available Stock</Label>
-  <Input
-    type="number"
-    key={fields.available.key}
-    name={fields.available.name}
-    defaultValue={fields.available.initialValue ?? 0}
-    placeholder="Available quantity"
-    className="w-full rounded-none"
-  />
-  <p className="text-red-500">{fields.available.errors}</p>
-</div>
+              <Label>Available Stock</Label>
+              <Input
+                type="number"
+                key={fields.available.key}
+                name={fields.available.name}
+                defaultValue={fields.available.initialValue ?? 0}
+                placeholder="Available quantity"
+                className="w-full rounded-none"
+              />
+              <p className="text-red-500">{fields.available.errors}</p>
+            </div>
 
-               <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3">
               <Label>Featured Product</Label>
               <Switch
                 className="bg-gray-300 data-[state=checked]:bg-black"
@@ -215,10 +226,9 @@ export default function ProductCreateRoute() {
                   }}
                 />
               )}
- 
+
               <p className="text-red-500">{fields.images.errors}</p>
             </div>
-            
           </div>
         </CardContent>
         <CardFooter>

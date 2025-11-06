@@ -23,12 +23,15 @@ model Product {
   id          String        @id @default(uuid())
   name        String
   description String
-  status      ProductStatus
-  price       Int
+  status      ProductStatus  
   images      String[]
   category    Category
   isFeatured  Boolean       @default(false)
   available   Int           @default(0)
+
+  price       Int
+  discount    Int?
+  inputPrice    Int?
 
   createdAt DateTime @default(now())
 

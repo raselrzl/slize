@@ -32,21 +32,28 @@ export async function createProduct(prevState: unknown, formData: FormData) {
     urlString.split(",").map((url) => url.trim())
   );
 
+  const inputPrice = submission.value.inputPrice;
+  const discount = submission.value.discount ?? 0; // you can add discount field in form later
+  const price = inputPrice - discount; // final selling price
+
   await prisma.product.create({
     data: {
       name: submission.value.name,
       description: submission.value.description,
       status: submission.value.status,
-      price: submission.value.price,
+      inputPrice: inputPrice, // original admin input
+      price: price,           // actual price to sell
+      discount: discount,     // optional discount
       available: submission.value.available ?? 0,
       images: flattenUrls,
       category: submission.value.category,
-      isFeatured: submission.value.isFeatured === true ? true : false,
+      isFeatured: submission.value.isFeatured === true,
     },
   });
 
   redirect("/dashboard/products");
 }
+
 
 export async function editProduct(prevState: any, formData: FormData) {
   const { getUser } = getKindeServerSession();
@@ -77,7 +84,7 @@ export async function editProduct(prevState: any, formData: FormData) {
       name: submission.value.name,
       description: submission.value.description,
       category: submission.value.category,
-      price: submission.value.price,
+      inputPrice: submission.value.inputPrice,
       isFeatured: submission.value.isFeatured === true ? true : false,
       status: submission.value.status,
       images: flattenUrls,
