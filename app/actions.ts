@@ -376,3 +376,26 @@ export async function updateItemQuantity(formData: FormData) {
 
   revalidatePath("/bag");
 }
+
+
+// actions.ts
+export async function getUserOrders() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user) {
+    return { user: null, orders: [] };
+  }
+
+  const orders = await prisma.order.findMany({
+    where: { userId: user.id },
+    orderBy: { createdAt: "desc" },
+    include: {
+      User: {
+        select: { firstName: true, lastName: true, email: true },
+      },
+    },
+  });
+
+  return { user, orders };
+}
