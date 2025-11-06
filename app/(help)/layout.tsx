@@ -8,7 +8,7 @@ interface HelpLayoutProps {
 
 export default function HelpLayout({ children }: HelpLayoutProps) {
   return (
-    <div className="bg-gray-200 min-h-screen">
+    <div className="bg-gray-200 min-h-screen max-w-5xl mx-auto">
       {/* Wrapper for sidebar + content */}
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row">
         {/* Sidebar / mobile menu */}

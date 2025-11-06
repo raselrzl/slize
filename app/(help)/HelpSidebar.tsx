@@ -18,7 +18,7 @@ export function HelpSidebar({ className }: HelpSidebarProps) {
   return (
     <>
       {/* Mobile top fixed nav */}
-      <div className="md:hidden fixed top-0 left-0 right-0 flex justify-between items-center p-2 border-b border-gray-200 bg-white z-50">
+      <div className="md:hidden fixed top-0 left-0 right-0 flex justify-between items-center p-2 border-b border-gray-200 bg-gray-200 z-50">
         <span className="font-semibold text-lg">Help</span>
         <button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -28,7 +28,7 @@ export function HelpSidebar({ className }: HelpSidebarProps) {
       {/* Sidebar / mobile menu */}
       <nav
         className={cn(
-          "flex flex-col md:flex md:h-full gap-2 md:p-4 border-r border-gray-200 bg-white",
+          "flex flex-col md:flex md:h-full gap-2 md:p-4 border-r border-gray-200 bg-gray-200",
           className,
           isOpen
             ? "absolute top-14 left-0 right-0 shadow-md md:shadow-none md:relative md:flex"
@@ -43,9 +43,9 @@ export function HelpSidebar({ className }: HelpSidebarProps) {
               key={link.id}
               href={link.href}
               className={cn(
-                "flex items-center h-[36px] px-4 py-2 text-sm font-medium hover:bg-gray-100 transition-colors duration-200",
+                "flex items-center h-[36px] px-4 py-2 text-sm font-medium hover:bg-gray-300 transition-colors duration-200",
                 isActive
-                  ? "bg-gray-200 text-black font-semibold"
+                  ? "bg-gray-400 text-black font-semibold"
                   : "text-gray-700"
               )}
               onClick={() => setIsOpen(false)} // close menu on mobile

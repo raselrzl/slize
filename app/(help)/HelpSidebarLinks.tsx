@@ -19,8 +19,7 @@ export const HelpSidebarLinks: LinkItem[] = [
   { id: 5, name: "Delivery and return costs", href: "/delivery-returns" },
 
   // About Kronstil
-  { id: 6, name: "About Kronstil", href: "/about" },
-  { id: 7, name: "About us", href: "/about-us" },
+  { id: 6, name: "About Kronstil", href: "/about-us" },
   { id: 8, name: "Career", href: "/career" },
   { id: 9, name: "Investor", href: "/investor" },
   { id: 10, name: "Our delivery partner", href: "/delivery-partner" },
