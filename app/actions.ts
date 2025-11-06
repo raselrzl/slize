@@ -699,3 +699,41 @@ export async function getUserOrders() {
 
   return { user, orders };
 }
+
+
+export async function deleteOrderAction(orderId: string) {
+  try {
+    const order = await prisma.order.findUnique({
+      where: { id: orderId },
+      include: { items: true },
+    });
+
+    if (!order) {
+      return { success: false, message: "Order not found" };
+    }
+
+    // Optional: restore product availability before deleting
+    await Promise.all(
+      order.items.map(async (item) => {
+        if (item.productId && item.quantity) {
+          await prisma.product.update({
+            where: { id: item.productId },
+            data: { available: { increment: item.quantity } },
+          });
+        }
+      })
+    );
+
+    // Delete order items first (if not cascaded)
+    await prisma.orderItem.deleteMany({ where: { orderId } });
+
+    // Delete order itself
+    await prisma.order.delete({ where: { id: orderId } });
+
+    revalidatePath("/dashboard/orders");
+    return { success: true };
+  } catch (err) {
+    console.error("❌ Error deleting order:", err);
+    return { success: false, message: "Server error" };
+  }
+}

@@ -60,6 +60,11 @@ async function getPaginatedOrders(
             profileImage: true,
           },
         },
+        shippingName: true,
+        shippingLine1: true,
+        shippingCity: true,
+        shippingPostal: true,
+        shippingCountry: true,
       },
     }),
     prisma.order.count(),
@@ -84,7 +89,6 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
 
   return (
     <>
-      {/* ✅ Header identical to your AllNewsArticleList */}
       <div className="flex items-center justify-between mb-8 bg-accent-foreground/5 p-2">
         <h1 className="text-xl font-bold">Manage All Orders</h1>
         <div className="text-sm bg-primary text-gray-800 px-3 py-1 rounded-md">
@@ -100,6 +104,7 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Customer</TableHead>
+                    <TableHead>Shipping Info</TableHead>
                     <TableHead>Type</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Date</TableHead>
@@ -118,6 +123,18 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                           </p>
                         </div>
                       </TableCell>
+
+                      {/* Shipping Info */}
+                      <TableCell>
+                        <div className="flex flex-col">
+                          <p className="font-medium">{item.shippingName}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {item.shippingLine1} {item.shippingCity}{" "}
+                            {item.shippingPostal}, {item.shippingCountry}
+                          </p>
+                        </div>
+                      </TableCell>
+
                       <TableCell>Order</TableCell>
                       <TableCell>{item.status}</TableCell>
                       <TableCell>
@@ -134,7 +151,7 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                         kr
                       </TableCell>
 
-                      {/* ✅ Dropdown Actions identical style */}
+                      {/* Dropdown Actions */}
                       <TableCell className="text-right">
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
@@ -142,7 +159,10 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                               <MoreHorizontal className="w-4 h-4" />
                             </Button>
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end" className="bg-gray-400 rounded-none">
+                          <DropdownMenuContent
+                            align="end"
+                            className="bg-gray-400 rounded-none"
+                          >
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
                             <DropdownMenuItem asChild>
@@ -174,7 +194,7 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
             </CardContent>
           </Card>
 
-          {/* ✅ Same pagination layout */}
+          {/* Pagination */}
           <PaginationComponent
             totalPages={totalPages}
             currentPage={currentPage}
