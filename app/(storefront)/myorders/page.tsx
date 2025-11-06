@@ -14,8 +14,8 @@ export default async function OrdersPage() {
   }
 
   return (
-    <section className="max-w-4xl mx-auto py-12 px-6">
-      <h1 className="text-3xl font-semibold mb-8 text-gray-900">Your Orders</h1>
+    <section className="max-w-7xl mx-auto py-12 px-6">
+      <h1 className="text-xl font-semibold mb-8 text-gray-900">Your Orders</h1>
 
       {orders.length === 0 ? (
         <div className="text-center text-gray-600">

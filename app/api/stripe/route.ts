@@ -1,17 +1,16 @@
+import { headers } from "next/headers";
+import { NextResponse } from "next/server";
+import { stripe } from "@/app/lib/stripe";
 import prisma from "@/app/lib/db";
 import { redis } from "@/app/lib/redis";
-import { stripe } from "@/app/lib/stripe";
-import { headers } from "next/headers";
+import Stripe from "stripe";
 
 export async function POST(req: Request) {
   const body = await req.text();
+  const headerList = await headers();
+  const signature = headerList.get("Stripe-Signature") as string;
 
-  /* const signature = headers().get("Stripe-Signature") as string; */
-
-  const headersResponse = await headers();
-  const signature = headersResponse.get("Stripe-Signature") as string;
-
-  let event;
+  let event: Stripe.Event;
 
   try {
     event = stripe.webhooks.constructEvent(
@@ -19,29 +18,64 @@ export async function POST(req: Request) {
       signature,
       process.env.STRIPE_SECRET_WEBHOOK as string
     );
-  } catch (error: unknown) {
-    return new Response("Webhook Error", { status: 400 });
+  } catch (err) {
+    console.error("❌ Invalid Stripe signature:", err);
+    return new NextResponse("Invalid signature", { status: 400 });
   }
 
-  switch (event.type) {
-    case "checkout.session.completed": {
-      const session = event.data.object;
+  if (event.type === "checkout.session.completed") {
+    const session = event.data.object as Stripe.Checkout.Session;
 
-      await prisma.order.create({
+    const metadata = session.metadata || {};
+    const userId = metadata.userId;
+    const cartItems = metadata.cart ? JSON.parse(metadata.cart) : [];
+
+    try {
+      // 1️⃣ Create order
+      const order = await prisma.order.create({
         data: {
-          amount: session.amount_total as number,
-          status: session.status as string,
-          userId: session.metadata?.userId,
+          userId,
+          status: "paid",
+          invoiceStatus: "paid",
+          amount: session.amount_total ?? 0,
         },
       });
 
-      await redis.del(`cart-${session.metadata?.userId}`);
-      break;
-    }
-    default: {
-      console.log("unhandled event");
+      // 2️⃣ Decrement stock and create order items
+      await Promise.all(
+        cartItems.map(async (item: any) => {
+          const product = await prisma.product.findUnique({
+            where: { id: item.productId },
+          });
+          if (!product) return;
+
+          await prisma.orderItem.create({
+            data: {
+              orderId: order.id,
+              productId: product.id,
+              quantity: item.quantity,
+              name: product.name,
+              price: product.price,
+              imageString: product.images[0] || null,
+            },
+          });
+
+          await prisma.product.update({
+            where: { id: product.id },
+            data: { available: { decrement: item.quantity } },
+          });
+        })
+      );
+
+      // 3️⃣ Clear cart
+      if (userId) await redis.del(`cart-${userId}`);
+
+      console.log("✅ Order created and stock decremented");
+    } catch (err) {
+      console.error("⚠️ Webhook error:", err);
+      return new NextResponse("Error processing order", { status: 500 });
     }
   }
 
-  return new Response(null, { status: 200 });
+  return new NextResponse("Webhook received", { status: 200 });
 }

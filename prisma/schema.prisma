@@ -28,6 +28,7 @@ model Product {
   images      String[]
   category    Category
   isFeatured  Boolean       @default(false)
+  available   Int           @default(0)
 
   createdAt DateTime @default(now())
 
@@ -49,6 +50,7 @@ model Order {
   deliveryStatus DeliveryStatus?  // new optional
   invoiceStatus  InvoiceStatus?   // optional invoice payment tracking
   amount         Int
+  deliveryFee    Int?
 
   User   User?   @relation(fields: [userId], references: [id])
   userId String?
@@ -56,6 +58,17 @@ model Order {
   items  OrderItem[]  // relation to OrderItem
 
   createdAt DateTime @default(now())
+
+  fullName        String?
+  phone           String?
+  email           String?
+
+  shippingName    String?
+  shippingLine1   String?
+  shippingLine2   String?
+  shippingCity    String?
+  shippingPostal  String?
+  shippingCountry String?
 }
 
 
@@ -64,6 +77,10 @@ model OrderItem {
   orderId   String?
   productId String?
   quantity  Int      @default(1)
+
+  name       String?
+  price      Int?
+  imageString String?
 
   Order   Order?    @relation(fields: [orderId], references: [id])
   Product Product?  @relation(fields: [productId], references: [id])
