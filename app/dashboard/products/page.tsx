@@ -47,6 +47,7 @@ interface Product {
   category: string;
   isFeatured: boolean;
   createdAt: Date;
+  available: number;
 }
 
 async function getData(page: number, perPage: number) {
@@ -99,6 +100,7 @@ export default async function ProductsPage({ searchParams }: any) {
                 <TableHead>Name</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Price</TableHead>
+                <TableHead>Availability</TableHead>
                 <TableHead>Date</TableHead>
                 <TableHead className="text-end">Actions</TableHead>
               </TableRow>
@@ -118,6 +120,7 @@ export default async function ProductsPage({ searchParams }: any) {
                   <TableCell>{item.name}</TableCell>
                   <TableCell>{item.status}</TableCell>
                   <TableCell>{item.price} kr</TableCell>
+                  <TableCell>{item.available}</TableCell>
                   <TableCell>{new Intl.DateTimeFormat("en-US").format(item.createdAt)}</TableCell>
                   <TableCell className="text-end">
                     <DropdownMenu>

@@ -18,6 +18,7 @@ async function getData(productCategory: string) {
           description: true,
           category: true,
           createdAt: true,
+          available: true,
         },
         where: {
           status: "published",
@@ -41,6 +42,7 @@ async function getData(productCategory: string) {
         select: {
           name: true,
           images: true,
+          available: true,
           price: true,
           id: true,
           description: true,
@@ -65,6 +67,7 @@ async function getData(productCategory: string) {
           name: true,
           images: true,
           price: true,
+          available: true,
           id: true,
           description: true,
         },
@@ -88,6 +91,7 @@ async function getData(productCategory: string) {
           price: true,
           id: true,
           description: true,
+          available: true,
         },
         orderBy: { createdAt: "desc" },
       });
@@ -108,6 +112,7 @@ async function getData(productCategory: string) {
           name: true,
           images: true,
           price: true,
+          available: true,
           id: true,
           description: true,
         },
@@ -129,6 +134,7 @@ async function getData(productCategory: string) {
         select: {
           name: true,
           images: true,
+          available: true,
           price: true,
           id: true,
           description: true,
@@ -153,6 +159,7 @@ async function getData(productCategory: string) {
           name: true,
           images: true,
           price: true,
+          available: true,
           id: true,
           description: true,
         },
@@ -174,6 +181,7 @@ async function getData(productCategory: string) {
         select: {
           name: true,
           images: true,
+          available: true,
           price: true,
           id: true,
           description: true,
@@ -198,6 +206,7 @@ async function getData(productCategory: string) {
           images: true,
           price: true,
           id: true,
+          available: true,
           description: true,
         },
         orderBy: { createdAt: "desc" },
@@ -221,6 +230,7 @@ async function getData(productCategory: string) {
         select: {
           name: true,
           images: true,
+          available: true,
           price: true,
           id: true,
           description: true,
@@ -246,6 +256,7 @@ async function getData(productCategory: string) {
           images: true,
           price: true,
           id: true,
+          available: true,
           description: true,
         },
         orderBy: { createdAt: "desc" },
@@ -272,6 +283,7 @@ async function getData(productCategory: string) {
           price: true,
           id: true,
           description: true,
+          available: true,
         },
         orderBy: { createdAt: "desc" },
       });

@@ -25,6 +25,7 @@ async function getData(productId: string) {
     select: {
       price: true,
       images: true,
+      available: true,
       description: true,
       name: true,
       id: true,
@@ -66,6 +67,10 @@ export default async function ProductIdRoute({
             <span className="text-xs ml-2 text-gray-500">(VAT included)</span>
           </p>
           <p className="text-sm text-gray-500 mt-6">Free delivery over 8 kr</p>
+          <p className="text-sm text-green-600 font-semibold mt-1">
+            {data.available > 0 ? `${data.available} in stock` : "Out of stock"}
+          </p>
+
           {user ? (
             // Logged in
             <form action={addProducttoShoppingCart} className="w-full">
