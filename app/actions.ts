@@ -237,7 +237,6 @@ export async function delItem(formData: FormData) {
   revalidatePath("/bag");
 }
 
-
 /* this is works without delivery fees */
 /* export async function checkOut() {
   const { getUser } = getKindeServerSession();
@@ -287,7 +286,7 @@ export async function delItem(formData: FormData) {
   }
 } */
 
-  export async function checkOut(formData: FormData) {
+export async function checkOut(formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
@@ -350,7 +349,6 @@ export async function delItem(formData: FormData) {
   return redirect(session.url as string);
 }
 
-
 export async function updateItemQuantity(formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
@@ -377,8 +375,6 @@ export async function updateItemQuantity(formData: FormData) {
   revalidatePath("/bag");
 }
 
-
-// actions.ts
 export async function getUserOrders() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
@@ -393,6 +389,21 @@ export async function getUserOrders() {
     include: {
       User: {
         select: { firstName: true, lastName: true, email: true },
+      },
+      items: {
+        include: {
+          Product: {
+            select: {
+              id: true,
+              name: true,
+              price: true,
+              images: true,
+              status: true, // <-- add this
+              category: true, // <-- add this
+              isFeatured: true, // <-- add this
+            },
+          },
+        },
       },
     },
   });

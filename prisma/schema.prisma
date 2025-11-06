@@ -8,7 +8,7 @@ datasource db {
 }
 
 model User {
-  id           String @id @unique
+  id           String  @id @unique
   email        String
   firstName    String
   lastName     String
@@ -30,8 +30,10 @@ model Product {
   isFeatured  Boolean       @default(false)
 
   createdAt DateTime @default(now())
+
+  orderItems OrderItem[]
 }
- 
+
 model Banner {
   id          String @id @default(uuid())
   title       String
@@ -41,16 +43,49 @@ model Banner {
 }
 
 model Order {
-  id     String @id @default(uuid())
-  status String @default("pending")
-  amount Int
+  id             String           @id @default(uuid())
+  status         String           @default("pending")  // existing
+  orderStatus    OrderStatus?     // new optional
+  deliveryStatus DeliveryStatus?  // new optional
+  invoiceStatus  InvoiceStatus?   // optional invoice payment tracking
+  amount         Int
 
   User   User?   @relation(fields: [userId], references: [id])
   userId String?
 
+  items  OrderItem[]  // relation to OrderItem
+
   createdAt DateTime @default(now())
 }
 
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  orderId   String?
+  productId String?
+  quantity  Int      @default(1)
+
+  Order   Order?    @relation(fields: [orderId], references: [id])
+  Product Product?  @relation(fields: [productId], references: [id])
+}
+
+// New enums
+enum OrderStatus {
+  pending
+  accepted
+  cancelled
+}
+
+enum DeliveryStatus {
+  not_shipped
+  shipped
+  delivered
+}
+
+enum InvoiceStatus {
+  pending
+  paid
+}
 
 enum ProductStatus {
   draft
