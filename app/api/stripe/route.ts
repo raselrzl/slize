@@ -42,81 +42,72 @@ export async function POST(req: Request) {
       const orderId = metadata.orderId as string | undefined;
       const userId = metadata.userId as string | undefined;
 
-      const shipping = session.shipping_details;
-      const customer = session.customer_details;
+      if (!orderId || !userId) {
+        console.warn("Order or User ID is missing in metadata");
+        return new NextResponse("Missing metadata", { status: 400 });
+      }
 
       try {
-        // 1️⃣ Get cart from Redis
-        const cartKey = `cart-${userId}`;
-        const cartData: string | null = await redis.get(cartKey); // ✅ explicitly string or null
-        const cartItems = cartData ? JSON.parse(cartData) : [];
+        // 1️⃣ Fetch the existing order
+        const order = await prisma.order.findUnique({
+          where: { id: orderId },
+          include: { items: true },
+        });
 
-        // 2️⃣ Create order with customer/shipping info
-        const order = await prisma.order.create({
+        // Check if the order was found
+        if (!order) {
+          console.warn(`Order ${orderId} not found`);
+          return new NextResponse("Order not found", { status: 404 });
+        }
+
+        // 2️⃣ Update order with payment + shipping info
+        await prisma.order.update({
+          where: { id: orderId },
           data: {
-            userId,
             status: "paid",
             invoiceStatus: "paid",
-            amount: session.amount_total ?? 0,
-            deliveryFee: Number(metadata.deliveryFee) || 0,
-            fullName: customer?.name || shipping?.name,
-            phone: customer?.phone || undefined,
-            email: customer?.email || undefined,
-            shippingName: shipping?.name,
-            shippingLine1: shipping?.address?.line1,
-            shippingLine2: shipping?.address?.line2,
-            shippingCity: shipping?.address?.city,
-            shippingPostal: shipping?.address?.postal_code,
-            shippingCountry: shipping?.address?.country,
+            fullName: session.customer_details?.name || session.shipping_details?.name,
+            phone: session.customer_details?.phone,
+            email: session.customer_details?.email,
+            shippingName: session.shipping_details?.name,
+            shippingLine1: session.shipping_details?.address?.line1,
+            shippingLine2: session.shipping_details?.address?.line2,
+            shippingCity: session.shipping_details?.address?.city,
+            shippingPostal: session.shipping_details?.address?.postal_code,
+            shippingCountry: session.shipping_details?.address?.country,
           },
         });
 
-        // 3️⃣ Create OrderItems and decrement stock
+        // 3️⃣ Decrement stock for each order item
         await Promise.all(
-          cartItems.map(async (item: any) => {
-            if (!item.productId || item.quantity <= 0) return;
+          order.items.map(async (item) => {
+            if (!item.productId) return;
 
-            // Fetch product
             const product = await prisma.product.findUnique({
               where: { id: item.productId },
             });
-            if (!product) return;
 
-            // Check stock
-            if (product.available < item.quantity) {
-              console.warn(
-                `⚠️ Product ${product.name} does not have enough stock.`
-              );
-              // optional: handle out-of-stock
-            } else {
-              // Create order item
-              await prisma.orderItem.create({
-                data: {
-                  orderId: order.id,
-                  productId: product.id,
-                  quantity: item.quantity,
-                  name: product.name,
-                  price: product.price,
-                  imageString: product.images[0] || null,
-                },
-              });
-
-              // Decrement stock
+            if (product && product.available >= item.quantity) {
               await prisma.product.update({
-                where: { id: product.id },
+                where: { id: item.productId },
                 data: { available: { decrement: item.quantity } },
               });
+            } else {
+              console.warn(`Not enough stock for product ${item.productId}`);
+              // Optionally, handle the out-of-stock scenario, e.g., notify the user
             }
           })
         );
 
-        // 4️⃣ Clear cart
-        if (userId) await redis.del(cartKey);
+        // 4️⃣ Clear Redis cart
+        if (userId) {
+          await redis.del(`cart-${userId}`);
+        }
 
-        console.log("✅ Order and stock updated successfully");
+        console.log("✅ Order updated, stock decremented, cart cleared");
       } catch (err) {
-        console.error("⚠️ Error saving order or updating stock:", err);
-        return new NextResponse("Error saving order", { status: 500 });
+        console.error("⚠️ Error updating order or stock:", err);
+        return new NextResponse("Error updating order", { status: 500 });
       }
 
       break;
@@ -128,3 +119,5 @@ export async function POST(req: Request) {
 
   return new NextResponse("Webhook received", { status: 200 });
 }
+
+
