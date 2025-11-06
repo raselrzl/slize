@@ -109,7 +109,7 @@ export function Info() {
                 key={i}
                 src={`/${src}`}
                 alt={src.split(".")[0]}
-                className="h-10 w-24 object-contain"
+                className="h-8 w-24 object-fill"
               />
             ))}
           </div>
@@ -148,7 +148,7 @@ export function Info() {
                 key={i}
                 src={`/payments/${src}`}
                 alt={src.split(".")[0]}
-                className="h-10 w-24 object-contain"
+                className="h-8 w-20 object-fill"
               />
             ))}
           </div>
