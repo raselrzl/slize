@@ -60,12 +60,19 @@ async function getData(page: number, perPage: number) {
   return { data, totalCount };
 }
 
-export default async function BannerRoute({ searchParams }: any) {
+export default async function BannerRoute({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string | string[] }>;
+}) {
   noStore();
 
-  const pageParam = Array.isArray(searchParams?.page)
-    ? searchParams.page[0]
-    : searchParams?.page;
+  // ✅ Await searchParams first
+  const params = await searchParams;
+
+  const pageParam = Array.isArray(params?.page)
+    ? params.page[0]
+    : params?.page;
 
   const currentPage = Number(pageParam) || 1;
   const perPage = 10;

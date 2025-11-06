@@ -66,9 +66,9 @@ async function getData(page: number, perPage: number) {
 export default async function ProductsPage({ searchParams }: any) {
   noStore();
 
-  const pageParam = Array.isArray(searchParams?.page)
-    ? searchParams.page[0]
-    : searchParams?.page;
+  const params = await searchParams; // 👈 REQUIRED FIX
+  const pageParam = Array.isArray(params?.page) ? params.page[0] : params?.page;
+
   const currentPage = Number(pageParam) || 1;
   const perPage = 10;
 

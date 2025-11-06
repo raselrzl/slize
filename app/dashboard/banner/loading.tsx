@@ -8,7 +8,7 @@ export default function Loading() {
         <div className="h-9 w-32 bg-gray-200 animate-pulse" />
       </div>
 
-      <Card className="mt-5">
+      <Card className="mt-5 rounded-none">
         <CardHeader>
           <CardTitle className="h-6 w-32 bg-gray-200 animate-pulse" />
           <CardDescription className="h-4 w-60 bg-gray-100 animate-pulse mt-2" />
