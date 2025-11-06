@@ -9,7 +9,7 @@ import { ExclusiveProductBoysHomeBanner } from "../components/storefront/Exclusi
 export default function IndexPage() {
   return (
     <div className="">
-      <div className="">
+      <div className="bg-white">
         {" "}
         <HeroOne />
       </div>

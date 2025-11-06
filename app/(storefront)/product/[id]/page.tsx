@@ -54,7 +54,7 @@ export default async function ProductIdRoute({
 
   return (
     <>
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start lg:gap-x-24 py-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-start lg:gap-x-24 py-6 border-b border-gray-900/10">
         <ImageSlider images={data.images} />
         <div className="px-4">
           <h1 className="text-2xl font-bold tracking-tight border-b border-gray-700 uppercase inline-block">
@@ -90,8 +90,8 @@ export default async function ProductIdRoute({
         </div>
       </div>
 
-      <div className="mt-16 max-w-7xl mx-auto">
-        <div className="flex justify-between items-center my-6 pb-8">
+      <div className="mt-16 max-w-7xl mx-auto ">
+        <div className="flex justify-between items-center my-6 pb-8 px-2 md:px-0">
         <h1 className="font-bold text-2xl text-gray-800 mt-4 leading-tight">
           Don’t Miss Out <br />
           Boys, Girls and Babies
