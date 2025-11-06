@@ -24,7 +24,7 @@ export function Info() {
   useEffect(() => {
     if (!isClient) return;
     const checkScreenSize = () => {
-      setOpenOnComputer(window.innerWidth >= 768); // md breakpoint
+      setOpenOnComputer(window.innerWidth >= 768);
     };
     checkScreenSize();
     window.addEventListener("resize", checkScreenSize);
@@ -45,7 +45,7 @@ export function Info() {
       <Button
         variant="ghost"
         size="sm"
-        className="w-9 p-0 md:hidden" // Hide icon on desktop
+        className="w-9 p-0 md:hidden"
       >
         <ChevronsUpDown className="h-4 w-4" />
         <span className="sr-only">Toggle</span>
@@ -54,25 +54,24 @@ export function Info() {
   );
 
   return (
-    <div className="flex flex-wrap gap-4 bg-gray-700 text-white w-full max-w-screen-xl mx-auto px-4 py-8">
+    <div className="flex flex-wrap gap-4 bg-gray-800 text-white w-full max-w-screen-xl mx-auto px-4 py-8">
+      
       {/* Help & Contact */}
       <Collapsible {...collapsibleProps(openHelp, setOpenHelp)} className="w-[350px] space-y-2">
         <div className="flex items-center justify-between space-x-4 px-4">
-          <h4 className="text-sm font-semibold">Help & contact</h4>
+          <h4 className="text-sm font-semibold">Help & Contact</h4>
           {collapsibleToggleButton}
         </div>
         <CollapsibleContent className={collapsibleContentClass}>
           {[
-            { text: "Frequently asked questions", link: "/faq" },
-            { text: "Delivery time", link: "/delivery-time" },
-            { text: "Payment & security", link: "/payment-security" },
-            { text: "Invoice payment", link: "/invoice-payment" },
-            { text: "Delivery and return costs", link: "/delivery-return" },
+            { text: "FAQ", link: "/faq" },
+            { text: "Delivery Time", link: "/delivery-time" },
+            { text: "Payment & Security", link: "/payment-security" },
+            { text: "Invoice Payment", link: "/invoice-payment" },
+            { text: "Delivery & Returns", link: "/delivery-returns" },
           ].map((item, i) => (
-            <div key={i} className="px-4 py-3 font-mono text-sm">
-              <a href={item.link} className="text-white hover:underline">
-                {item.text}
-              </a>
+            <div key={i} className="px-4 py-2 text-sm">
+              <a href={item.link} className="text-white hover:underline">{item.text}</a>
             </div>
           ))}
         </CollapsibleContent>
@@ -86,14 +85,12 @@ export function Info() {
         </div>
         <CollapsibleContent className={collapsibleContentClass}>
           {[
-            { text: "About us", link: "/about-us" },
+            { text: "About Us", link: "/about-us" },
             { text: "Career", link: "/career" },
-            { text: "Investor", link: "/investor" },
+            { text: "Investor Relations", link: "/investor" },
           ].map((item, i) => (
-            <div key={i} className="px-4 py-3 font-mono text-sm">
-              <a href={item.link} className="text-white hover:underline">
-                {item.text}
-              </a>
+            <div key={i} className="px-4 py-2 text-sm">
+              <a href={item.link} className="text-white hover:underline">{item.text}</a>
             </div>
           ))}
         </CollapsibleContent>
@@ -102,17 +99,17 @@ export function Info() {
       {/* Delivery Partners */}
       <Collapsible {...collapsibleProps(openDelivery, setOpenDelivery)} className="w-[350px] space-y-2">
         <div className="flex items-center justify-between space-x-4 px-4">
-          <h4 className="text-sm font-semibold">Our delivery partner</h4>
+          <h4 className="text-sm font-semibold">Delivery Partners</h4>
           {collapsibleToggleButton}
         </div>
         <CollapsibleContent className={collapsibleContentClass}>
-          <div className="flex flex-wrap gap-2 justify-center p-2">
+          <div className="flex flex-wrap gap-2 justify-start p-2">
             {["postnord.png", "budbee.png", "instabox.png"].map((src, i) => (
               <img
                 key={i}
                 src={`/${src}`}
-                alt={src}
-                className="h-10 w-30 rounded-md shadow-md object-cover"
+                alt={src.split(".")[0]}
+                className="h-10 w-24 object-contain"
               />
             ))}
           </div>
@@ -122,19 +119,17 @@ export function Info() {
       {/* Your Options */}
       <Collapsible {...collapsibleProps(openOptions, setOpenOptions)} className="w-[350px] space-y-2">
         <div className="flex items-center justify-between space-x-4 px-4">
-          <h4 className="text-sm font-semibold">Your Options</h4>
+          <h4 className="text-sm font-semibold">Customer Options</h4>
           {collapsibleToggleButton}
         </div>
         <CollapsibleContent className={collapsibleContentClass}>
           {[
-            { text: "Free delivery", link: "/free-delivery" },
+            { text: "Free Delivery", link: "/free-delivery" },
             { text: "Free Returns", link: "/free-returns" },
-            { text: "30-day open purchase", link: "/30-day-open-purchase" },
+            { text: "30-Day Open Purchase", link: "/open-purchase" },
           ].map((item, i) => (
-            <div key={i} className="px-4 py-3 font-mono text-sm">
-              <a href={item.link} className="text-white hover:underline">
-                {item.text}
-              </a>
+            <div key={i} className="px-4 py-2 text-sm">
+              <a href={item.link} className="text-white hover:underline">{item.text}</a>
             </div>
           ))}
         </CollapsibleContent>
@@ -143,22 +138,23 @@ export function Info() {
       {/* Payment Options */}
       <Collapsible {...collapsibleProps(openPayment, setOpenPayment)} className="w-[350px] space-y-2">
         <div className="flex items-center justify-between space-x-4 px-4">
-          <h4 className="text-sm font-semibold">Payment options</h4>
+          <h4 className="text-sm font-semibold">Payment Options</h4>
           {collapsibleToggleButton}
         </div>
         <CollapsibleContent className={collapsibleContentClass}>
-          <div className="flex flex-wrap gap-2 justify-center p-2">
+          <div className="flex flex-wrap gap-2 justify-start p-2">
             {["ax.png", "mastercard.png", "visa.png"].map((src, i) => (
               <img
                 key={i}
                 src={`/payments/${src}`}
-                alt={src}
-                className="h-10 w-24 rounded-md shadow-md object-cover"
+                alt={src.split(".")[0]}
+                className="h-10 w-24 object-contain"
               />
             ))}
           </div>
         </CollapsibleContent>
       </Collapsible>
+
     </div>
   );
 }
