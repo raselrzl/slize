@@ -80,7 +80,7 @@ export default async function OrdersPage() {
                       <div className="flex-1 space-y-1">
                         <p><span className="font-semibold">Name:</span> {item.Product?.name || "N/A"}</p>
                         <p><span className="font-semibold">Quantity:</span> {item.quantity || "N/A"}</p>
-                        <p><span className="font-semibold">Price:</span> {((item.Product?.price || 0) / 100).toFixed(2)} SEK</p>
+                        <p><span className="font-semibold">Price:</span> {item.Product?.price} SEK</p>
                         <p><span className="font-semibold">Status:</span> {item.Product?.status || "N/A"}</p>
                         <p><span className="font-semibold">Category:</span> {item.Product?.category || "N/A"}</p>
                         <p><span className="font-semibold">Featured:</span> {item.Product?.isFeatured ? "Yes" : "No"}</p>
