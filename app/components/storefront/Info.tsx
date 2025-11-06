@@ -70,7 +70,7 @@ export function Info() {
             { text: "Invoice Payment", link: "/invoice-payment" },
             { text: "Delivery & Returns", link: "/delivery-returns" },
           ].map((item, i) => (
-            <div key={i} className="px-4 py-2 text-sm">
+            <div key={i} className="px-4 py-2 text-xs">
               <a href={item.link} className="text-white hover:underline">{item.text}</a>
             </div>
           ))}
@@ -89,7 +89,7 @@ export function Info() {
             { text: "Career", link: "/career" },
             { text: "Investor Relations", link: "/investor" },
           ].map((item, i) => (
-            <div key={i} className="px-4 py-2 text-sm">
+            <div key={i} className="px-4 py-2 text-xs">
               <a href={item.link} className="text-white hover:underline">{item.text}</a>
             </div>
           ))}
@@ -129,7 +129,7 @@ export function Info() {
             { text: "30-Day Open Purchase", link: "/open-purchase" },
           ].map((item, i) => (
             <div key={i} className="px-4 py-2 text-sm">
-              <a href={item.link} className="text-white hover:underline">{item.text}</a>
+              <a href={item.link} className="text-white hover:underline text-xs">{item.text}</a>
             </div>
           ))}
         </CollapsibleContent>
