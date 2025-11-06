@@ -109,15 +109,15 @@ export function EditForm({ data }: iAppProps) {
               <p className="text-red-500">{fields.description.errors}</p>
             </div>
             <div className="flex flex-col gap-3">
-              <Label>Price</Label>
+              <Label>Price Input</Label>
               <Input
-                key={fields.price.key}
-                name={fields.price.name}
+                key={fields.inputPrice.key}
+                name={fields.inputPrice.name}
                 defaultValue={data.price}
                 type="number"
                 placeholder="55 kr"
               />
-              <p className="text-red-500">{fields.price.errors}</p>
+              <p className="text-red-500">{fields.inputPrice.errors}</p>
             </div>
 
             <div className="flex flex-col gap-3">
