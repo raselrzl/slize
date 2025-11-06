@@ -96,25 +96,7 @@ export function Info() {
         </CollapsibleContent>
       </Collapsible>
 
-      {/* Delivery Partners */}
-      <Collapsible {...collapsibleProps(openDelivery, setOpenDelivery)} className="w-[350px] space-y-2">
-        <div className="flex items-center justify-between space-x-4 px-4">
-          <h4 className="text-sm font-semibold">Delivery Partners</h4>
-          {collapsibleToggleButton}
-        </div>
-        <CollapsibleContent className={collapsibleContentClass}>
-          <div className="flex flex-wrap gap-2 justify-start p-2">
-            {["postnord.png", "budbee.png", "instabox.png"].map((src, i) => (
-              <img
-                key={i}
-                src={`/${src}`}
-                alt={src.split(".")[0]}
-                className="h-8 w-24 object-fill"
-              />
-            ))}
-          </div>
-        </CollapsibleContent>
-      </Collapsible>
+     
 
       {/* Your Options */}
       <Collapsible {...collapsibleProps(openOptions, setOpenOptions)} className="w-[350px] space-y-2">
@@ -149,6 +131,26 @@ export function Info() {
                 src={`/payments/${src}`}
                 alt={src.split(".")[0]}
                 className="h-8 w-20 object-fill"
+              />
+            ))}
+          </div>
+        </CollapsibleContent>
+      </Collapsible>
+
+       {/* Delivery Partners */}
+      <Collapsible {...collapsibleProps(openDelivery, setOpenDelivery)} className="w-[350px] space-y-2">
+        <div className="flex items-center justify-between space-x-4 px-4">
+          <h4 className="text-sm font-semibold">Delivery Partners</h4>
+          {collapsibleToggleButton}
+        </div>
+        <CollapsibleContent className={collapsibleContentClass}>
+          <div className="flex flex-wrap gap-2 justify-start p-2">
+            {["postnord.png", "budbee.png", "instabox.png"].map((src, i) => (
+              <img
+                key={i}
+                src={`/${src}`}
+                alt={src.split(".")[0]}
+                className="h-8 w-24 object-fill"
               />
             ))}
           </div>
