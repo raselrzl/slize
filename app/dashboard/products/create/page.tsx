@@ -148,6 +148,19 @@ export default function ProductCreateRoute() {
               />
               <p className="text-red-500">{fields.description.errors}</p>
             </div>
+            <div className="flex flex-col gap-3">
+  <Label>Available Stock</Label>
+  <Input
+    type="number"
+    key={fields.available.key}
+    name={fields.available.name}
+    defaultValue={fields.available.initialValue ?? 0}
+    placeholder="Available quantity"
+    className="w-full rounded-none"
+  />
+  <p className="text-red-500">{fields.available.errors}</p>
+</div>
+
                <div className="flex flex-col gap-3">
               <Label>Featured Product</Label>
               <Switch
@@ -202,7 +215,7 @@ export default function ProductCreateRoute() {
                   }}
                 />
               )}
-
+ 
               <p className="text-red-500">{fields.images.errors}</p>
             </div>
             

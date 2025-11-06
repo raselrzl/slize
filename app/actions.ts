@@ -38,6 +38,7 @@ export async function createProduct(prevState: unknown, formData: FormData) {
       description: submission.value.description,
       status: submission.value.status,
       price: submission.value.price,
+      available: submission.value.available ?? 0,
       images: flattenUrls,
       category: submission.value.category,
       isFeatured: submission.value.isFeatured === true ? true : false,
@@ -700,7 +701,7 @@ export async function getUserOrders() {
   return { user, orders };
 }
 
-
+ 
 export async function deleteOrderAction(orderId: string) {
   try {
     const order = await prisma.order.findUnique({
