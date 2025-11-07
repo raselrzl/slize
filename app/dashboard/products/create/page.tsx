@@ -172,16 +172,25 @@ export default function ProductCreateRoute() {
               <p className="text-red-500">{fields.available.errors}</p>
             </div>
 
-            <div className="flex flex-col gap-3">
-              <Label>Featured Product</Label>
-              <Switch
-                className="bg-gray-300 data-[state=checked]:bg-black"
-                key={fields.isFeatured.key}
-                name={fields.isFeatured.name}
-                defaultValue={fields.isFeatured.initialValue}
-              />
-              <p className="text-red-500">{fields.isFeatured.errors}</p>
-            </div>
+           <div className="flex flex-col gap-3 p-3">
+  <Label>Featured Product</Label>
+  <Switch
+    className="
+      bg-black                /* default off color */
+      data-[state=checked]:bg-green-500  /* active/checked color */
+      w-12 h-6 rounded-full relative
+      before:content-[''] before:absolute before:top-0.5 before:left-0.5
+      before:w-5 before:h-5 before:bg-green-300 before:rounded-full
+      before:transition-all
+      data-[state=checked]:before:translate-x-6
+    "
+    key={fields.isFeatured.key}
+    name={fields.isFeatured.name}
+    defaultValue={fields.isFeatured.initialValue}
+  />
+  <p className="text-red-500">{fields.isFeatured.errors}</p>
+</div>
+
 
             <div className="flex flex-col gap-3">
               <Label>Images</Label>
