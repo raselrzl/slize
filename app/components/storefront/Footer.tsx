@@ -28,13 +28,13 @@ export function Footer() {
           &copy; 2024 Kronstil and Co. All Rights Reserved.
         </p>
         <div className="flex space-x-2 items-center mt-4 sm:mt-0">
-          <div className="h-10 w-10 bg-gray-800 flex justify-center items-center">
+          <div className="h-10 w-10 bg-gray-800 flex justify-center items-center rounded-sm">
             <Instagram
               className="text-gray-100 hover:text-gray-600 cursor-pointer"
               size={24}
             />
           </div>
-          <div className="h-10 w-10 bg-gray-800 flex justify-center items-center">
+          <div className="h-10 w-10 bg-gray-800 flex justify-center items-center rounded-sm">
             <Facebook
               className="text-gray-100 hover:text-gray-600 cursor-pointer"
               size={24}
