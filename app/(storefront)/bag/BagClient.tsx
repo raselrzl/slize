@@ -1,6 +1,11 @@
 "use client";
 
-import { checkOut, delItem, orderWithInvoice, updateItemQuantity } from "@/app/actions";
+import {
+  checkOut,
+  delItem,
+  orderWithInvoice,
+  updateItemQuantity,
+} from "@/app/actions";
 import { ChceckoutButton, DeleteItem } from "@/app/components/SubmitButtons";
 import { Cart } from "@/app/lib/interfaces";
 import { Info, ShoppingBag } from "lucide-react";
@@ -106,7 +111,7 @@ export default function BagClient({
       </div>
 
       <div className="md:sticky md:top-24 flex justify-center mt-14">
-        <div className="bg-gray-200 rounded-none w-[300px] h-[340px] shadow-md mb-4">
+        <div className="bg-gray-200 rounded-none w-[300px] h-[380px] shadow-md mb-4">
           <div className="flex items-center text-gray-800 justify-between bg-gray-200 p-3">
             <p>Subtotal:</p>
             <p>{new Intl.NumberFormat("en-US").format(totalPrice)}.00 kr</p>
@@ -133,9 +138,9 @@ export default function BagClient({
             </form>
 
             {/* New Pay with Invoice Button */}
-<InvoiceCheckoutModalForm deliveryFee={deliveryFee} />
+            <InvoiceCheckoutModalForm deliveryFee={deliveryFee} />
 
-            <p className="text-center mt-6">We accept</p>
+            <p className="text-center mt-3">We accept</p>
             <div className="flex flex-wrap gap-2 justify-center px-2">
               {["ax.png", "mastercard.png", "visa.png"].map((src, i) => (
                 <img

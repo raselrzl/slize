@@ -87,7 +87,7 @@ export function ChceckoutButton() {
         </Button>
       ) : (
         <Button variant="destructive" type="submit" size="lg" className="w-full mt-5 bg-gray-900 hover:bg-gray-800 text-white rounded-none">
-          Checkout
+          Pay Now
         </Button>
       )}
     </>
