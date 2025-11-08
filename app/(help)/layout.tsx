@@ -30,7 +30,7 @@ export default function HelpLayout({ children }: HelpLayoutProps) {
         </aside>
 
         {/* Main content */}
-        <main className="flex-1 p-4 md:p-6 mt-16 md:mt-0">
+        <main className="flex-1 p-4 mt-6 md:mt-0">
           {/* On mobile, add top margin equal to fixed mobile nav height */}
           {children}
          
