@@ -10,7 +10,7 @@ interface HelpLayoutProps {
 
 export default function HelpLayout({ children }: HelpLayoutProps) {
   return (
-    <div className="bg-gray-200 min-h-screen max-w-5xl mx-auto">
+    <div className="bg-gray-200 min-h-screen  mx-auto">
               <div className="flex justify-center items-center bg-black">
           <Link href="/">
             <Image
@@ -25,12 +25,12 @@ export default function HelpLayout({ children }: HelpLayoutProps) {
       {/* Wrapper for sidebar + content */}
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row">
         {/* Sidebar / mobile menu */}
-        <aside className="md:w-64 w-full z-20">
+        <aside className="md:w-64 w-full z-20 border-r border-gray-950/10">
           <HelpSidebar />
         </aside>
 
         {/* Main content */}
-        <main className="flex-1 p-4 mt-6 md:mt-0">
+        <main className="flex-1 p-4 md:mt-0 max-w-7xl">
           {/* On mobile, add top margin equal to fixed mobile nav height */}
           {children}
          

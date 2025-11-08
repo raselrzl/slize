@@ -43,7 +43,7 @@ export function HelpSidebar({ className }: HelpSidebarProps) {
               key={link.id}
               href={link.href}
               className={cn(
-                "flex items-center h-[36px] px-4 py-2 text-sm font-medium hover:bg-gray-300 transition-colors duration-200",
+                "flex items-center h-[36px] px-4 py-2 text-xs font-medium hover:bg-gray-300 transition-colors duration-200",
                 isActive
                   ? "bg-gray-400 text-black font-semibold"
                   : "text-gray-700"
