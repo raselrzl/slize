@@ -86,7 +86,7 @@ export function HeroOneClient({ data }: { data: Banner[] }) {
           ref={scrollRef}
           className="
       grid grid-flow-col auto-cols-[180px] md:auto-cols-[300px]
-      gap-4
+      gap-3
       overflow-x-auto
       pb-4
       scroll-smooth
