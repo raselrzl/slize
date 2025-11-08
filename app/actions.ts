@@ -566,6 +566,6 @@ export async function updateOrderStatus(
 ) {
   return await prisma.order.update({
     where: { id: orderId },
-    data: { orderStatus: status },
+    data: { status },
   });
 }
