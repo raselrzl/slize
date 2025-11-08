@@ -5,14 +5,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-type Props = {
-  params: { id: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
-
-
-export default async function OrderDetailsPage({ params, searchParams }: Props) {
-  const { id } = params;
+export default async function OrderDetailsPage({
+  params,
+}: {
+  params: Promise<{ id: string }>; // params typed as a Promise
+}) {
+  const { id } = await params;
 
   const order = await prisma.order.findUnique({
     where: { id },
