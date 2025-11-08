@@ -27,7 +27,7 @@ export default function IndexPage() {
         <ExclusiveProductBoysHomeBanner />
       </div>
 
-      <div>
+      <div className=" py-4">
         <BoysFeaturedProducts />
       </div>
       <div className="bg-teal-900 py-4 flex justify-end">
