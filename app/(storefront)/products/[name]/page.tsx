@@ -344,11 +344,11 @@ export default async function CategoriesPage({
   return (
     <section>
       <CategoryRenderer category={params.name} />
-      <div className={bgColor}>
+      <div className={bgColor} >
         {params.name === "all" ? (
           <ProductListWithFilter data={data} />
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-1 max-w-7xl mx-auto py-4 px-2 md:px-0">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-1 max-w-7xl mx-auto py-4 px-2 md:px-0">
             {data.map((item) => (
               <ProductCard key={item.id} item={item} />
             ))}

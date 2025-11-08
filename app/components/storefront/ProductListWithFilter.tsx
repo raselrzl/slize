@@ -63,7 +63,7 @@ export default function ProductListWithFilter({ data }: { data: any[] }) {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-1">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-1">
             {filteredData.map((item) => (
               <ProductCard key={item.id} item={item} />
             ))}
