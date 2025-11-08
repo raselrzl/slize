@@ -19,6 +19,8 @@ async function getData(productCategory: string) {
           category: true,
           createdAt: true,
           available: true,
+          inputPrice: true,
+          discount: true,
         },
         where: {
           status: "published",
@@ -46,6 +48,8 @@ async function getData(productCategory: string) {
           price: true,
           id: true,
           description: true,
+          inputPrice: true,
+          discount: true,
         },
         orderBy: { createdAt: "desc" },
       });
@@ -70,6 +74,8 @@ async function getData(productCategory: string) {
           available: true,
           id: true,
           description: true,
+          inputPrice: true,
+          discount: true,
         },
         orderBy: { createdAt: "desc" },
       });
@@ -92,6 +98,8 @@ async function getData(productCategory: string) {
           id: true,
           description: true,
           available: true,
+          inputPrice: true,
+          discount: true,
         },
         orderBy: { createdAt: "desc" },
       });
@@ -115,6 +123,8 @@ async function getData(productCategory: string) {
           available: true,
           id: true,
           description: true,
+          inputPrice: true,
+          discount: true,
         },
         orderBy: { createdAt: "desc" },
       });
@@ -138,6 +148,8 @@ async function getData(productCategory: string) {
           price: true,
           id: true,
           description: true,
+          inputPrice: true,
+          discount: true,
         },
         orderBy: { createdAt: "desc" },
       });
@@ -162,6 +174,8 @@ async function getData(productCategory: string) {
           available: true,
           id: true,
           description: true,
+          discount: true,
+          inputPrice: true,
         },
         orderBy: { createdAt: "desc" },
       });
@@ -185,6 +199,8 @@ async function getData(productCategory: string) {
           price: true,
           id: true,
           description: true,
+          discount: true,
+          inputPrice: true,
         },
         orderBy: { createdAt: "desc" },
       });
@@ -208,6 +224,8 @@ async function getData(productCategory: string) {
           id: true,
           available: true,
           description: true,
+          discount: true,
+          inputPrice: true,
         },
         orderBy: { createdAt: "desc" },
       });
@@ -234,6 +252,8 @@ async function getData(productCategory: string) {
           price: true,
           id: true,
           description: true,
+          discount: true,
+          inputPrice: true,
         },
         orderBy: { createdAt: "desc" },
       });
@@ -258,6 +278,8 @@ async function getData(productCategory: string) {
           id: true,
           available: true,
           description: true,
+          discount: true,
+          inputPrice: true,
         },
         orderBy: { createdAt: "desc" },
       });
@@ -284,6 +306,8 @@ async function getData(productCategory: string) {
           id: true,
           description: true,
           available: true,
+          discount: true,
+          inputPrice: true,
         },
         orderBy: { createdAt: "desc" },
       });

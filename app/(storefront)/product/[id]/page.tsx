@@ -76,12 +76,17 @@ export default async function ProductIdRoute({
                 <span className="line-through text-gray-500 mr-2">
                   kr {data.inputPrice ?? data.price}.00
                 </span>
-                <span className="text-red-600">kr {data.price}.00</span>
+                <span className="text-green-600">kr {data.price}.00</span>
               </>
             ) : (
               <>kr {data.price}.00</>
             )}
             <span className="text-xs ml-2 text-gray-500">(VAT included)</span>
+             {data.inputPrice && data.discount ? (
+                <span className="ml-2 bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full">
+                  -{Math.round((data.discount / data.inputPrice) * 100)}%
+                </span>
+              ) : null}
           </p>
 
           <p className="text-sm text-gray-500 mt-6">Free delivery over 8 kr</p>

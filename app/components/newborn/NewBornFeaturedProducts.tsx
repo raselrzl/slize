@@ -16,6 +16,8 @@ async function getData() {
       description: true,
       images: true,
       price: true,
+      inputPrice: true,
+      discount: true,
     },
     orderBy: {
       createdAt: "desc",

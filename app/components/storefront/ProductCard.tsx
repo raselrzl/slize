@@ -18,6 +18,8 @@ interface iAppProps {
     description: string;
     price: number;
     images: string[];
+    discount: number | null;
+    inputPrice: number | null;
   };
 }
 
@@ -51,20 +53,44 @@ export function ProductCard({ item }: iAppProps) {
           ))}
         </CarouselContent>
       </Carousel>
-      <Link href={`/product/${item.id}`} className="p-1">
+      <Link
+        href={`/product/${item.id}`}
+        className="inline text-left p-2 rounded-md hover:bg-gray-50 transition w-full"
+      >
         <div className="flex justify-between items-center mt-1">
-          <h1 className="font-semibold md:text-md text-sm line-clamp-1 text-gray-950">{item.name}</h1>
-          <h3 className="inline-flex items-center px-2 py-1 text-xs font-medium text-gray-950">
-            {item.price}kr
-          </h3>
+          <h1 className="font-semibold md:text-md text-sm line-clamp-1 text-gray-950">
+            {item.name}
+          </h1>
         </div>
-        <div className="flex flex-row items-center">
-          <p className="text-gray-600 text-xs mt-1 line-clamp-1">
+
+        <p className="mt-1 text-sm">
+          {item.discount && item.discount > 0 ? (
+            <>
+              <span className="font-semibold text-green-600">
+                {item.price} kr
+              </span>
+              <span className="ml-1 line-through text-gray-400">
+                {item.inputPrice} kr
+              </span>
+              {item.inputPrice && item.discount ? (
+                <span className="ml-2 bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full">
+                  -{Math.round((item.discount / item.inputPrice) * 100)}%
+                </span>
+              ) : null}
+            </>
+          ) : (
+            <span className="font-semibold text-green-700">
+              {item.price} kr
+            </span>
+          )}
+        </p>
+
+        <div className="flex flex-row items-center mt-1">
+          <p className="text-gray-600 text-xs line-clamp-1">
             {item.description}
           </p>
-
           <div className="ml-auto pl-2 font-medium text-gray-900">
-            <ChevronRight />
+            <ChevronRight size={16} />
           </div>
         </div>
       </Link>
