@@ -5,22 +5,19 @@ export function Footer() {
     <footer className="mb-0 sm:px-6 lg:px-8 bg-gray-200 max-w-screen-xl mx-auto px-4 py-8 border-t border-gray-950/10">
       {/* Links Section */}
       <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-800 mb-6 text-bold">
-        <a href="#" className="hover:underline transition-colors">
-          Tech blog
-        </a>
-        <a href="#" className="hover:underline transition-colors">
+        <a href="/company-information" className="hover:underline transition-colors">
           Company information
         </a>
-        <a href="#" className="hover:underline transition-colors">
+        <a href="/terms-and-conditions" className="hover:underline transition-colors">
           General terms and conditions
         </a>
-        <a href="#" className="hover:underline transition-colors">
+        <a href="/data-protection" className="hover:underline transition-colors">
           Data protection
         </a>
-        <a href="#" className="hover:underline transition-colors">
+        <a href="/cookie-settings" className="hover:underline transition-colors">
           Cookie settings
         </a>
-        <a href="#" className="hover:underline transition-colors">
+        <a href="/community-guidelines" className="hover:underline transition-colors">
           Community Guidelines
         </a>
       </div>
