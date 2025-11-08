@@ -25,7 +25,7 @@ export default async function OrderDetailsPage({
   const totalAmount = order.items.reduce((sum, item) => sum + (item.price || 0) * item.quantity, 0);
 
   return (
-    <div className="min-h-screen p-6 bg-gray-50">
+    <div className="min-h-screen p-6">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">Order Details</h1>
         <Button asChild>
