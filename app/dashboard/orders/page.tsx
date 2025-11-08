@@ -4,7 +4,6 @@ import { unstable_noStore as noStore } from "next/cache";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -48,11 +47,7 @@ async function getPaginatedOrders(
       take: pageSize,
       skip,
       orderBy: { createdAt: "desc" },
-      select: {
-        id: true,
-        amount: true,
-        createdAt: true,
-        status: true,
+      include: {
         User: {
           select: {
             firstName: true,
@@ -60,11 +55,15 @@ async function getPaginatedOrders(
             profileImage: true,
           },
         },
-        shippingName: true,
-        shippingLine1: true,
-        shippingCity: true,
-        shippingPostal: true,
-        shippingCountry: true,
+        items: {
+          select: {
+            id: true,
+            name: true,
+            quantity: true,
+            price: true,
+            imageString: true,
+          },
+        },
       },
     }),
     prisma.order.count(),
@@ -83,9 +82,7 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
   const params = await searchParams;
   const currentPage = Number(params.page) || 1;
 
-  const { orders, totalCount, totalPages } = await getPaginatedOrders(
-    currentPage
-  );
+  const { orders, totalCount, totalPages } = await getPaginatedOrders(currentPage);
 
   return (
     <>
@@ -105,38 +102,101 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                   <TableRow>
                     <TableHead>Customer</TableHead>
                     <TableHead>Shipping Info</TableHead>
-                    <TableHead>Type</TableHead>
+                    <TableHead>Order Type</TableHead>
                     <TableHead>Status</TableHead>
+                    <TableHead>Delivery</TableHead>
+                    <TableHead>Invoice</TableHead>
                     <TableHead>Date</TableHead>
                     <TableHead className="text-right">Amount</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
+
                 <TableBody>
                   {orders.map((item) => (
                     <TableRow key={item.id}>
+                      {/* Customer Info */}
                       <TableCell>
                         <div className="flex flex-col">
-                          <p className="font-medium">{item.User?.firstName}</p>
+                          <p className="font-medium">{item.User?.firstName ?? "Guest"}</p>
                           <p className="text-xs text-muted-foreground">
-                            {item.User?.email ?? "No Email"}
+                            {item.User?.email ?? item.email ?? "No Email"}
                           </p>
                         </div>
                       </TableCell>
 
                       {/* Shipping Info */}
                       <TableCell>
-                        <div className="flex flex-col">
+                        <div className="flex flex-col text-xs">
                           <p className="font-medium">{item.shippingName}</p>
-                          <p className="text-xs text-muted-foreground">
-                            {item.shippingLine1} {item.shippingCity}{" "}
+                          <p className="text-muted-foreground">
+                            {item.shippingLine1} {item.shippingCity},{" "}
                             {item.shippingPostal}, {item.shippingCountry}
                           </p>
                         </div>
                       </TableCell>
 
-                      <TableCell>Order</TableCell>
-                      <TableCell>{item.status}</TableCell>
+                      {/* Order Type */}
+                      <TableCell>
+                        {item.invoiceStatus ? (
+                          <span className="text-xs font-semibold bg-yellow-100 text-yellow-700 px-2 py-1 rounded">
+                            Invoice
+                          </span>
+                        ) : (
+                          <span className="text-xs font-semibold bg-green-100 text-green-700 px-2 py-1 rounded">
+                            Card
+                          </span>
+                        )}
+                      </TableCell>
+
+                      {/* Order Status */}
+                      <TableCell>
+                        <span
+                          className={`text-xs font-semibold px-2 py-1 rounded ${
+                            item.status === "pending"
+                              ? "bg-yellow-100 text-yellow-700"
+                              : item.status === "completed"
+                              ? "bg-green-100 text-green-700"
+                              : "bg-red-100 text-red-700"
+                          }`}
+                        >
+                          {item.status}
+                        </span>
+                      </TableCell>
+
+                      {/* Delivery Status */}
+                      <TableCell>
+                        <span
+                          className={`text-xs font-semibold px-2 py-1 rounded ${
+                            item.deliveryStatus === "delivered"
+                              ? "bg-green-100 text-green-700"
+                              : item.deliveryStatus === "shipped"
+                              ? "bg-blue-100 text-blue-700"
+                              : "bg-gray-100 text-gray-700"
+                          }`}
+                        >
+                          {item.deliveryStatus ?? "Not Shipped"}
+                        </span>
+                      </TableCell>
+
+                      {/* Invoice Status */}
+                      <TableCell>
+                        {item.invoiceStatus ? (
+                          <span
+                            className={`text-xs font-semibold px-2 py-1 rounded ${
+                              item.invoiceStatus === "paid"
+                                ? "bg-green-100 text-green-700"
+                                : "bg-yellow-100 text-yellow-700"
+                            }`}
+                          >
+                            {item.invoiceStatus}
+                          </span>
+                        ) : (
+                          "-"
+                        )}
+                      </TableCell>
+
+                      {/* Date */}
                       <TableCell>
                         {new Date(item.createdAt).toLocaleDateString("en-US", {
                           year: "numeric",
@@ -144,11 +204,10 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                           day: "numeric",
                         })}
                       </TableCell>
+
+                      {/* Amount */}
                       <TableCell className="text-right">
-                        {new Intl.NumberFormat("en-US").format(
-                          item.amount / 100
-                        )}{" "}
-                        kr
+                        {new Intl.NumberFormat("en-US").format(item.amount / 100)} kr
                       </TableCell>
 
                       {/* Dropdown Actions */}
@@ -166,9 +225,14 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
                             <DropdownMenuItem asChild>
-                              <Link
-                                href={`/dashboard/orders/${item.id}/updatestatus`}
-                              >
+                              <Link href={`/dashboard/orders/${item.id}/details`}>
+                                <PenBoxIcon className="w-4 h-4 mr-2" />
+                                View Details
+                              </Link>
+                            </DropdownMenuItem>
+
+                            <DropdownMenuItem asChild>
+                              <Link href={`/dashboard/orders/${item.id}/updatestatus`}>
                                 <PenBoxIcon className="w-4 h-4 mr-2" />
                                 Update Status
                               </Link>
@@ -177,9 +241,7 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                             <DropdownMenuSeparator />
 
                             <DropdownMenuItem asChild>
-                              <Link
-                                href={`/dashboard/orders/${item.id}/delete`}
-                              >
+                              <Link href={`/dashboard/orders/${item.id}/delete`}>
                                 <XCircle className="w-4 h-4 mr-2 text-red-600" />
                                 Delete
                               </Link>
@@ -195,10 +257,7 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
           </Card>
 
           {/* Pagination */}
-          <PaginationComponent
-            totalPages={totalPages}
-            currentPage={currentPage}
-          />
+          <PaginationComponent totalPages={totalPages} currentPage={currentPage} />
         </div>
       ) : (
         <div className="p-6 text-center text-muted-foreground">
