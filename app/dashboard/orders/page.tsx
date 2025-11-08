@@ -52,7 +52,6 @@ async function getPaginatedOrders(
           select: {
             firstName: true,
             email: true,
-            profileImage: true,
           },
         },
         items: {
@@ -102,7 +101,7 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                   <TableRow>
                     <TableHead>Customer</TableHead>
                     <TableHead>Shipping Info</TableHead>
-                    <TableHead>Order Type</TableHead>
+                    <TableHead>Payment</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Delivery</TableHead>
                     <TableHead>Invoice</TableHead>
@@ -128,23 +127,28 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                       {/* Shipping Info */}
                       <TableCell>
                         <div className="flex flex-col text-xs">
-                          <p className="font-medium">{item.shippingName}</p>
+                          <p className="font-medium">{item.shippingName ?? "-"}</p>
                           <p className="text-muted-foreground">
-                            {item.shippingLine1} {item.shippingCity},{" "}
-                            {item.shippingPostal}, {item.shippingCountry}
+                            {[item.shippingLine1, item.shippingLine2, item.shippingCity, item.shippingPostal, item.shippingCountry]
+                              .filter(Boolean)
+                              .join(", ") || "-"}
                           </p>
                         </div>
                       </TableCell>
 
-                      {/* Order Type */}
+                      {/* Payment Method */}
                       <TableCell>
-                        {item.invoiceStatus ? (
-                          <span className="text-xs font-semibold bg-yellow-100 text-yellow-700 px-2 py-1 rounded">
+                        {item.paymentMethod === "invoice" ? (
+                          <span className="text-xs font-semibold bg-yellow-100 text-yellow-700 px-2 py-1">
                             Invoice
                           </span>
+                        ) : item.paymentMethod === "direct" ? (
+                          <span className="text-xs font-semibold bg-green-100 text-green-700 px-2 py-1">
+                            Direct Payment
+                          </span>
                         ) : (
-                          <span className="text-xs font-semibold bg-green-100 text-green-700 px-2 py-1 rounded">
-                            Card
+                          <span className="text-xs font-semibold bg-gray-100 text-gray-700 px-2 py-1">
+                            Unknown
                           </span>
                         )}
                       </TableCell>
@@ -218,10 +222,7 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                               <MoreHorizontal className="w-4 h-4" />
                             </Button>
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent
-                            align="end"
-                            className="bg-gray-400 rounded-none"
-                          >
+                          <DropdownMenuContent align="end" className="bg-gray-400 rounded-none">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
                             <DropdownMenuItem asChild>

@@ -72,6 +72,12 @@ model Order {
   shippingCity    String?
   shippingPostal  String?
   shippingCountry String?
+  paymentMethod  PaymentMethod?
+}
+
+enum PaymentMethod {
+  direct
+  invoice
 }
 
 

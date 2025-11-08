@@ -292,6 +292,7 @@ export async function checkOut(formData: FormData) {
     data: {
       userId: user.id,
       amount: finalTotalMinor,
+      paymentMethod: "direct",
       deliveryFee: deliveryFeeMinor,
       status: "pending",
       items: {
@@ -502,6 +503,7 @@ export async function orderWithInvoice(formData: FormData) {
     data: {
       userId: user.id,
       amount: finalTotal * 100,
+      paymentMethod: "invoice",
       deliveryFee: deliveryFee * 100,
       status: "pending",
       invoiceStatus: "pending",
