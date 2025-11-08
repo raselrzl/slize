@@ -440,7 +440,6 @@ export async function deleteOrderAction(orderId: string) {
   }
 }
 
-
 export async function orderWithInvoice(formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
@@ -464,7 +463,7 @@ export async function orderWithInvoice(formData: FormData) {
   const shippingPostal = formData.get("shippingPostal") as string;
   const shippingCountry = formData.get("shippingCountry") as string;
 
-  // Get cart from Redis
+  // ✅ Get and parse cart
   const rawCart = await redis.get(`cart-${user.id}`);
   const cart: Cart | null = rawCart as Cart | null;
 
@@ -473,12 +472,13 @@ export async function orderWithInvoice(formData: FormData) {
     return;
   }
 
-  // Validate product availability
+  // ✅ Validate product availability
   const unavailable: string[] = [];
   const validItems: typeof cart.items = [];
 
   for (const item of cart.items) {
     const product = await prisma.product.findUnique({ where: { id: item.id } });
+
     if (!product || product.available < item.quantity) {
       unavailable.push(item.name);
     } else {
@@ -491,11 +491,14 @@ export async function orderWithInvoice(formData: FormData) {
     return;
   }
 
-  // Create Order with shipping info
-  const subtotal = validItems.reduce((sum, it) => sum + it.price * it.quantity, 0);
+  // ✅ Create Order
+  const subtotal = validItems.reduce(
+    (sum, it) => sum + it.price * it.quantity,
+    0
+  );
   const finalTotal = subtotal + deliveryFee;
 
-  await prisma.order.create({
+  const order = await prisma.order.create({
     data: {
       userId: user.id,
       amount: finalTotal * 100,
@@ -521,12 +524,27 @@ export async function orderWithInvoice(formData: FormData) {
         })),
       },
     },
+    include: { items: true },
   });
 
-  // Clear cart
+  // ✅ Update product stock (decrease available quantity)
+  await Promise.all(
+    validItems.map(async (item) => {
+      await prisma.product.update({
+        where: { id: item.id },
+        data: {
+          available: {
+            decrement: item.quantity,
+          },
+        },
+      });
+    })
+  );
+
+  // ✅ Clear the user's cart from Redis
   await redis.del(`cart-${user.id}`);
 
-  // Redirect to invoice payment success page
-  redirect("/");
+  // ✅ Redirect to invoice payment success page
+  redirect("/payment/invoice-payment");
 }
 
