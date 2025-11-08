@@ -42,8 +42,8 @@ export async function createProduct(prevState: unknown, formData: FormData) {
       description: submission.value.description,
       status: submission.value.status,
       inputPrice: inputPrice, // original admin input
-      price: price,           // actual price to sell
-      discount: discount,     // optional discount
+      price: price, // actual price to sell
+      discount: discount, // optional discount
       available: submission.value.available ?? 0,
       images: flattenUrls,
       category: submission.value.category,
@@ -53,7 +53,6 @@ export async function createProduct(prevState: unknown, formData: FormData) {
 
   redirect("/dashboard/products");
 }
-
 
 export async function editProduct(prevState: any, formData: FormData) {
   const { getUser } = getKindeServerSession();
@@ -76,6 +75,11 @@ export async function editProduct(prevState: any, formData: FormData) {
   );
 
   const productId = formData.get("productId") as string;
+
+  const inputPrice = submission.value.inputPrice;
+  const discount = submission.value.discount ?? 0; // you can add discount field in form later
+  const price = inputPrice - discount; // final selling price
+
   await prisma.product.update({
     where: {
       id: productId,
@@ -84,6 +88,8 @@ export async function editProduct(prevState: any, formData: FormData) {
       name: submission.value.name,
       description: submission.value.description,
       category: submission.value.category,
+      price: price,
+      discount: submission.value.discount,
       inputPrice: submission.value.inputPrice,
       isFeatured: submission.value.isFeatured === true ? true : false,
       status: submission.value.status,
@@ -274,7 +280,10 @@ export async function checkOut(formData: FormData) {
   }
 
   // create order + Stripe session as before
-  const subtotalSEK = validItems.reduce((sum, it) => sum + it.price * it.quantity, 0);
+  const subtotalSEK = validItems.reduce(
+    (sum, it) => sum + it.price * it.quantity,
+    0
+  );
   const finalTotalSEK = subtotalSEK + deliveryFeeSEK;
   const finalTotalMinor = finalTotalSEK * 100;
   const deliveryFeeMinor = deliveryFeeSEK * 100;
@@ -285,24 +294,38 @@ export async function checkOut(formData: FormData) {
       amount: finalTotalMinor,
       deliveryFee: deliveryFeeMinor,
       status: "pending",
-      items: { create: validItems.map(it => ({
-        productId: it.id,
-        quantity: it.quantity,
-        name: it.name,
-        price: it.price * 100,
-        imageString: it.imageString,
-      }))},
+      items: {
+        create: validItems.map((it) => ({
+          productId: it.id,
+          quantity: it.quantity,
+          name: it.name,
+          price: it.price * 100,
+          imageString: it.imageString,
+        })),
+      },
     },
     include: { items: true },
   });
 
-  const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = validItems.map(item => ({
-    price_data: { currency: "sek", unit_amount: item.price * 100, product_data: { name: item.name, images: [item.imageString] } },
-    quantity: item.quantity,
-  }));
+  const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] =
+    validItems.map((item) => ({
+      price_data: {
+        currency: "sek",
+        unit_amount: item.price * 100,
+        product_data: { name: item.name, images: [item.imageString] },
+      },
+      quantity: item.quantity,
+    }));
 
   if (deliveryFeeMinor > 0) {
-    lineItems.push({ price_data: { currency: "sek", unit_amount: deliveryFeeMinor, product_data: { name: "Delivery Fee" } }, quantity: 1 });
+    lineItems.push({
+      price_data: {
+        currency: "sek",
+        unit_amount: deliveryFeeMinor,
+        product_data: { name: "Delivery Fee" },
+      },
+      quantity: 1,
+    });
   }
 
   const session = await stripe.checkout.sessions.create({
@@ -316,8 +339,7 @@ export async function checkOut(formData: FormData) {
   });
 
   return redirect(session.url!);
-};
-
+}
 
 export async function updateItemQuantity(formData: FormData) {
   const { getUser } = getKindeServerSession();
@@ -381,7 +403,6 @@ export async function getUserOrders() {
   return { user, orders };
 }
 
- 
 export async function deleteOrderAction(orderId: string) {
   try {
     const order = await prisma.order.findUnique({

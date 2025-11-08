@@ -40,6 +40,8 @@ interface iAppProps {
     description: string;
     status: $Enums.ProductStatus;
     price: number;
+    inputPrice: number | null;
+    discount: number | null;
     images: string[];
     category: $Enums.Category;
     isFeatured: boolean;
@@ -67,7 +69,7 @@ export function EditForm({ data }: iAppProps) {
     <form id={form.id} onSubmit={form.onSubmit} action={action}>
       <input type="hidden" name="productId" value={data.id} />
       <div className="flex items-center gap-4">
-        <Button variant="outline" size="icon" asChild>
+        <Button variant="outline" size="icon" asChild className="rounded-none">
           <Link href="/dashboard/products">
             <ChevronLeft className="w-4 h-4" />
           </Link>
@@ -78,9 +80,7 @@ export function EditForm({ data }: iAppProps) {
       <Card className="mt-5">
         <CardHeader>
           <CardTitle>Product Details</CardTitle>
-          <CardDescription>
-            In this form can update product
-          </CardDescription>
+          <CardDescription>In this form can update product</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-6">
@@ -110,13 +110,31 @@ export function EditForm({ data }: iAppProps) {
             </div>
             <div className="flex flex-col gap-3">
               <Label>Price Input</Label>
-              <Input
-                key={fields.inputPrice.key}
-                name={fields.inputPrice.name}
-                defaultValue={data.price}
-                type="number"
-                placeholder="55 kr"
-              />
+            {data.inputPrice !== null && (
+                <Input
+                  key={fields.inputPrice.key}
+                  name={fields.inputPrice.name}
+                  defaultValue={data.inputPrice ?? ""}
+                  type="number"
+                  placeholder="55 kr"
+                />
+              )}
+
+              <p className="text-red-500">{fields.inputPrice.errors}</p>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <Label>Discount</Label>
+              {data.discount !== null && (
+                <Input
+                  key={fields.discount.key}
+                  name={fields.discount.name}
+                  defaultValue={data.discount}
+                  type="number"
+                  placeholder="35"
+                />
+              )}
+
               <p className="text-red-500">{fields.inputPrice.errors}</p>
             </div>
 
