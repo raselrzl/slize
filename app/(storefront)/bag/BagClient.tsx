@@ -147,7 +147,7 @@ export default function BagClient({
                   key={i}
                   src={`/payments/${src}`}
                   alt={src}
-                  className="h-8 w-20 shadow-md object-cover"
+                  className="h-8 w-20 shadow-md object-cover rounded-sm"
                 />
               ))}
             </div>
