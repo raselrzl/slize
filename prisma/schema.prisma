@@ -100,6 +100,7 @@ enum OrderStatus {
   pending
   accepted
   cancelled
+  completed
 }
 
 enum DeliveryStatus {
@@ -109,7 +110,10 @@ enum DeliveryStatus {
 }
 
 enum InvoiceStatus {
+  sent
+  remindered
   pending
+  cancelled
   paid
 }
 

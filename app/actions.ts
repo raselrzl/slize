@@ -10,7 +10,6 @@ import { Cart } from "./lib/interfaces";
 import { revalidatePath } from "next/cache";
 import { stripe } from "./lib/stripe";
 import Stripe from "stripe";
-import { NextResponse } from "next/server";
 
 export async function createProduct(prevState: unknown, formData: FormData) {
   const { getUser } = getKindeServerSession();
@@ -550,3 +549,23 @@ export async function orderWithInvoice(formData: FormData) {
   redirect("/payment/invoice-payment");
 }
 
+export async function updateInvoiceStatus(orderId: string, status: "sent" | "remindered" | "pending" | "cancelled" | "paid") {
+  if (!orderId) throw new Error("Order ID is required");
+
+  const updated = await prisma.order.update({
+    where: { id: orderId },
+    data: { invoiceStatus: status },
+  });
+
+  return updated;
+}
+
+export async function updateOrderStatus(
+  orderId: string,
+  status: "pending" | "accepted" | "cancelled" | "completed"
+) {
+  return await prisma.order.update({
+    where: { id: orderId },
+    data: { orderStatus: status },
+  });
+}

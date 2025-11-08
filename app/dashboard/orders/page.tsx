@@ -102,7 +102,7 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                     <TableHead>Customer</TableHead>
                     <TableHead>Shipping Info</TableHead>
                     <TableHead>Payment By</TableHead>
-                    <TableHead>Payment Status</TableHead>
+                    <TableHead>Order Status</TableHead>
                     <TableHead>Delivery status</TableHead>
                     <TableHead>Invoice Status</TableHead>
                     <TableHead>Order Date</TableHead>
@@ -233,14 +233,18 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                             </DropdownMenuItem>
 
                             <DropdownMenuItem asChild>
-                              <Link href={`/dashboard/orders/${item.id}/updatestatus`}>
+                              <Link href={`/dashboard/orders/${item.id}/updateInvoiceStatus`}>
                                 <PenBoxIcon className="w-4 h-4 mr-2" />
-                                Update Status
+                                Update Invoice Status
                               </Link>
                             </DropdownMenuItem>
 
-                            <DropdownMenuSeparator />
-
+                              <DropdownMenuItem asChild>
+                              <Link href={`/dashboard/orders/${item.id}/updateorderStatus`}>
+                                <PenBoxIcon className="w-4 h-4 mr-2" />
+                                Update Order Status
+                              </Link>
+                            </DropdownMenuItem>
                             <DropdownMenuItem asChild>
                               <Link href={`/dashboard/orders/${item.id}/delete`}>
                                 <XCircle className="w-4 h-4 mr-2 text-red-600" />
