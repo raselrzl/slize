@@ -101,11 +101,11 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                   <TableRow>
                     <TableHead>Customer</TableHead>
                     <TableHead>Shipping Info</TableHead>
-                    <TableHead>Payment</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Delivery</TableHead>
-                    <TableHead>Invoice</TableHead>
-                    <TableHead>Date</TableHead>
+                    <TableHead>Payment By</TableHead>
+                    <TableHead>Payment Status</TableHead>
+                    <TableHead>Delivery status</TableHead>
+                    <TableHead>Invoice Status</TableHead>
+                    <TableHead>Order Date</TableHead>
                     <TableHead className="text-right">Amount</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
