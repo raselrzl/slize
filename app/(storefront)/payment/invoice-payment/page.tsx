@@ -1,56 +1,42 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { motion } from "framer-motion";
+import { Card } from "@/components/ui/card";
+import { FileText } from "lucide-react";
+import Link from "next/link";
 
 export default function InvoicePaymentSuccess() {
-  const router = useRouter();
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9, y: 40 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="w-full max-w-md"
-      >
-        <Card className="shadow-lg border border-gray-200 rounded-2xl">
-          <CardHeader className="text-center">
-            <div className="flex justify-center mb-4">
-              <CheckCircle2 className="text-green-600" size={72} />
-            </div>
-            <CardTitle className="text-2xl font-semibold text-gray-800">
-              Order Placed Successfully 🎉
-            </CardTitle>
-          </CardHeader>
+    <section className="w-full min-h-[50vh] flex items-center justify-center px-10 py-4">
+      <Card className="w-[350px] border-none rounded-none shadow-xl">
+        <div className="p-6">
+          <div className="w-full flex justify-center">
+            <FileText className="w-12 h-12 rounded-full bg-yellow-500/30 text-yellow-600 p-2" />
+          </div>
 
-          <CardContent className="text-center space-y-4">
-            <p className="text-gray-600">
-              Thank you for your purchase! You will receive your invoice within{" "}
-              <strong>3 working days</strong>.
+          <div className="mt-3 text-center sm:mt-5 w-full">
+            <h3 className="text-lg leading-6 font-medium">
+              Order Placed Successfully
+            </h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Thank you for your order. You will receive your invoice within{" "}
+              <strong>3 working days</strong>. Once payment is confirmed, we will notify you.
             </p>
 
-            <div className="flex flex-col sm:flex-row justify-center gap-3 mt-6">
-              <Button
-                onClick={() => router.push("/")}
-                className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-md"
-              >
-                🏠 Go to Homepage
-              </Button>
-              <Button
-                onClick={() => router.push("/myorders")}
-                variant="outline"
-                className="border-gray-400 hover:bg-gray-100 px-6 py-2 rounded-md"
-              >
-                📦 Check Order Status
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </motion.div>
-    </div>
+            <Button
+              asChild
+              className="w-full mt-5 sm:mt-6 border border-gray-950/10 rounded-none h-9"
+            >
+              <Link href="/">Back to Shopping</Link>
+            </Button>
+
+            <Button
+              asChild
+              className="w-full mt-2 border border-gray-950/10 rounded-none h-9"
+            >
+              <Link href="/myorders">Check Order Status</Link>
+            </Button>
+          </div>
+        </div>
+      </Card>
+    </section>
   );
 }
