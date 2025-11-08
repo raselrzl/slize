@@ -35,45 +35,47 @@ export default function DeleteOrderPage() {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-20 border border-red-400 bg-red-50 dark:bg-gray-800 dark:border-gray-600 p-8 rounded-lg text-center">
-      <div className="flex flex-col items-center gap-3">
-        <AlertTriangle className="w-12 h-12 text-red-600" />
-        <h1 className="text-xl font-bold text-red-700">
-          Delete Order Confirmation
-        </h1>
-        <p className="text-gray-700 dark:text-gray-300">
-          You are about to permanently delete order ID:
-          <span className="font-semibold text-red-600"> {orderId}</span>
-        </p>
-        <p className="text-sm text-gray-500">
-          This action cannot be undone.
-        </p>
-      </div>
-
-      {error && (
-        <div className="mt-4 p-3 bg-red-200 text-red-800 rounded-md">
-          {error}
+    <div className="flex items-center justify-center p-4">
+      <div className="max-w-md w-full bg-white dark:bg-gray-800 border border-red-300 dark:border-red-600 p-8 shadow-lg text-center">
+        <div className="flex flex-col items-center gap-4">
+          <AlertTriangle className="w-14 h-14 text-red-600" />
+          <h1 className="text-2xl font-bold text-red-700">
+            Delete Order Confirmation
+          </h1>
+          <p className="text-gray-700 dark:text-gray-300">
+            You are about to permanently delete order ID:
+            <span className="font-semibold text-red-600"> {orderId}</span>
+          </p>
+          <p className="text-sm text-gray-500">
+            This action cannot be undone.
+          </p>
         </div>
-      )}
 
-      <div className="flex justify-center gap-4 mt-8">
-        <Button
-          variant="destructive"
-          disabled={isPending}
-          onClick={handleDelete}
-          className="flex items-center gap-2"
-        >
-          {isPending ? (
-            <>
-              <Loader2 className="w-4 h-4 animate-spin" /> Deleting...
-            </>
-          ) : (
-            "Yes, Delete"
-          )}
-        </Button>
-        <Link href="/dashboard/orders">
-          <Button variant="secondary">Cancel</Button>
-        </Link>
+        {error && (
+          <div className="mt-4 p-3 bg-red-100 dark:bg-red-700 text-red-800 dark:text-red-200 rounded-md">
+            {error}
+          </div>
+        )}
+
+        <div className="flex justify-center gap-4 mt-8">
+          <Button
+            variant="destructive"
+            disabled={isPending}
+            onClick={handleDelete} 
+            className="flex items-center gap-2 border h-8 rounded-none"
+          >
+            {isPending ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" /> Deleting...
+              </>
+            ) : (
+              "Yes, Delete"
+            )}
+          </Button>
+          <Link href="/dashboard/orders">
+            <Button variant="secondary" className="border h-8 rounded-none">Cancel</Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
