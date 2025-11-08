@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 type Props = {
-  params: {
-    id: string;
-  };
+  params: { id: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
 };
 
-export default async function OrderDetailsPage({ params }: Props) {
+
+export default async function OrderDetailsPage({ params, searchParams }: Props) {
   const { id } = params;
 
   const order = await prisma.order.findUnique({
