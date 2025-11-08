@@ -342,7 +342,7 @@ export async function checkOut(formData: FormData) {
 }
 
 export async function updateItemQuantity(formData: FormData) {
-  const { getUser } = getKindeServerSession();
+  const { getUser } = getKindeServerSession(); 
   const user = await getUser();
 
   if (!user) return redirect("/");
@@ -439,3 +439,94 @@ export async function deleteOrderAction(orderId: string) {
     return { success: false, message: "Server error" };
   }
 }
+
+
+export async function orderWithInvoice(formData: FormData) {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user) {
+    redirect("/login");
+    return;
+  }
+
+  const deliveryFee = Number(formData.get("deliveryFee") || 0);
+
+  // Shipping info from form
+  const fullName = formData.get("fullName") as string;
+  const phone = formData.get("phone") as string;
+  const email = formData.get("email") as string;
+
+  const shippingName = formData.get("shippingName") as string;
+  const shippingLine1 = formData.get("shippingLine1") as string;
+  const shippingLine2 = formData.get("shippingLine2") as string;
+  const shippingCity = formData.get("shippingCity") as string;
+  const shippingPostal = formData.get("shippingPostal") as string;
+  const shippingCountry = formData.get("shippingCountry") as string;
+
+  // Get cart from Redis
+  const rawCart = await redis.get(`cart-${user.id}`);
+  const cart: Cart | null = rawCart as Cart | null;
+
+  if (!cart || !cart.items || cart.items.length === 0) {
+    redirect("/bag");
+    return;
+  }
+
+  // Validate product availability
+  const unavailable: string[] = [];
+  const validItems: typeof cart.items = [];
+
+  for (const item of cart.items) {
+    const product = await prisma.product.findUnique({ where: { id: item.id } });
+    if (!product || product.available < item.quantity) {
+      unavailable.push(item.name);
+    } else {
+      validItems.push({ ...item, price: product.price });
+    }
+  }
+
+  if (unavailable.length > 0) {
+    redirect("/out-of-stock");
+    return;
+  }
+
+  // Create Order with shipping info
+  const subtotal = validItems.reduce((sum, it) => sum + it.price * it.quantity, 0);
+  const finalTotal = subtotal + deliveryFee;
+
+  await prisma.order.create({
+    data: {
+      userId: user.id,
+      amount: finalTotal * 100,
+      deliveryFee: deliveryFee * 100,
+      status: "pending",
+      invoiceStatus: "pending",
+      fullName,
+      phone,
+      email,
+      shippingName,
+      shippingLine1,
+      shippingLine2,
+      shippingCity,
+      shippingPostal,
+      shippingCountry,
+      items: {
+        create: validItems.map((it) => ({
+          productId: it.id,
+          quantity: it.quantity,
+          name: it.name,
+          price: it.price * 100,
+          imageString: it.imageString,
+        })),
+      },
+    },
+  });
+
+  // Clear cart
+  await redis.del(`cart-${user.id}`);
+
+  // Redirect to invoice payment success page
+  redirect("/");
+}
+

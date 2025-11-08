@@ -1,6 +1,6 @@
 "use client";
 
-import { checkOut, delItem, updateItemQuantity } from "@/app/actions";
+import { checkOut, delItem, orderWithInvoice, updateItemQuantity } from "@/app/actions";
 import { ChceckoutButton, DeleteItem } from "@/app/components/SubmitButtons";
 import { Cart } from "@/app/lib/interfaces";
 import { Info, ShoppingBag } from "lucide-react";
@@ -8,6 +8,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { QuantitySelector } from "./QuantitySelector";
+import InvoiceCheckoutForm from "./InvoiceCheckoutForm";
+import InvoiceCheckoutModalForm from "./InvoiceCheckoutForm";
 
 interface BagClientProps {
   cart: Cart | null;
@@ -129,6 +131,10 @@ export default function BagClient({
               <input type="hidden" name="deliveryFee" value={deliveryFee} />
               <ChceckoutButton />
             </form>
+
+            {/* New Pay with Invoice Button */}
+<InvoiceCheckoutModalForm deliveryFee={deliveryFee} />
+
             <p className="text-center mt-6">We accept</p>
             <div className="flex flex-wrap gap-2 justify-center px-2">
               {["ax.png", "mastercard.png", "visa.png"].map((src, i) => (
