@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { MoreHorizontal, PenBoxIcon, XCircle } from "lucide-react";
 import { PaginationComponent } from "@/app/components/PaginationComponent";
 import { OrderFilter } from "./OrderFilter";
+import { DownloadInvoiceButton } from "./DownloadInvoiceButton";
 
 type SearchParamsProps = {
   searchParams: Promise<{ page?: string; id?: string }>;
@@ -82,6 +83,26 @@ async function getPaginatedOrders(
     totalPages: Math.ceil(totalCount / pageSize),
   };
 }
+
+
+const handleDownloadInvoice = async (orderId: string) => {
+  try {
+    const res = await fetch(`/api/invoice/${orderId}`);
+    if (!res.ok) throw new Error("Failed to fetch invoice");
+
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `invoice-${orderId}.pdf`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  } catch (err) {
+    console.error(err);
+    alert("Failed to download invoice.");
+  }
+};
+
 
 export default async function OrdersPage({ searchParams }: SearchParamsProps) {
   noStore();
@@ -277,6 +298,11 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                                 Update Delivery Status
                               </Link>
                             </DropdownMenuItem>
+
+                            <DropdownMenuItem asChild>
+                              <DownloadInvoiceButton orderId={item.id} />
+                            </DropdownMenuItem>
+
                             <DropdownMenuItem asChild>
                               <Link href={`/dashboard/orders/${item.id}/delete`}>
                                 <XCircle className="w-4 h-4 mr-2 text-red-600" />
