@@ -1,20 +1,11 @@
 import prisma from "@/app/lib/db";
 import { emailClient } from "@/app/lib/mailtrap";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { redirect } from "next/navigation";
 import { NextResponse } from "next/server";
 
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ invoiceId: string }> }
 ) {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  if (!user || user.email !== "rasel6041@gmail.com") {
-    return redirect("/");
-  }
-
   try {
     const { invoiceId } = await params;
 
