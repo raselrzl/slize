@@ -6,10 +6,12 @@ import { orderWithInvoice } from "@/app/actions";
 
 interface InvoiceCheckoutModalProps {
   deliveryFee: number;
+  user: { name: string | null; email: string | null }; 
 }
 
 export default function InvoiceCheckoutModalForm({
   deliveryFee,
+  user
 }: InvoiceCheckoutModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -64,19 +66,24 @@ export default function InvoiceCheckoutModalForm({
                 className="p-2 w-full rounded-none outline-none border"
               />
               <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                required
-                className="p-2 w-full rounded-none outline-none border"
-              />
-              <input
-                type="text"
-                name="shippingName"
-                placeholder="Recipient Name"
-                required
-                className="p-2 w-full rounded-none outline-none border"
-              />
+  type="text"
+  name="fullName"
+  placeholder="Full Name"
+  required
+  value={user.name || ""}
+  readOnly
+  className="p-2 w-full rounded-none outline-none border bg-gray-100"
+/>
+
+<input
+  type="email"
+  name="email"
+  placeholder="Email"
+  required
+  value={user.email || ""}
+  readOnly
+  className="p-2 w-full rounded-none outline-none border bg-gray-100"
+/>
               <input
                 type="text"
                 name="shippingLine1"

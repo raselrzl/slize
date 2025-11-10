@@ -35,6 +35,7 @@ export default async function BagRoute() {
         totalPrice={totalPrice}
         deliveryFee={deliveryFee}
         finalTotal={finalTotal}
+        user={{ name: `${user.given_name} ${user.family_name}`, email: user.email }}
       />
        <div className="flex justify-between items-center my-6 pb-8">
         <h1 className="font-bold text-2xl text-gray-800 mt-4 leading-tight">

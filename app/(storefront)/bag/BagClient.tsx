@@ -21,6 +21,7 @@ interface BagClientProps {
   totalPrice: number;
   deliveryFee: number;
   finalTotal: number;
+  user: { name: string | null; email: string | null };
 }
 
 export default function BagClient({
@@ -28,6 +29,7 @@ export default function BagClient({
   totalPrice,
   deliveryFee,
   finalTotal,
+  user,
 }: BagClientProps) {
   if (!cart || !cart.items || cart.items.length === 0) {
     return (
@@ -138,7 +140,7 @@ export default function BagClient({
             </form>
 
             {/* New Pay with Invoice Button */}
-            <InvoiceCheckoutModalForm deliveryFee={deliveryFee} />
+            <InvoiceCheckoutModalForm deliveryFee={deliveryFee} user={{ name: user.name, email: user.email }} />
 
             <p className="text-center mt-3">We accept</p>
             <div className="flex flex-wrap gap-2 justify-center px-2">
