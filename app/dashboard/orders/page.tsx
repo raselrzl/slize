@@ -323,9 +323,14 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                               <DownloadInvoiceButton orderId={item.id} />
                             </DropdownMenuItem>
 
-                            <DropdownMenuItem asChild className="hover:border rounded-none cursor-pointer">
-                              <SendReminderButton orderId={item.id} />
-                            </DropdownMenuItem>
+                             {/* Only show reminder if order is NOT paid and NOT completed */}
+      {/* Only show reminder if invoice is NOT paid */}
+{item.invoiceStatus !== "paid" && (
+  <DropdownMenuItem asChild className="hover:border rounded-none cursor-pointer">
+    <SendReminderButton orderId={item.id} />
+  </DropdownMenuItem>
+)}
+
 
                             <DropdownMenuItem asChild className="hover:border rounded-none cursor-pointer">
                               <Link
