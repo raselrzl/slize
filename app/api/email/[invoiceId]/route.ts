@@ -56,8 +56,8 @@ export async function POST(
 
     const invoiceLink =
       process.env.NODE_ENV !== "production"
-        ? `http://localhost:3000/api/invoice/${order.id}`
-        : `https://kronstil.store/api/invoice/${order.id}`;
+        ? `https://kronstil.store/api/invoice/${order.id}`
+        : `http://localhost:3000/api/invoice/${order.id}`;
 
     // 🔹 Send email with full order info
     await emailClient.send({
