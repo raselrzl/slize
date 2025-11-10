@@ -24,24 +24,25 @@ export default async function OrdersPage() {
       ) : (
         <ul className="space-y-6">
           {orders.map((order) => (
-            <li key={order.id} className="border border-gray-300 p-4 bg-white rounded-xs">
-              
+            <li
+              key={order.id}
+              className="border border-gray-300 p-4 bg-white rounded-xs"
+            >
               {/* Order Header */}
               <div className="flex justify-between items-center mb-4 flex-wrap gap-2">
                 <p>
-  <span className="font-semibold text-gray-500">Order ID:</span>{" "}
-  {order.id ? order.id.slice(-6).toUpperCase() : "N/A"}
-</p>
+                  <span className="font-semibold text-gray-500">Order ID:</span>{" "}
+                  {order.id ? order.id.slice(-6).toUpperCase() : "N/A"}
+                </p>
 
                 <div className="flex gap-2 flex-wrap">
                   <span className="px-2 py-1 text-xs font-medium uppercase tracking-wide bg-yellow-200 text-yellow-900">
                     {order.status || "N/A"}
                   </span>
-             {/*      <span className="px-2 py-1 text-xs font-medium uppercase tracking-wide bg-blue-100 text-blue-900">
-                    {order.orderStatus || "N/A"}
-                  </span> */}
                   <span className="px-2 py-1 text-xs font-medium uppercase tracking-wide bg-purple-100 text-purple-900">
-                    {order.deliveryStatus ? order.deliveryStatus.replace("_", " ") : "N/A"}
+                    {order.deliveryStatus
+                      ? order.deliveryStatus.replace("_", " ")
+                      : "N/A"}
                   </span>
                   <span className="px-2 py-1 text-xs font-medium uppercase tracking-wide bg-gray-200 text-gray-900">
                     {order.invoiceStatus || "N/A"}
@@ -52,10 +53,29 @@ export default async function OrdersPage() {
               {/* User Info */}
               <div className="mb-4">
                 <p>
-                  <span className="font-semibold">Ship to:</span>{" "}
-                  {order.User?.firstName || "N/A"} {order.User?.lastName || "N/A"} (
-                  {order.User?.email || "N/A"})
+                  <span className="font-semibold">Order By:</span>{" "}
+                  {order.fullName || `${order.User?.firstName ?? ""} ${order.User?.lastName ?? ""}`.trim() || "N/A"} (
+                  {order.email || order.User?.email || "N/A"})
                 </p>
+                <p>
+                  <span className="font-semibold">Phone:</span>{" "}
+                  {order.phone || "N/A"}
+                </p>
+              </div>
+
+              {/* Shipping Info */}
+              <div className="mb-4 bg-gray-50 border border-gray-200 p-3 rounded-sm">
+                <p className="font-semibold mb-1 text-gray-800">Shipping Address:</p>
+                <p>{order.shippingName || order.fullName || "N/A"}</p>
+                <p>
+                  {order.shippingLine1 || "N/A"}
+                  {order.shippingLine2 ? `, ${order.shippingLine2}` : ""}
+                </p>
+                <p>
+                  {order.shippingCity || "N/A"},{" "}
+                  {order.shippingPostal || ""}
+                </p>
+                <p>{order.shippingCountry || "N/A"}</p>
               </div>
 
               {/* Order Items */}
@@ -63,8 +83,10 @@ export default async function OrdersPage() {
                 <p className="font-semibold mb-2">Items:</p>
                 {order.items && order.items.length > 0 ? (
                   order.items.map((item) => (
-                    <div key={item.id} className="flex items-center gap-4 border-b border-gray-200 pb-2 mb-2">
-                      
+                    <div
+                      key={item.id}
+                      className="flex items-center gap-4 border-b border-gray-200 pb-2 mb-2"
+                    >
                       {/* Product Image */}
                       {item.Product?.images?.[0] ? (
                         <img
@@ -80,30 +102,49 @@ export default async function OrdersPage() {
 
                       {/* Product Details */}
                       <div className="flex-1 space-y-1">
-                        <p><span className="font-semibold">Name:</span> {item.Product?.name || "N/A"}</p>
-                        <p><span className="font-semibold">Quantity:</span> {item.quantity || "N/A"}</p>
-                        <p><span className="font-semibold">Price:</span> {item.Product?.price} SEK</p>
-                       </div>
+                        <p>
+                          <span className="font-semibold">Name:</span>{" "}
+                          {item.Product?.name || "N/A"}
+                        </p>
+                        <p>
+                          <span className="font-semibold">Quantity:</span>{" "}
+                          {item.quantity || "N/A"}
+                        </p>
+                        <p>
+                          <span className="font-semibold">Price:</span>{" "}
+                          {item.Product?.price} SEK
+                        </p>
+                      </div>
                     </div>
                   ))
                 ) : (
-                  <p className="text-gray-600 text-sm">No items in this order.</p>
+                  <p className="text-gray-600 text-sm">
+                    No items in this order.
+                  </p>
                 )}
               </div>
 
               {/* Order Summary */}
               <div className="space-y-1">
-                <p><span className="font-semibold">Total:</span> {(order.amount ? order.amount / 100 : 0).toFixed(2)} SEK</p>
+                <p>
+                  <span className="font-semibold">Total:</span>{" "}
+                  {(order.amount ? order.amount / 100 : 0).toFixed(2)} SEK
+                </p>
                 <p>
                   <span className="font-semibold">Placed on:</span>{" "}
-                  {order.createdAt ? new Date(order.createdAt).toLocaleDateString("en-SE", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  }) : "N/A"}
+                  {order.createdAt
+                    ? new Date(order.createdAt).toLocaleDateString("en-SE", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })
+                    : "N/A"}
+                </p>
+                <p>
+                  <span className="font-semibold">Payment Method:</span>{" "}
+                  {order.paymentMethod || "N/A"}
                 </p>
               </div>
-
             </li>
           ))}
         </ul>
