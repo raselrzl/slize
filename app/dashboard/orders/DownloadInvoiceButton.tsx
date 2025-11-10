@@ -28,7 +28,7 @@ export function DownloadInvoiceButton({ orderId }: Props) {
   return (
     <button
       onClick={handleDownloadInvoice}
-      className="flex items-center gap-2 w-full text-left text-sm pl-2 pt-1"
+      className="flex items-center gap-2 w-full text-left text-sm pl-2  p-1 hover:border rounded-none cursor-pointer"
     >
       <Download className="w-4 h-4 mr-2" />
       Download Invoice

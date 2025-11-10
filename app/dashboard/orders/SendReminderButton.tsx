@@ -1,6 +1,4 @@
 "use client"; // ✅ This makes it a Client Component
-
-import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 
 interface SendReminderButtonProps {
@@ -22,7 +20,7 @@ export function SendReminderButton({ orderId }: SendReminderButtonProps) {
   return (
      <button
       onClick={sendReminder}
-      className="flex items-center gap-2 w-full text-left text-sm pl-2 pt-2"
+      className="flex items-center gap-2 w-full text-left text-sm pl-2 p-1 hover:border rounded-none cursor-pointer"
     >
       <Mail className="w-4 h-4 mr-2" />
       Send Payment Reminder
