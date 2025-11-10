@@ -1,6 +1,6 @@
 "use client";
 
-import { PenBoxIcon } from "lucide-react";
+import { Download, PenBoxIcon } from "lucide-react";
 
 interface Props {
   orderId: string;
@@ -28,9 +28,9 @@ export function DownloadInvoiceButton({ orderId }: Props) {
   return (
     <button
       onClick={handleDownloadInvoice}
-      className="flex items-center gap-2 w-full text-left"
+      className="flex items-center gap-2 w-full text-left text-sm pl-2 pt-1"
     >
-      <PenBoxIcon className="w-4 h-4 mr-2" />
+      <Download className="w-4 h-4 mr-2" />
       Download Invoice
     </button>
   );
