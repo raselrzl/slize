@@ -12,9 +12,37 @@ import { stripe } from "./lib/stripe";
 import Stripe from "stripe";
 import { emailClient } from "./lib/mailtrap";
 
+async function getOrCreateDbUser(kindeUser: any) {
+  if (!kindeUser) return null;
+
+  let dbUser = await prisma.user.findUnique({
+    where: { id: kindeUser.id },
+  });
+
+  if (!dbUser) {
+    dbUser = await prisma.user.create({
+      data: {
+        id: kindeUser.id,
+        email: kindeUser.email ?? "",
+        firstName: kindeUser.given_name ?? "",
+        lastName: kindeUser.family_name ?? "",
+        profileImage: kindeUser.picture ?? "",
+      },
+    });
+  }
+
+  return dbUser;
+}
+
 export async function createProduct(prevState: unknown, formData: FormData) {
+  /* const { getUser } = getKindeServerSession();
+  const user = await getUser(); */
+
+  /* testing auth flow */
   const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
 
   if (!user || user.email !== "rasel6041@gmail.com") {
     return redirect("/");
@@ -55,8 +83,14 @@ export async function createProduct(prevState: unknown, formData: FormData) {
 }
 
 export async function editProduct(prevState: any, formData: FormData) {
+  /*  const { getUser } = getKindeServerSession();
+  const user = await getUser(); */
+
+  /* testing auth flow */
   const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
 
   if (!user || user.email !== "rasel6041@gmail.com") {
     return redirect("/");
@@ -101,8 +135,14 @@ export async function editProduct(prevState: any, formData: FormData) {
 }
 
 export async function deleteProduct(formData: FormData) {
+  /*   const { getUser } = getKindeServerSession();
+  const user = await getUser(); */
+
+  /* testing auth flow */
   const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
 
   if (!user || user.email !== "rasel6041@gmail.com") {
     return redirect("/");
@@ -118,8 +158,11 @@ export async function deleteProduct(formData: FormData) {
 }
 
 export async function createBanner(prevState: any, formData: FormData) {
+  /* testing auth flow */
   const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
 
   if (!user || user.email !== "rasel6041@gmail.com") {
     return redirect("/");
@@ -144,8 +187,11 @@ export async function createBanner(prevState: any, formData: FormData) {
 }
 
 export async function deleteBanner(formData: FormData) {
+  /* testing auth flow */
   const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
 
   if (!user || user.email !== "rasel6041@gmail.com") {
     return redirect("/");
@@ -161,8 +207,11 @@ export async function deleteBanner(formData: FormData) {
 }
 
 export async function addItem(productId: string) {
+  /* testing auth flow */
   const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
 
   if (!user) {
     return redirect("/");
@@ -229,8 +278,11 @@ export async function addItem(productId: string) {
 }
 
 export async function delItem(formData: FormData) {
+  /* testing auth flow */
   const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
 
   if (!user) {
     return redirect("/");
@@ -253,8 +305,12 @@ export async function delItem(formData: FormData) {
 }
 
 export async function checkOut(formData: FormData) {
+  /* testing auth flow */
   const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
+
   if (!user) return redirect("/");
 
   const deliveryFeeSEK = Number(formData.get("deliveryFee") || 0);
@@ -339,8 +395,7 @@ export async function checkOut(formData: FormData) {
     metadata: { userId: user.id, orderId: order.id },
   });
 
-
-const baseUrl =
+  const baseUrl =
     process.env.NODE_ENV === "production"
       ? "https://kronstil.store"
       : "http://localhost:3000";
@@ -355,7 +410,9 @@ const baseUrl =
       <tr>
         <td>${item.name}</td>
         <td style="text-align:center;">${item.quantity}</td>
-        <td style="text-align:right;">${((item.price ?? 0) / 100).toFixed(2)} SEK</td>
+        <td style="text-align:right;">${((item.price ?? 0) / 100).toFixed(
+          2
+        )} SEK</td>
       </tr>
     `
     )
@@ -369,10 +426,12 @@ const baseUrl =
     to: [{ email: user.email ?? "contact@kronstil.store" }],
     template_uuid: "41a0e893-8d7d-4381-8ddb-504abbd3ade8", // <-- replace with your Mailtrap template
     template_variables: {
-      clientName: user.given_name || "Valued Customer",
+      clientName: user.firstName || "Valued Customer",
       orderId: orderIdShort,
       invoiceLink,
-      invoiceDate: new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(invoiceDate),
+      invoiceDate: new Intl.DateTimeFormat("en-US", {
+        dateStyle: "long",
+      }).format(invoiceDate),
       subtotal: `${subtotalSEK.toFixed(2)} SEK`,
       deliveryFee: `${deliveryFeeSEK.toFixed(2)} SEK`,
       totalAmount: `${finalTotalSEK.toFixed(2)} SEK`,
@@ -380,14 +439,16 @@ const baseUrl =
       currentYear: new Date().getFullYear(),
     },
   });
-  
 
   return redirect(session.url!);
 }
 
 export async function updateItemQuantity(formData: FormData) {
+  /* testing auth flow */
   const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
 
   if (!user) return redirect("/");
 
@@ -412,8 +473,11 @@ export async function updateItemQuantity(formData: FormData) {
 }
 
 export async function getUserOrders() {
+  /* testing auth flow */
   const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
 
   if (!user) {
     return { user: null, orders: [] };
@@ -448,6 +512,12 @@ export async function getUserOrders() {
 }
 
 export async function deleteOrderAction(orderId: string) {
+  /* testing auth flow */
+  const { getUser } = getKindeServerSession();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
+
   try {
     const order = await prisma.order.findUnique({
       where: { id: orderId },
@@ -485,8 +555,11 @@ export async function deleteOrderAction(orderId: string) {
 }
 
 export async function orderWithInvoice(formData: FormData) {
+  /* testing auth flow */
   const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
 
   if (!user) {
     redirect("/login");
@@ -654,6 +727,12 @@ export async function updateInvoiceStatus(
   orderId: string,
   status: "sent" | "remindered" | "pending" | "cancelled" | "paid" | "refunded"
 ) {
+  /* testing auth flow */
+  const { getUser } = getKindeServerSession();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
+
   if (!orderId) throw new Error("Order ID is required");
 
   const updated = await prisma.order.update({
@@ -668,6 +747,12 @@ export async function updateOrderStatus(
   orderId: string,
   status: "pending" | "accepted" | "cancelled" | "completed"
 ) {
+  /* testing auth flow */
+  const { getUser } = getKindeServerSession();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
+
   return await prisma.order.update({
     where: { id: orderId },
     data: { status },
@@ -687,6 +772,11 @@ export async function updateDeliveryStatus(
     | "returned"
     | "cancelled"
 ) {
+  /* testing auth flow */
+  const { getUser } = getKindeServerSession();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
   try {
     const updatedOrder = await prisma.order.update({
       where: { id: orderId },

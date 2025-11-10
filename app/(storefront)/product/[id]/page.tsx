@@ -22,6 +22,7 @@ import { unstable_noStore as noStore } from "next/cache";
 import { Button } from "@/components/ui/button";
 import { BoysFeaturedProducts } from "@/app/components/boysfeatured/BoysFeaturedProducts";
 import { NewBornFeaturedProducts } from "@/app/components/newborn/NewBornFeaturedProducts";
+import AuthAddToBag from "./AuthAddToBag";
 
 async function getData(productId: string) {
   const data = await prisma.product.findUnique({
@@ -94,21 +95,13 @@ export default async function ProductIdRoute({
             {data.available > 0 ? `${data.available} in stock` : "Out of stock"}
           </p>
 
-          {user ? (
-            // Logged in
-            <form action={addProducttoShoppingCart} className="w-full">
-              <ShoppingBagButton />
-            </form>
-          ) : (
-            // Not logged in
-            <div className="w-full">
-              <Button asChild size="lg" className={buttonClass}>
-                <LoginLink postLoginRedirectURL={`/product/${data.id}`}>
-                  <ShoppingBag className="mr-4 h-5 w-5" /> Add to Bag
-                </LoginLink>
-              </Button>
-            </div>
-          )}
+         {user ? (
+  <form action={addProducttoShoppingCart} className="w-full">
+    <ShoppingBagButton />
+  </form>
+) : (
+  <AuthAddToBag productId={data.id} />
+)}
 
           <p className="mt-8 text-center bg-gray-200 py-2 flex items-center justify-center gap-4 text-xs font-bold">
             {" "}
