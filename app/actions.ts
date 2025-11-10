@@ -339,6 +339,49 @@ export async function checkOut(formData: FormData) {
     metadata: { userId: user.id, orderId: order.id },
   });
 
+
+const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? "https://kronstil.store"
+      : "http://localhost:3000";
+
+  const invoiceLink = `${baseUrl}/myorders`;
+
+  // prepare invoice details for email
+  const orderIdShort = String(order.id).slice(-6).toUpperCase();
+  const orderItemsHtml = order.items
+    .map(
+      (item) => `
+      <tr>
+        <td>${item.name}</td>
+        <td style="text-align:center;">${item.quantity}</td>
+        <td style="text-align:right;">${((item.price ?? 0) / 100).toFixed(2)} SEK</td>
+      </tr>
+    `
+    )
+    .join("");
+
+  const invoiceDate = new Date();
+
+  // ✅ send confirmation email
+  await emailClient.send({
+    from: { email: "contact@kronstil.store", name: "Kronstil" },
+    to: [{ email: user.email ?? "contact@kronstil.store" }],
+    template_uuid: "41a0e893-8d7d-4381-8ddb-504abbd3ade8", // <-- replace with your Mailtrap template
+    template_variables: {
+      clientName: user.given_name || "Valued Customer",
+      orderId: orderIdShort,
+      invoiceLink,
+      invoiceDate: new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(invoiceDate),
+      subtotal: `${subtotalSEK.toFixed(2)} SEK`,
+      deliveryFee: `${deliveryFeeSEK.toFixed(2)} SEK`,
+      totalAmount: `${finalTotalSEK.toFixed(2)} SEK`,
+      itemsTable: orderItemsHtml,
+      currentYear: new Date().getFullYear(),
+    },
+  });
+  
+
   return redirect(session.url!);
 }
 
