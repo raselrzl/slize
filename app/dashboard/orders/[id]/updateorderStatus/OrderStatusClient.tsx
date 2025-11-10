@@ -17,6 +17,7 @@ export default function OrderStatusClient({ orderId }: { orderId: string }) {
         await updateOrderStatus(orderId, status);
         router.refresh();
         alert("✅ Order status updated!");
+         router.push("/dashboard/orders");
       } catch (err) {
         console.error(err);
         alert("❌ Failed to update order status.");

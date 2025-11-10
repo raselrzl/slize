@@ -245,6 +245,13 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                                 Update Order Status
                               </Link>
                             </DropdownMenuItem>
+
+                             <DropdownMenuItem asChild>
+                              <Link href={`/dashboard/orders/${item.id}/updatedeliverystatus`}>
+                                <PenBoxIcon className="w-4 h-4 mr-2" />
+                                Update Delivery Status
+                              </Link>
+                            </DropdownMenuItem>
                             <DropdownMenuItem asChild>
                               <Link href={`/dashboard/orders/${item.id}/delete`}>
                                 <XCircle className="w-4 h-4 mr-2 text-red-600" />

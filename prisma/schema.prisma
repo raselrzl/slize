@@ -104,10 +104,17 @@ enum OrderStatus {
 }
 
 enum DeliveryStatus {
-  not_shipped
-  shipped
-  delivered
+  pending          // order placed but not yet processed
+  processing       // order is being prepared/packed
+  ready_to_ship    // order is ready for courier pickup
+  shipped          // handed over to courier / in transit
+  out_for_delivery // courier is on the way to customer
+  delivered        // successfully delivered
+  failed_delivery  // delivery attempt failed
+  returned         // returned by customer or failed delivery returned
+  cancelled        // order cancelled before shipment
 }
+
 
 enum InvoiceStatus {
   sent
@@ -115,6 +122,7 @@ enum InvoiceStatus {
   pending
   cancelled
   paid
+  refunded
 }
 
 enum ProductStatus {

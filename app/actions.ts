@@ -549,7 +549,7 @@ export async function orderWithInvoice(formData: FormData) {
   redirect("/payment/invoice-payment");
 }
 
-export async function updateInvoiceStatus(orderId: string, status: "sent" | "remindered" | "pending" | "cancelled" | "paid") {
+export async function updateInvoiceStatus(orderId: string, status: "sent" | "remindered" | "pending" | "cancelled" | "paid" |"refunded") {
   if (!orderId) throw new Error("Order ID is required");
 
   const updated = await prisma.order.update({
@@ -568,4 +568,31 @@ export async function updateOrderStatus(
     where: { id: orderId },
     data: { status },
   });
+}
+
+
+export async function updateDeliveryStatus(
+  orderId: string,
+  status:
+    | "pending"
+    | "processing"
+    | "ready_to_ship"
+    | "shipped"
+    | "out_for_delivery"
+    | "delivered"
+    | "failed_delivery"
+    | "returned"
+    | "cancelled"
+) {
+  try {
+    const updatedOrder = await prisma.order.update({
+      where: { id: orderId },
+      data: { deliveryStatus: status },
+    });
+
+    return updatedOrder;
+  } catch (error) {
+    console.error("❌ Failed to update delivery status:", error);
+    throw new Error("Failed to update delivery status");
+  }
 }
