@@ -67,10 +67,10 @@ export async function Navbar() {
               <LoginLink>
                 <ShoppingBagIcon className="text-gray-800 h-7 w-7 hover:text-gray-500" />
               </LoginLink>
-              <span className="h-6 w-px bg-gray-400 self-center"></span>
+             {/*  <span className="h-6 w-px bg-gray-400 self-center"></span>
               <LoginLink>
                 <Heart className="text-gray-800 h-7 w-7 hover:text-gray-500" />
-              </LoginLink>
+              </LoginLink> */}
               <span className="h-6 w-px bg-gray-400 self-center"></span>
               <LoginLink>
                 <User2 className="text-gray-800 h-7 w-7 hover:text-gray-500" />
