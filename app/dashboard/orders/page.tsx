@@ -4,8 +4,6 @@ import { unstable_noStore as noStore } from "next/cache";
 import {
   Card,
   CardContent,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import {
   Table,
@@ -20,21 +18,22 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal, PenBoxIcon, XCircle } from "lucide-react";
 import { PaginationComponent } from "@/app/components/PaginationComponent";
+import { OrderFilter } from "./OrderFilter";
 
 type SearchParamsProps = {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string; id?: string }>;
 };
 
-// 🔹 Pagination logic
+// 🔹 Pagination logic + optional ID filter
 async function getPaginatedOrders(
   page: number = 1,
-  pageSize: number = 10
+  pageSize: number = 10,
+  idFilter?: string
 ): Promise<{
   orders: any[];
   totalCount: number;
@@ -42,10 +41,19 @@ async function getPaginatedOrders(
 }> {
   const skip = (page - 1) * pageSize;
 
+  const where = idFilter
+    ? {
+        id: {
+          endsWith: idFilter,
+        },
+      }
+    : {};
+
   const [orders, totalCount] = await Promise.all([
     prisma.order.findMany({
       take: pageSize,
       skip,
+      where,
       orderBy: { createdAt: "desc" },
       include: {
         User: {
@@ -65,7 +73,7 @@ async function getPaginatedOrders(
         },
       },
     }),
-    prisma.order.count(),
+    prisma.order.count({ where }),
   ]);
 
   return {
@@ -80,15 +88,24 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
 
   const params = await searchParams;
   const currentPage = Number(params.page) || 1;
+  const idFilter = params.id || "";
 
-  const { orders, totalCount, totalPages } = await getPaginatedOrders(currentPage);
+  const { orders, totalCount, totalPages } = await getPaginatedOrders(
+    currentPage,
+    10,
+    idFilter
+  );
 
   return (
     <>
       <div className="flex items-center justify-between mb-8 bg-accent-foreground/5 p-2">
         <h1 className="text-xl font-bold">Manage All Orders</h1>
-        <div className="text-sm bg-primary text-gray-800 px-3 py-1 rounded-md">
-          Total: {totalCount}
+        <div className="flex items-center gap-2">
+          {/* 🔹 Filter Input */}
+         <OrderFilter />
+          <div className="text-sm bg-primary text-gray-800 px-3 py-1 rounded-md">
+            Total: {totalCount}
+          </div>
         </div>
       </div>
 
@@ -99,6 +116,7 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
               <Table>
                 <TableHeader>
                   <TableRow>
+                    <TableHead>Order ID</TableHead>
                     <TableHead>Customer</TableHead>
                     <TableHead>Shipping Info</TableHead>
                     <TableHead>Payment By</TableHead>
@@ -114,6 +132,13 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                 <TableBody>
                   {orders.map((item) => (
                     <TableRow key={item.id}>
+                      {/* 🔹 Order ID (last 6 digits) */}
+                      <TableCell>
+                        <span className="font-mono text-xs bg-gray-200 px-2 py-1 rounded uppercase font-bold">
+                          {item.id.slice(-6)}
+                        </span>
+                      </TableCell>
+
                       {/* Customer Info */}
                       <TableCell>
                         <div className="flex flex-col">
@@ -200,7 +225,7 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                         )}
                       </TableCell>
 
-                      {/* Date */}
+                      {/* Order Date */}
                       <TableCell>
                         {new Date(item.createdAt).toLocaleDateString("en-US", {
                           year: "numeric",
@@ -239,14 +264,14 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                               </Link>
                             </DropdownMenuItem>
 
-                              <DropdownMenuItem asChild>
+                            <DropdownMenuItem asChild>
                               <Link href={`/dashboard/orders/${item.id}/updateorderStatus`}>
                                 <PenBoxIcon className="w-4 h-4 mr-2" />
                                 Update Order Status
                               </Link>
                             </DropdownMenuItem>
 
-                             <DropdownMenuItem asChild>
+                            <DropdownMenuItem asChild>
                               <Link href={`/dashboard/orders/${item.id}/updatedeliverystatus`}>
                                 <PenBoxIcon className="w-4 h-4 mr-2" />
                                 Update Delivery Status
@@ -272,9 +297,7 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
           <PaginationComponent totalPages={totalPages} currentPage={currentPage} />
         </div>
       ) : (
-        <div className="p-6 text-center text-muted-foreground">
-          No orders found.
-        </div>
+        <div className="p-6 text-center text-muted-foreground">No orders found.</div>
       )}
     </>
   );
