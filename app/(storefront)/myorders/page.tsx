@@ -52,7 +52,7 @@ export default async function OrdersPage() {
               {/* User Info */}
               <div className="mb-4">
                 <p>
-                  <span className="font-semibold">User:</span>{" "}
+                  <span className="font-semibold">Ship to:</span>{" "}
                   {order.User?.firstName || "N/A"} {order.User?.lastName || "N/A"} (
                   {order.User?.email || "N/A"})
                 </p>
@@ -83,10 +83,7 @@ export default async function OrdersPage() {
                         <p><span className="font-semibold">Name:</span> {item.Product?.name || "N/A"}</p>
                         <p><span className="font-semibold">Quantity:</span> {item.quantity || "N/A"}</p>
                         <p><span className="font-semibold">Price:</span> {item.Product?.price} SEK</p>
-                        <p><span className="font-semibold">Status:</span> {item.Product?.status || "N/A"}</p>
-                        <p><span className="font-semibold">Category:</span> {item.Product?.category || "N/A"}</p>
-                        <p><span className="font-semibold">Featured:</span> {item.Product?.isFeatured ? "Yes" : "No"}</p>
-                      </div>
+                       </div>
                     </div>
                   ))
                 ) : (
