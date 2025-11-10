@@ -1,10 +1,7 @@
 import prisma from "@/app/lib/db";
 import Link from "next/link";
 import { unstable_noStore as noStore } from "next/cache";
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -25,6 +22,7 @@ import { MoreHorizontal, PenBoxIcon, XCircle } from "lucide-react";
 import { PaginationComponent } from "@/app/components/PaginationComponent";
 import { OrderFilter } from "./OrderFilter";
 import { DownloadInvoiceButton } from "./DownloadInvoiceButton";
+import { SendReminderButton } from "./SendReminderButton";
 
 type SearchParamsProps = {
   searchParams: Promise<{ page?: string; id?: string }>;
@@ -84,7 +82,6 @@ async function getPaginatedOrders(
   };
 }
 
-
 const handleDownloadInvoice = async (orderId: string) => {
   try {
     const res = await fetch(`/api/invoice/${orderId}`);
@@ -102,7 +99,6 @@ const handleDownloadInvoice = async (orderId: string) => {
     alert("Failed to download invoice.");
   }
 };
-
 
 export default async function OrdersPage({ searchParams }: SearchParamsProps) {
   noStore();
@@ -123,7 +119,7 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
         <h1 className="text-xl font-bold">Manage All Orders</h1>
         <div className="flex items-center gap-2">
           {/* 🔹 Filter Input */}
-         <OrderFilter />
+          <OrderFilter />
           <div className="text-sm bg-primary text-gray-800 px-3 py-1 rounded-md">
             Total: {totalCount}
           </div>
@@ -163,7 +159,9 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                       {/* Customer Info */}
                       <TableCell>
                         <div className="flex flex-col">
-                          <p className="font-medium">{item.User?.firstName ?? "Guest"}</p>
+                          <p className="font-medium">
+                            {item.User?.firstName ?? "Guest"}
+                          </p>
                           <p className="text-xs text-muted-foreground">
                             {item.User?.email ?? item.email ?? "No Email"}
                           </p>
@@ -173,9 +171,17 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                       {/* Shipping Info */}
                       <TableCell>
                         <div className="flex flex-col text-xs">
-                          <p className="font-medium">{item.shippingName ?? "-"}</p>
+                          <p className="font-medium">
+                            {item.shippingName ?? "-"}
+                          </p>
                           <p className="text-muted-foreground">
-                            {[item.shippingLine1, item.shippingLine2, item.shippingCity, item.shippingPostal, item.shippingCountry]
+                            {[
+                              item.shippingLine1,
+                              item.shippingLine2,
+                              item.shippingCity,
+                              item.shippingPostal,
+                              item.shippingCountry,
+                            ]
                               .filter(Boolean)
                               .join(", ") || "-"}
                           </p>
@@ -257,7 +263,10 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
 
                       {/* Amount */}
                       <TableCell className="text-right">
-                        {new Intl.NumberFormat("en-US").format(item.amount / 100)} kr
+                        {new Intl.NumberFormat("en-US").format(
+                          item.amount / 100
+                        )}{" "}
+                        kr
                       </TableCell>
 
                       {/* Dropdown Actions */}
@@ -268,32 +277,43 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                               <MoreHorizontal className="w-4 h-4" />
                             </Button>
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end" className="bg-gray-400 rounded-none">
+                          <DropdownMenuContent
+                            align="end"
+                            className="bg-gray-400 rounded-none"
+                          >
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
                             <DropdownMenuItem asChild>
-                              <Link href={`/dashboard/orders/${item.id}/details`}>
+                              <Link
+                                href={`/dashboard/orders/${item.id}/details`}
+                              >
                                 <PenBoxIcon className="w-4 h-4 mr-2" />
                                 View Details
                               </Link>
                             </DropdownMenuItem>
 
                             <DropdownMenuItem asChild>
-                              <Link href={`/dashboard/orders/${item.id}/updateInvoiceStatus`}>
+                              <Link
+                                href={`/dashboard/orders/${item.id}/updateInvoiceStatus`}
+                              >
                                 <PenBoxIcon className="w-4 h-4 mr-2" />
                                 Update Invoice Status
                               </Link>
                             </DropdownMenuItem>
 
                             <DropdownMenuItem asChild>
-                              <Link href={`/dashboard/orders/${item.id}/updateorderStatus`}>
+                              <Link
+                                href={`/dashboard/orders/${item.id}/updateorderStatus`}
+                              >
                                 <PenBoxIcon className="w-4 h-4 mr-2" />
                                 Update Order Status
                               </Link>
                             </DropdownMenuItem>
 
                             <DropdownMenuItem asChild>
-                              <Link href={`/dashboard/orders/${item.id}/updatedeliverystatus`}>
+                              <Link
+                                href={`/dashboard/orders/${item.id}/updatedeliverystatus`}
+                              >
                                 <PenBoxIcon className="w-4 h-4 mr-2" />
                                 Update Delivery Status
                               </Link>
@@ -304,7 +324,13 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                             </DropdownMenuItem>
 
                             <DropdownMenuItem asChild>
-                              <Link href={`/dashboard/orders/${item.id}/delete`}>
+                              <SendReminderButton orderId={item.id} />
+                            </DropdownMenuItem>
+
+                            <DropdownMenuItem asChild>
+                              <Link
+                                href={`/dashboard/orders/${item.id}/delete`}
+                              >
                                 <XCircle className="w-4 h-4 mr-2 text-red-600" />
                                 Delete
                               </Link>
@@ -320,10 +346,15 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
           </Card>
 
           {/* Pagination */}
-          <PaginationComponent totalPages={totalPages} currentPage={currentPage} />
+          <PaginationComponent
+            totalPages={totalPages}
+            currentPage={currentPage}
+          />
         </div>
       ) : (
-        <div className="p-6 text-center text-muted-foreground">No orders found.</div>
+        <div className="p-6 text-center text-muted-foreground">
+          No orders found.
+        </div>
       )}
     </>
   );
