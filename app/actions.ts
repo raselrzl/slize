@@ -343,7 +343,7 @@ export async function checkOut(formData: FormData) {
 }
 
 export async function updateItemQuantity(formData: FormData) {
-  const { getUser } = getKindeServerSession(); 
+  const { getUser } = getKindeServerSession();
   const user = await getUser();
 
   if (!user) return redirect("/");
@@ -546,22 +546,22 @@ export async function orderWithInvoice(formData: FormData) {
   // ✅ Clear the user's cart from Redis
   await redis.del(`cart-${user.id}`);
 
-
   const invoiceDate = new Date();
-const dueDate = new Date();
-dueDate.setDate(invoiceDate.getDate() + 30); 
+  const dueDate = new Date();
+  dueDate.setDate(invoiceDate.getDate() + 30);
 
- const sender = { email: "contact@kronstil.store", name: "Kronstil" };
+  const sender = { email: "contact@kronstil.store", name: "Kronstil" };
   const invoiceLink =
     process.env.NODE_ENV !== "production"
       ? `http://localhost:3000/api/invoice/${order.id}`
       : `https://kronstil.store/api/invoice/${order.id}`;
 
-      const invoiceItemsHtml = order.items
-  .map((item) => {
-    const price = ((item.price ?? 0) / 100).toFixed(2) + " SEK";
-    const total = (((item.price ?? 0) * item.quantity) / 100).toFixed(2) + " SEK";
-    return `
+  const invoiceItemsHtml = order.items
+    .map((item) => {
+      const price = ((item.price ?? 0) / 100).toFixed(2) + " SEK";
+      const total =
+        (((item.price ?? 0) * item.quantity) / 100).toFixed(2) + " SEK";
+      return `
       <tr>
         <td>${item.name}</td>
         <td style="text-align:center;">${item.quantity}</td>
@@ -569,9 +569,8 @@ dueDate.setDate(invoiceDate.getDate() + 30);
         <td style="text-align:right;">${total}</td>
       </tr>
     `;
-  })
-  .join("");
-
+    })
+    .join("");
 
   // ✅ Prepare array of items
   const invoiceItems = order.items.map((item) => ({
@@ -582,31 +581,36 @@ dueDate.setDate(invoiceDate.getDate() + 30);
   }));
 
   // Send email
-await emailClient.send({
-  from: sender,
-  to: [{ email: order.email ?? email }],
-  template_uuid: "712196c2-812d-4d8a-848a-23289905985f",
-  template_variables: {
-    clientName: fullName || "Valued Customer",
-    invoiceNumber: String(order.id).slice(-6),
-    invoiceDate: new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(invoiceDate),
-    invoiceDueDate: new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(dueDate),
-    invoiceSubtotal: `${subtotal.toFixed(2)} SEK`,
-    invoiceDelivery: `${deliveryFee.toFixed(2)} SEK`,
-    invoiceAmount: `${finalTotal.toFixed(2)} SEK`,
-    invoiceItems: invoiceItemsHtml, // HTML string of items
-    invoiceLink,
-    currentYear: new Date().getFullYear(),
-  },
-});
-
-
+  await emailClient.send({
+    from: sender,
+    to: [{ email: order.email ?? email }],
+    template_uuid: "712196c2-812d-4d8a-848a-23289905985f",
+    template_variables: {
+      clientName: fullName || "Valued Customer",
+      invoiceNumber: String(order.id).slice(-6),
+      invoiceDate: new Intl.DateTimeFormat("en-US", {
+        dateStyle: "long",
+      }).format(invoiceDate),
+      invoiceDueDate: new Intl.DateTimeFormat("en-US", {
+        dateStyle: "long",
+      }).format(dueDate),
+      invoiceSubtotal: `${subtotal.toFixed(2)} SEK`,
+      invoiceDelivery: `${deliveryFee.toFixed(2)} SEK`,
+      invoiceAmount: `${finalTotal.toFixed(2)} SEK`,
+      invoiceItems: invoiceItemsHtml, // HTML string of items
+      invoiceLink,
+      currentYear: new Date().getFullYear(),
+    },
+  });
 
   // ✅ Redirect to invoice payment success page
   redirect("/payment/invoice-payment");
 }
 
-export async function updateInvoiceStatus(orderId: string, status: "sent" | "remindered" | "pending" | "cancelled" | "paid" |"refunded") {
+export async function updateInvoiceStatus(
+  orderId: string,
+  status: "sent" | "remindered" | "pending" | "cancelled" | "paid" | "refunded"
+) {
   if (!orderId) throw new Error("Order ID is required");
 
   const updated = await prisma.order.update({
@@ -626,7 +630,6 @@ export async function updateOrderStatus(
     data: { status },
   });
 }
-
 
 export async function updateDeliveryStatus(
   orderId: string,

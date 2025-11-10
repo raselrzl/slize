@@ -283,7 +283,10 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                           >
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-                            <DropdownMenuItem asChild className="hover:border rounded-none cursor-pointer">
+                            <DropdownMenuItem
+                              asChild
+                              className="hover:border rounded-none cursor-pointer"
+                            >
                               <Link
                                 href={`/dashboard/orders/${item.id}/details`}
                               >
@@ -292,7 +295,10 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                               </Link>
                             </DropdownMenuItem>
 
-                            <DropdownMenuItem asChild className="hover:border rounded-none cursor-pointer">
+                            <DropdownMenuItem
+                              asChild
+                              className="hover:border rounded-none cursor-pointer"
+                            >
                               <Link
                                 href={`/dashboard/orders/${item.id}/updateInvoiceStatus`}
                               >
@@ -301,7 +307,10 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                               </Link>
                             </DropdownMenuItem>
 
-                            <DropdownMenuItem asChild className="hover:border rounded-none cursor-pointer">
+                            <DropdownMenuItem
+                              asChild
+                              className="hover:border rounded-none cursor-pointer"
+                            >
                               <Link
                                 href={`/dashboard/orders/${item.id}/updateorderStatus`}
                               >
@@ -310,7 +319,10 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                               </Link>
                             </DropdownMenuItem>
 
-                            <DropdownMenuItem asChild className="hover:border rounded-none cursor-pointer">
+                            <DropdownMenuItem
+                              asChild
+                              className="hover:border rounded-none cursor-pointer"
+                            >
                               <Link
                                 href={`/dashboard/orders/${item.id}/updatedeliverystatus`}
                               >
@@ -319,20 +331,28 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
                               </Link>
                             </DropdownMenuItem>
 
-                            <DropdownMenuItem asChild className="hover:border rounded-none cursor-pointer">
+                            <DropdownMenuItem
+                              asChild
+                              className="hover:border rounded-none cursor-pointer"
+                            >
                               <DownloadInvoiceButton orderId={item.id} />
                             </DropdownMenuItem>
 
-                             {/* Only show reminder if order is NOT paid and NOT completed */}
-      {/* Only show reminder if invoice is NOT paid */}
-{item.invoiceStatus !== "paid" && (
-  <DropdownMenuItem asChild className="hover:border rounded-none cursor-pointer">
-    <SendReminderButton orderId={item.id} />
-  </DropdownMenuItem>
-)}
+                            {/* Only show reminder if order is NOT paid and NOT completed */}
+                            {/* Only show reminder if invoice is NOT paid */}
+                            {item.invoiceStatus !== "paid" && (
+                              <DropdownMenuItem
+                                asChild
+                                className="hover:border rounded-none cursor-pointer"
+                              >
+                                <SendReminderButton orderId={item.id} />
+                              </DropdownMenuItem>
+                            )}
 
-
-                            <DropdownMenuItem asChild className="hover:border rounded-none cursor-pointer">
+                            <DropdownMenuItem
+                              asChild
+                              className="hover:border rounded-none cursor-pointer"
+                            >
                               <Link
                                 href={`/dashboard/orders/${item.id}/delete`}
                               >
