@@ -29,15 +29,17 @@ export default async function OrdersPage() {
               {/* Order Header */}
               <div className="flex justify-between items-center mb-4 flex-wrap gap-2">
                 <p>
-                  <span className="font-semibold text-gray-500">Order ID:</span> {order.id || "N/A"}
-                </p>
+  <span className="font-semibold text-gray-500">Order ID:</span>{" "}
+  {order.id ? order.id.slice(-6).toUpperCase() : "N/A"}
+</p>
+
                 <div className="flex gap-2 flex-wrap">
                   <span className="px-2 py-1 text-xs font-medium uppercase tracking-wide bg-yellow-200 text-yellow-900">
                     {order.status || "N/A"}
                   </span>
-                  <span className="px-2 py-1 text-xs font-medium uppercase tracking-wide bg-blue-100 text-blue-900">
+             {/*      <span className="px-2 py-1 text-xs font-medium uppercase tracking-wide bg-blue-100 text-blue-900">
                     {order.orderStatus || "N/A"}
-                  </span>
+                  </span> */}
                   <span className="px-2 py-1 text-xs font-medium uppercase tracking-wide bg-purple-100 text-purple-900">
                     {order.deliveryStatus ? order.deliveryStatus.replace("_", " ") : "N/A"}
                   </span>
