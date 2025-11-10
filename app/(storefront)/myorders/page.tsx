@@ -31,49 +31,67 @@ export default async function OrdersPage() {
               {/* Order Header */}
               <div className="flex justify-between items-center mb-4 flex-wrap gap-2">
                 <p>
-                  <span className="font-semibold text-gray-500">Order ID:</span>{" "}
+                  <span className="font-semibold text-sm text-gray-500">
+                    Order ID:
+                  </span>{" "}
                   {order.id ? order.id.slice(-6).toUpperCase() : "N/A"}
                 </p>
 
-                <div className="flex gap-2 flex-wrap">
-                  <span className="px-2 py-1 text-xs font-medium uppercase tracking-wide bg-yellow-200 text-yellow-900">
-                    {order.status || "N/A"}
-                  </span>
-                  <span className="px-2 py-1 text-xs font-medium uppercase tracking-wide bg-purple-100 text-purple-900">
-                    {order.deliveryStatus
-                      ? order.deliveryStatus.replace("_", " ")
-                      : "N/A"}
-                  </span>
-                  <span className="px-2 py-1 text-xs font-medium uppercase tracking-wide bg-gray-200 text-gray-900">
-                    {order.invoiceStatus || "N/A"}
-                  </span>
+                <div className="flex gap-2 flex-wrap text-xs">
+                  <p>
+                    Order-status:{" "}
+                    <span className="px-2 py-1 text-md  font-medium uppercase tracking-wide bg-yellow-200 text-yellow-900">
+                      {order.status || "N/A"}
+                    </span>
+                  </p>
+                  <p>
+                    {" "}
+                    DeliveryStatus:{" "}
+                    <span className="px-2 py-1 text-md font-medium uppercase tracking-wide bg-purple-100 text-purple-900">
+                      {order.deliveryStatus
+                        ? order.deliveryStatus.replace("_", " ")
+                        : "N/A"}
+                    </span>
+                  </p>
+                  <p>
+                    {" "}
+                    Payment Status:{" "}
+                    <span className="px-2 py-1 text-md font-medium uppercase tracking-wide bg-green-200 text-gray-900">
+                      {order.invoiceStatus || "N/A"}
+                    </span>
+                  </p>
                 </div>
               </div>
 
               {/* User Info */}
               <div className="mb-4">
-                <p>
-                  <span className="font-semibold">Order By:</span>{" "}
-                  {order.fullName || `${order.User?.firstName ?? ""} ${order.User?.lastName ?? ""}`.trim() || "N/A"} (
-                  {order.email || order.User?.email || "N/A"})
+                <p className="text-sm">
+                  <span className="font-semibold">
+                    {order.fullName ||
+                      `${order.User?.firstName ?? ""} ${
+                        order.User?.lastName ?? ""
+                      }`.trim() ||
+                      "N/A"}{" "}
+                  </span>{" "}
                 </p>
-                <p>
-                  <span className="font-semibold">Phone:</span>{" "}
-                  {order.phone || "N/A"}
+                <p className="text-sm">
+                  {order.email || order.User?.email || "N/A"}
                 </p>
+                <p className="text-sm">{order.phone || "N/A"}</p>
               </div>
 
               {/* Shipping Info */}
               <div className="mb-4 bg-gray-50 border border-gray-200 p-3 rounded-sm">
-                <p className="font-semibold mb-1 text-gray-800">Shipping Address:</p>
+                <p className="font-semibold mb-1 text-gray-800">
+                  Shipping Info:
+                </p>
                 <p>{order.shippingName || order.fullName || "N/A"}</p>
                 <p>
                   {order.shippingLine1 || "N/A"}
                   {order.shippingLine2 ? `, ${order.shippingLine2}` : ""}
                 </p>
                 <p>
-                  {order.shippingCity || "N/A"},{" "}
-                  {order.shippingPostal || ""}
+                  {order.shippingCity || "N/A"}, {order.shippingPostal || ""}
                 </p>
                 <p>{order.shippingCountry || "N/A"}</p>
               </div>
@@ -126,21 +144,23 @@ export default async function OrdersPage() {
 
               {/* Order Summary */}
               <div className="space-y-1">
-                <p>
+                <p className="text-sm">
                   <span className="font-semibold">Total:</span>{" "}
                   {(order.amount ? order.amount / 100 : 0).toFixed(2)} SEK
                 </p>
-                <p>
-                  <span className="font-semibold">Placed on:</span>{" "}
-                  {order.createdAt
-                    ? new Date(order.createdAt).toLocaleDateString("en-SE", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })
-                    : "N/A"}
+                <p className="text-sm">
+                  <span className="font-semibold">
+                    {" "}
+                    {order.createdAt
+                      ? new Date(order.createdAt).toLocaleDateString("en-SE", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })
+                      : "N/A"}
+                  </span>{" "}
                 </p>
-                <p>
+                <p className="text-sm">
                   <span className="font-semibold">Payment Method:</span>{" "}
                   {order.paymentMethod || "N/A"}
                 </p>
