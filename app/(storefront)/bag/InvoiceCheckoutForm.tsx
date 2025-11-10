@@ -6,12 +6,12 @@ import { orderWithInvoice } from "@/app/actions";
 
 interface InvoiceCheckoutModalProps {
   deliveryFee: number;
-  user: { name: string | null; email: string | null }; 
+  user: { name: string | null; email: string | null };
 }
 
 export default function InvoiceCheckoutModalForm({
   deliveryFee,
-  user
+  user,
 }: InvoiceCheckoutModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -42,22 +42,40 @@ export default function InvoiceCheckoutModalForm({
               ✕
             </button>
 
-            <h2 className="text-lg font-bold mb-4"> Please Enter Shipping Details</h2>
+            <h2 className="text-lg font-bold mb-4">
+              Please Enter Shipping Details
+            </h2>
 
             <form
               action={orderWithInvoice}
               onSubmit={handleSubmit}
               className="flex flex-col gap-2"
             >
+              {/* Delivery Fee */}
               <input type="hidden" name="deliveryFee" value={deliveryFee} />
 
+              {/* Read-only user info */}
               <input
                 type="text"
                 name="fullName"
                 placeholder="Full Name"
                 required
-                className="p-2 w-full rounded-none outline-none border"
+                value={user.name || ""}
+                readOnly
+                className="p-2 w-full rounded-none outline-none border bg-gray-100"
               />
+
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                required
+                value={user.email || ""}
+                readOnly
+                className="p-2 w-full rounded-none outline-none border bg-gray-100"
+              />
+
+              {/* Additional user-entered info */}
               <input
                 type="text"
                 name="phone"
@@ -65,25 +83,7 @@ export default function InvoiceCheckoutModalForm({
                 required
                 className="p-2 w-full rounded-none outline-none border"
               />
-              <input
-  type="text"
-  name="fullName"
-  placeholder="Full Name"
-  required
-  value={user.name || ""}
-  readOnly
-  className="p-2 w-full rounded-none outline-none border bg-gray-100"
-/>
 
-<input
-  type="email"
-  name="email"
-  placeholder="Email"
-  required
-  value={user.email || ""}
-  readOnly
-  className="p-2 w-full rounded-none outline-none border bg-gray-100"
-/>
               <input
                 type="text"
                 name="shippingLine1"
@@ -91,12 +91,14 @@ export default function InvoiceCheckoutModalForm({
                 required
                 className="p-2 w-full rounded-none outline-none border"
               />
+
               <input
                 type="text"
                 name="shippingLine2"
                 placeholder="Address Line 2"
                 className="p-2 w-full rounded-none outline-none border"
               />
+
               <input
                 type="text"
                 name="shippingCity"
@@ -104,6 +106,7 @@ export default function InvoiceCheckoutModalForm({
                 required
                 className="p-2 w-full rounded-none outline-none border"
               />
+
               <input
                 type="text"
                 name="shippingPostal"
@@ -111,6 +114,7 @@ export default function InvoiceCheckoutModalForm({
                 required
                 className="p-2 w-full rounded-none outline-none border"
               />
+
               <input
                 type="text"
                 name="shippingCountry"
