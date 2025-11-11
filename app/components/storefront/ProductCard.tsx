@@ -76,7 +76,7 @@ export function ProductCard({ item }: iAppProps) {
 
         {/* 🔘 Dots positioned inside image bottom */}
         {totalSlides > 1 && (
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-1 bg-black/30 px-1 py-0.5 rounded-full backdrop-blur-sm">
+          <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2 flex space-x-1 bg-black/30 px-1 py-0.5 rounded-full backdrop-blur-sm">
             {item.images.map((_, index) => (
               <button
                 key={index}
