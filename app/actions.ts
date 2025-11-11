@@ -792,6 +792,13 @@ export async function updateDeliveryStatus(
 
 
 export async function addToFavorite(formData: FormData) {
+/* testing auth flow */
+  const { getUser } = getKindeServerSession();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
+
+
   const productId = formData.get("productId") as string;
   const userId = formData.get("userId") as string;
   const pathName = formData.get("pathName") as string;
@@ -809,6 +816,14 @@ export async function addToFavorite(formData: FormData) {
 }
 
 export async function deleteFromFavorite(formData: FormData) {
+
+/* testing auth flow */
+  const { getUser } = getKindeServerSession();
+  const kindeUser = await getUser();
+  if (!kindeUser) return redirect("/");
+  const user = await getOrCreateDbUser(kindeUser);
+
+
   const favoriteId = formData.get("favoriteId") as string;
   const pathName = formData.get("pathName") as string;
 
