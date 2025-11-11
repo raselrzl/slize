@@ -80,34 +80,6 @@ export default async function ProductIdRoute({
         <ImageSlider images={data.images} />
         <div className="px-4">
           <div className="flex">
-            {user && (
-              <form
-                action={favorite ? deleteFromFavorite : addToFavorite}
-                className="inline-block"
-              >
-                {favorite ? (
-                  <input type="hidden" name="favoriteId" value={favorite.id} />
-                ) : (
-                  <>
-                    <input type="hidden" name="productId" value={data.id} />
-                    <input type="hidden" name="userId" value={user.id} />
-                  </>
-                )}
-                <input
-                  type="hidden"
-                  name="pathName"
-                  value={`/product/${data.id}`}
-                />
-                <button>
-                  <Heart
-                    className={`w-4 h-4 ${
-                      favorite ? "text-red-500" : "text-gray-500"
-                    }`}
-                  />
-                </button>
-              </form>
-            )}
-
             <h1 className="text-2xl font-bold tracking-tight border-b border-gray-700 uppercase inline-block">
               {data.name}
             </h1>
@@ -137,13 +109,52 @@ export default async function ProductIdRoute({
             {data.available > 0 ? `${data.available} in stock` : "Out of stock"}
           </p>
 
-          {user ? (
-            <form action={addProducttoShoppingCart} className="w-full">
-              <ShoppingBagButton />
-            </form>
-          ) : (
-            <AuthAddToBag productId={data.id} />
-          )}
+          <div className="flex items-center gap-2 mt-5">
+            <div className="w-full">
+              {user ? (
+                <form action={addProducttoShoppingCart} className="w-full">
+                  <ShoppingBagButton />
+                </form>
+              ) : (
+                <AuthAddToBag productId={data.id} />
+              )}
+            </div>
+            <div className="bg-black h-11 w-11 flex items-center justify-center">
+              {user && (
+                <form
+                  action={favorite ? deleteFromFavorite : addToFavorite}
+                  className="inline-block"
+                >
+                  {favorite ? (
+                    <input
+                      type="hidden"
+                      name="favoriteId"
+                      value={favorite.id}
+                    />
+                  ) : (
+                    <>
+                      <input type="hidden" name="productId" value={data.id} />
+                      <input type="hidden" name="userId" value={user.id} />
+                    </>
+                  )}
+                  <input
+                    type="hidden"
+                    name="pathName"
+                    value={`/product/${data.id}`}
+                  />
+                  <button className="pt-2">
+                    <Heart
+                      className={`w-8 h-8 transition-all duration-300 ${
+                        favorite
+                          ? "fill-red-500 text-red-500 hover:scale-110"
+                          : "fill-white text-gray-200 hover:text-red-400 hover:fill-red-100"
+                      }`}
+                    />
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
 
           <p className="mt-8 text-center bg-gray-200 py-2 flex items-center justify-center gap-4 text-xs font-bold">
             {" "}

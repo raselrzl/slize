@@ -42,7 +42,7 @@ export function ShoppingBagButton() {
     <Button
       disabled={pending}
       size="lg"
-      className="w-full mt-5 bg-black text-white rounded-none hover:bg-gray-800"
+      className="w-full bg-black text-white rounded-none hover:bg-gray-800"
       type="submit"
     >
       {pending ? (
