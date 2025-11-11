@@ -43,7 +43,7 @@ export default async function FavoriteRoute() {
   const favorites = await getData(user.id);
 
   return (
-    <section className="container mx-auto px-5 lg:px-10 mt-10">
+    <section className="container mx-auto max-w-7xl mt-8">
       <h2 className="text-3xl font-semibold tracking-tight text-center">
         My Favorite Products
       </h2>
