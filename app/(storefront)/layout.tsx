@@ -21,8 +21,7 @@ export default function StoreFrontLayout({
         <h1 className="font-bold text-lg">⚠️ Warning: Testing Mode Active</h1>
         <p className="mt-1 text-justify text-sm">
           Our application is currently in <strong>testing mode</strong>. Any orders or payments 
-          will <strong>not be processed</strong> or responsible. You are welcome to explore, 
-          but please do <strong>not pay anything</strong>.
+          will <strong>not be processed</strong> or responsible. You are always welcome to explore!
         </p>
       </div>
     </div>
