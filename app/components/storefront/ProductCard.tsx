@@ -76,13 +76,13 @@ export function ProductCard({ item }: iAppProps) {
 
         {/* 🔘 Dots positioned inside image bottom */}
         {totalSlides > 1 && (
-          <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2 flex space-x-0.5 bg-black/30 px-1 py-0.5 rounded-full backdrop-blur-sm">
+          <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2 flex space-x-0.5 px-1 py-0.5 rounded-full backdrop-blur-sm">
             {item.images.map((_, index) => (
               <button
                 key={index}
                 onClick={() => api && api.scrollTo(index)}
                 className={`w-1.5 h-1.5 md:h-2 md:w-2 rounded-full transition-all duration-300 ${
-                  activeIndex === index ? "bg-white scale-110" : "bg-gray-500"
+                  activeIndex === index ? "bg-green-500 scale-110" : "bg-gray-400"
                 }`}
               />
             ))}
