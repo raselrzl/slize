@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
@@ -34,16 +33,9 @@ export function ProductCard({ item }: iAppProps) {
 
   useEffect(() => {
     if (!api) return;
-
-    // update on select
-    const onSelect = () => {
-      setActiveIndex(api.selectedScrollSnap());
-    };
-
-    // initial and listener
+    const onSelect = () => setActiveIndex(api.selectedScrollSnap());
     onSelect();
     api.on("select", onSelect);
-
     return () => {
       api.off("select", onSelect);
     };
@@ -55,46 +47,47 @@ export function ProductCard({ item }: iAppProps) {
         bg-white border border-gray-200 overflow-hidden shadow-sm 
         transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
     >
-      <Carousel className="w-full mx-auto p-0" setApi={setApi}>
-        <CarouselContent className="p-0">
-          {item.images.map((img, index) => (
-            <CarouselItem key={index} className="p-0">
-              <div className="relative w-full h-[250px] md:h-[340px] overflow-hidden">
-                <Image
-                  src={img}
-                  alt={`Product Image ${index + 1}`}
-                  width={600}
-                  height={600}
-                  className="object-cover w-full h-full"
-                  placeholder="blur"
-                  blurDataURL="/placeholder.webp"
-                  quality={75}
-                  priority={index === 0}
-                  unoptimized={false}
-                />
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
+      <div className="relative w-full">
+        <Carousel className="w-full mx-auto p-0" setApi={setApi}>
+          <CarouselContent className="p-0">
+            {item.images.map((img, index) => (
+              <CarouselItem key={index} className="p-0">
+                <div className="relative w-full h-[250px] md:h-[320px] overflow-hidden">
+                  <Image
+                    src={img}
+                    alt={`Product Image ${index + 1}`}
+                    width={600}
+                    height={600}
+                    className="object-cover w-full h-full"
+                    placeholder="blur"
+                    blurDataURL="/placeholder.webp"
+                    quality={75}
+                    priority={index === 0}
+                    unoptimized={false}
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
 
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-
-      {/* Dots indicator */}
-      {totalSlides > 1 && (
-        <div className="flex justify-center mt-1 mb-1 space-x-1">
-          {item.images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => api && api.scrollTo(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                activeIndex === index ? "bg-black scale-110" : "bg-gray-300"
-              }`}
-            />
-          ))}
-        </div>
-      )}
+        {/* Dots inside image bottom */}
+        {totalSlides > 1 && (
+          <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex space-x-1 bg-black/40 px-1 py-0.5 rounded-full backdrop-blur-sm">
+            {item.images.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => api && api.scrollTo(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  activeIndex === index ? "bg-white scale-110" : "bg-gray-400"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
 
       <Link
         href={`/product/${item.id}`}
