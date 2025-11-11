@@ -44,8 +44,8 @@ export default async function FavoriteRoute() {
 
   return (
     <section className="container mx-auto max-w-7xl mt-8">
-      <h2 className="text-3xl font-semibold tracking-tight text-center">
-        My Favorite Products
+      <h2 className="text-xl font-semibold tracking-tight">
+        My Favorite Products List
       </h2>
 
       {favorites.length === 0 ? (

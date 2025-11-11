@@ -25,10 +25,10 @@ export default async function FavoritesButton() {
   });
 
   return (
-    <Link href="/favorites" className="relative">
+    <Link href="/favorites" className="relative inline-block">
       <Heart className="text-gray-800 h-7 w-7 hover:text-gray-500" />
       {favoritesCount > 0 && (
-        <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-500 text-white w-4 h-4 rounded-full text-xs flex items-center justify-center">
+        <span className="absolute -top-3 -right-3 p-2  bg-red-500 text-white w-5 h-5 rounded-full text-[10px] flex items-center justify-center shadow">
           {favoritesCount}
         </span>
       )}

@@ -43,11 +43,10 @@ export async function Navbar() {
         </div>
 
         {/* Right section */}
-        <div className="flex justify-end items-center gap-2">
+        <div className="flex justify-end items-center gap-1">
           {user ? (
             <>
               <FavoritesButton />
-              <span className="h-6 w-px bg-gray-400 self-center"></span>
               <Link href="/bag" className="group p-2 flex items-center mr-2">
                 <div className="relative">
                   <ShoppingBagIcon className="text-gray-800 h-7 w-7 mr-2 hover:text-gray-500" />
@@ -56,7 +55,6 @@ export async function Navbar() {
                   </span>
                 </div>
               </Link>
-              <span className="h-6 w-px bg-gray-400 self-center"></span>
               <UserDropdown
                 email={user.email as string}
                 name={user.given_name as string}

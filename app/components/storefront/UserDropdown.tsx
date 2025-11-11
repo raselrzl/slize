@@ -23,7 +23,7 @@ export function UserDropdown({ email, name, userImage }: iAppProps) {
     <DropdownMenu>
       {/* Avatar / Initial trigger */}
       <DropdownMenuTrigger asChild className="cursor-pointer">
-        <p className="flex items-center justify-center h-10 w-10 rounded-full bg-gray-100 border border-gray-300 text-gray-700 font-semibold hover:bg-gray-200 transition-colors">
+        <p className="flex items-center justify-center h-8 w-8 rounded-full bg-gray-100 border border-gray-300 text-gray-700 font-semibold hover:bg-gray-200 transition-colors">
           {name?.slice(0, 1).toUpperCase()}
         </p>
       </DropdownMenuTrigger>
