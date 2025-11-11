@@ -17,6 +17,7 @@ model User {
   orders Order[]
 
   createdAt DateTime @default(now())
+  Favorite     Favorite[]
 }
 
 model Product {
@@ -36,7 +37,19 @@ model Product {
   createdAt DateTime @default(now())
 
   orderItems OrderItem[]
+  Favorite     Favorite[]
 }
+
+
+model Favorite {
+  id String @id @default(uuid())
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+  product   Product?   @relation(fields: [productId], references: [id])
+  productId String?
+  createAt DateTime @default(now())
+}
+
 
 model Banner {
   id          String @id @default(uuid())

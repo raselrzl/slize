@@ -789,3 +789,34 @@ export async function updateDeliveryStatus(
     throw new Error("Failed to update delivery status");
   }
 }
+
+
+export async function addToFavorite(formData: FormData) {
+  const productId = formData.get("productId") as string;
+  const userId = formData.get("userId") as string;
+  const pathName = formData.get("pathName") as string;
+
+  if (!productId || !userId) return;
+
+  await prisma.favorite.create({
+    data: {
+      productId,
+      userId,
+    },
+  });
+
+  revalidatePath(pathName);
+}
+
+export async function deleteFromFavorite(formData: FormData) {
+  const favoriteId = formData.get("favoriteId") as string;
+  const pathName = formData.get("pathName") as string;
+
+  if (!favoriteId) return;
+
+  await prisma.favorite.delete({
+    where: { id: favoriteId },
+  });
+
+  revalidatePath(pathName);
+}

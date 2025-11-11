@@ -11,6 +11,7 @@ import {
 import { redis } from "@/app/lib/redis";
 import { Cart } from "@/app/lib/interfaces";
 import Image from "next/image";
+import FavoritesButton from "./FavoritesButton";
 
 export async function Navbar() {
   const { getUser } = getKindeServerSession();
@@ -24,7 +25,7 @@ export async function Navbar() {
     <>
       <nav className="w-full max-w-7xl mx-auto px-2 md:px-0 py-4 grid grid-cols-2 items-center">
         {/* Left - Navbar Links (hidden on mobile) */}
-       {/*  <div className="hidden md:flex justify-start">
+        {/*  <div className="hidden md:flex justify-start">
           <NavbarLinks />
         </div> */}
 
@@ -42,10 +43,13 @@ export async function Navbar() {
         </div>
 
         {/* Right section */}
-        <div className="flex justify-end items-center">
+        <div className="flex justify-end items-center gap-2">
           {user ? (
             <>
-              <Link href="/bag" className="group p-2 flex items-center mr-2">
+        
+              <FavoritesButton />
+              <span className="h-6 w-px bg-gray-400 self-center"></span>
+                      <Link href="/bag" className="group p-2 flex items-center mr-2">
                 <div className="relative">
                   <ShoppingBagIcon className="text-gray-800 h-7 w-7 mr-2 hover:text-gray-500" />
                   <span className="absolute top-0 right-0 text-xs font-bold text-gray-300 group-hover:text-gray-200 transform translate-x-1/2 -translate-y-1/2 bg-gray-800 p-2 rounded-full w-5 h-5 flex items-center justify-center">
@@ -53,7 +57,7 @@ export async function Navbar() {
                   </span>
                 </div>
               </Link>
-
+                <span className="h-6 w-px bg-gray-400 self-center"></span>
               <UserDropdown
                 email={user.email as string}
                 name={user.given_name as string}
@@ -67,10 +71,10 @@ export async function Navbar() {
               <LoginLink>
                 <ShoppingBagIcon className="text-gray-800 h-7 w-7 hover:text-gray-500" />
               </LoginLink>
-             {/*  <span className="h-6 w-px bg-gray-400 self-center"></span>
-              <LoginLink>
-                <Heart className="text-gray-800 h-7 w-7 hover:text-gray-500" />
-              </LoginLink> */}
+              <span className="h-6 w-px bg-gray-400 self-center"></span>
+
+              <FavoritesButton />
+
               <span className="h-6 w-px bg-gray-400 self-center"></span>
               <LoginLink>
                 <User2 className="text-gray-800 h-7 w-7 hover:text-gray-500" />
