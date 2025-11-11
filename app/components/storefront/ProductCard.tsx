@@ -81,8 +81,8 @@ export function ProductCard({ item }: iAppProps) {
               <button
                 key={index}
                 onClick={() => api && api.scrollTo(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  activeIndex === index ? "bg-white scale-110" : "bg-gray-400"
+                className={`w-1.5 h-1.5 md:h-2 md:w-2 rounded-full transition-all duration-300 ${
+                  activeIndex === index ? "bg-white scale-110" : "bg-gray-500"
                 }`}
               />
             ))}
