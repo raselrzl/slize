@@ -145,21 +145,6 @@ export default async function ProductIdRoute({
             <AuthAddToBag productId={data.id} />
           )}
 
-          {user ? (
-            <form action={addToFavorite}>
-              <input type="hidden" name="productId" value={data.id} />
-              <input type="hidden" name="userId" value={user.id} />
-              <input
-                type="hidden"
-                name="pathName"
-                value={`/product/${data.id}`}
-              />
-              <button>
-                <Heart className="w-4 h-4" />
-              </button>
-            </form>
-          ) : null}
-
           <p className="mt-8 text-center bg-gray-200 py-2 flex items-center justify-center gap-4 text-xs font-bold">
             {" "}
             <Undo2 />
