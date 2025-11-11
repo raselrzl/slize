@@ -52,10 +52,10 @@ export function ProductCard({ item }: iAppProps) {
           <CarouselContent className="p-0">
             {item.images.map((img, index) => (
               <CarouselItem key={index} className="p-0">
-                <div className="relative w-full h-[250px] md:h-[320px] overflow-hidden">
+                <div className="relative w-full h-[260px] md:h-[320px] overflow-hidden">
                   <Image
                     src={img}
-                    alt={`Product Image ${index + 1}`}
+                    alt="Product Image"
                     width={600}
                     height={600}
                     className="object-cover w-full h-full"
@@ -69,13 +69,14 @@ export function ProductCard({ item }: iAppProps) {
               </CarouselItem>
             ))}
           </CarouselContent>
+
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
 
-        {/* Dots inside image bottom */}
+        {/* 🔘 Dots positioned inside image bottom */}
         {totalSlides > 1 && (
-          <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex space-x-1 bg-black/40 px-1 py-0.5 rounded-full backdrop-blur-sm">
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-1 bg-black/30 px-1 py-0.5 rounded-full backdrop-blur-sm">
             {item.images.map((_, index) => (
               <button
                 key={index}
@@ -89,6 +90,7 @@ export function ProductCard({ item }: iAppProps) {
         )}
       </div>
 
+      {/* Product info section */}
       <Link
         href={`/product/${item.id}`}
         className="inline text-left p-2 rounded-md hover:bg-gray-50 transition w-full"
