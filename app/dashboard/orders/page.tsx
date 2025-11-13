@@ -23,6 +23,7 @@ import { PaginationComponent } from "@/app/components/PaginationComponent";
 import { OrderFilter } from "./OrderFilter";
 import { DownloadInvoiceButton } from "./DownloadInvoiceButton";
 import { SendReminderButton } from "./SendReminderButton";
+import WatchedTotal from "./WatchedTotal";
 
 type SearchParamsProps = {
   searchParams: Promise<{ page?: string; id?: string }>;
@@ -121,7 +122,7 @@ export default async function OrdersPage({ searchParams }: SearchParamsProps) {
           {/* 🔹 Filter Input */}
           <OrderFilter />
           <div className="text-sm bg-primary text-gray-800 px-3 py-1 rounded-md">
-            Total: {totalCount}
+            <WatchedTotal total={totalCount} />
           </div>
         </div>
       </div>
