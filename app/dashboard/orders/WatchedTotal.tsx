@@ -11,7 +11,6 @@ export default function PersistentNewOrdersCounter({ total, id = "orders" }: Pro
   const storageKey = `lastSeenTotal_${id}`;
   const [lastSeen, setLastSeen] = useState<number>(0);
   const [newOrders, setNewOrders] = useState<number>(0);
-  const [showRed, setShowRed] = useState(false);
 
   // load last seen total from localStorage on mount
   useEffect(() => {
@@ -24,10 +23,8 @@ export default function PersistentNewOrdersCounter({ total, id = "orders" }: Pro
   useEffect(() => {
     if (total > lastSeen) {
       setNewOrders(total - lastSeen);
-      setShowRed(true);
     } else {
       setNewOrders(0);
-      setShowRed(false);
     }
   }, [total, lastSeen]);
 
@@ -35,17 +32,23 @@ export default function PersistentNewOrdersCounter({ total, id = "orders" }: Pro
     setLastSeen(total);
     localStorage.setItem(storageKey, total.toString());
     setNewOrders(0);
-    setShowRed(false);
   };
 
   return (
     <div
-      className="text-sm bg-primary text-gray-800 px-3 py-1 rounded-md cursor-pointer select-none"
-      style={{ color: showRed ? "red" : "black" }}
+      className="relative text-sm bg-primary text-gray-800 px-3 py-1 rounded-md cursor-pointer select-none"
       onClick={handleClick}
       title="Click to mark orders as seen"
     >
-      {newOrders > 0 ? `${newOrders} New Orders` : `Total: ${total}`}
+      Total: {total}
+      {/* Badge */}
+      <span
+        className={`absolute -top-2 -right-2 w-5 h-5 text-xs font-bold flex items-center justify-center rounded-full text-white ${
+          newOrders > 0 ? "bg-red-500" : "bg-gray-400"
+        }`}
+      >
+        {newOrders}
+      </span>
     </div>
   );
 }
