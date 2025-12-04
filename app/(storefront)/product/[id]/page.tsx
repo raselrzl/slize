@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { BoysFeaturedProducts } from "@/app/components/boysfeatured/BoysFeaturedProducts";
 import { NewBornFeaturedProducts } from "@/app/components/newborn/NewBornFeaturedProducts";
 import AuthAddToBag from "./AuthAddToBag";
+import HeartLogin from "./HeartToLogin";
 
 async function getData(productId: string) {
   const data = await prisma.product.findUnique({
@@ -112,48 +113,41 @@ export default async function ProductIdRoute({
           <div className="flex items-center gap-2 mt-5">
             <div className="w-full">
               {user ? (
-                <form action={addProducttoShoppingCart} className="w-full">
+                <form action={addProducttoShoppingCart} className="w-full ">
                   <ShoppingBagButton />
                 </form>
               ) : (
                 <AuthAddToBag productId={data.id} />
               )}
             </div>
-            <div className="bg-black h-11 w-11 flex items-center justify-center">
-              {user && (
-                <form
-                  action={favorite ? deleteFromFavorite : addToFavorite}
-                  className="inline-block"
-                >
-                  {favorite ? (
-                    <input
-                      type="hidden"
-                      name="favoriteId"
-                      value={favorite.id}
-                    />
-                  ) : (
-                    <>
-                      <input type="hidden" name="productId" value={data.id} />
-                      <input type="hidden" name="userId" value={user.id} />
-                    </>
-                  )}
-                  <input
-                    type="hidden"
-                    name="pathName"
-                    value={`/product/${data.id}`}
-                  />
-                  <button className="pt-2">
-                    <Heart
-                      className={`w-8 h-8 transition-all duration-300 ${
-                        favorite
-                          ? "fill-red-500 text-red-500 hover:scale-110"
-                          : "fill-white text-gray-200 hover:text-red-400 hover:fill-red-100"
-                      }`}
-                    />
-                  </button>
-                </form>
-              )}
-            </div>
+          <div className="bg-black w-11 h-11 flex items-center justify-center">
+  {user ? (
+    <form action={favorite ? deleteFromFavorite : addToFavorite}>
+      {favorite ? (
+        <input type="hidden" name="favoriteId" value={favorite.id} />
+      ) : (
+        <>
+          <input type="hidden" name="productId" value={data.id} />
+          <input type="hidden" name="userId" value={user.id} />
+        </>
+      )}
+      <input type="hidden" name="pathName" value={`/product/${data.id}`} />
+
+      <button>
+        <Heart
+          className={`w-8 h-8 transition-all duration-300 mt-2 ${
+            favorite
+              ? "fill-red-500 text-red-500 hover:scale-110"
+              : "fill-white text-gray-200 hover:text-red-400 hover:fill-red-100"
+          }`}
+        />
+      </button>
+    </form>
+  ) : (
+   <HeartLogin productId={data.id} />
+  )}
+</div>
+
           </div>
 
           <p className="mt-8 text-center bg-gray-200 py-2 flex items-center justify-center gap-4 text-xs font-bold">
